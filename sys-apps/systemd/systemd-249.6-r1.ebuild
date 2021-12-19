@@ -154,6 +154,9 @@ BDEPEND="
 		dev-lang/perl
 		sys-apps/dbus
 	)
+	gnuefi? (
+		sys-devel/binutils
+	)
 	app-text/docbook-xml-dtd:4.2
 	app-text/docbook-xml-dtd:4.5
 	app-text/docbook-xsl-stylesheets
@@ -257,6 +260,11 @@ src_configure() {
 		export CFLAGS="${CFLAGS} -D__UAPI_DEF_ETHHDR=0"
 	fi
 
+	# llvm-objcopy does not work
+	if use gnuefi; then
+		export OBJCOPY="objcopy"
+	fi
+
 	python_setup
 
 	multilib-minimal_src_configure
@@ -291,7 +299,6 @@ multilib_src_configure() {
 		$(meson_use gcrypt)
 		$(meson_native_use_bool gnuefi gnu-efi)
 		-Defi-includedir="${ESYSROOT}/usr/include/efi"
-		-Defi-ld="$(tc-getLD)"
 		-Defi-libdir="${ESYSROOT}/usr/$(get_libdir)"
 		$(meson_native_use_bool homed)
 		$(meson_native_use_bool http microhttpd)
