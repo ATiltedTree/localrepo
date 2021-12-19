@@ -1,0 +1,3 @@
+
+# No llvm-libunwind
+sys-devel/clang -llvm-libunwind

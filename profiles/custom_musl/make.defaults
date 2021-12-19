@@ -1,0 +1,9 @@
+# llvm-as is a LLVM IR to LLVM Bitcode assembler, use clang for asm compilation
+AS="clang"
+
+# Tell rust's cc crate to use libc++
+CXXSTDLIB="c++"
+
+# Compile linux kernel with LLVM
+LLVM=1
+LLVM_IAS=1
