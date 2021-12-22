@@ -117,14 +117,10 @@ CRATES="
 inherit cargo
 
 DESCRIPTION="A tool to conveniently learn about the disk usage of directories, fast!"
-# Double check the homepage as the cargo_metadata crate
-# does not provide this value so instead repository is used
-HOMEPAGE="https://github.com/Byron/${PN}"
+HOMEPAGE="https://github.com/Byron/dua-cli"
 SRC_URI="
-	https://github.com/Byron/${PN}/archive/refs/tags/v${PV}.tar.gz
+	https://github.com/Byron/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
 	$(cargo_crate_uris)"
-# License set may be more restrictive as OR is not respected
-# use cargo-license for a more accurate license picture
 LICENSE="Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD MIT MPL-2.0 Unlicense ZLIB"
 SLOT="0"
 KEYWORDS="~amd64"
