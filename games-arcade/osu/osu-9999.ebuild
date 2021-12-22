@@ -12,10 +12,9 @@ HOMEPAGE="https://github.com/ppy/osu"
 if [[ ${PV} = "9999" ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/ppy/osu.git"
-	KEYWORDS=""
 else
 	SRC_URI="https://github.com/ppy/osu/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~x86 ~amd64 ~arm ~arm64"
+	KEYWORDS="~amd64 ~arm ~arm64"
 fi
 
 LICENSE="MIT CC-BY-NC-4.0"
@@ -48,7 +47,7 @@ case ${ARCH} in
 		RUNTIME="linux-arm64"
 		;;
 	*)
-		die "unsupported architecture ${ARCH}"
+		ewarn "unsupported architecture ${ARCH}"
 		;;
 esac
 
