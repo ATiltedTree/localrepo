@@ -3,8 +3,6 @@
 
 EAPI=8
 
-inherit autotools
-
 DESCRIPTION="Dynamic DNS client with SSL/TLS support"
 HOMEPAGE="https://troglobit.com/projects/inadyn/"
 SRC_URI="https://github.com/troglobit/${PN}/releases/download/v${PV}/${P}.tar.xz"
