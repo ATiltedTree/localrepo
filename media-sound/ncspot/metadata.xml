@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<maintainer type="person">
+	<email>me@atiltedtree.dev</email>
+	<name>Tilmann Meyer</name>
+</maintainer>
+<use>
+	<flag name="clipboard">Enable sharing of song URLs via the clipboard</flag>
+	<flag name="mpris">Enable the use of MPRIS via dbus</flag>
+	<flag name="notify">Enable notifications when a new song starts</flag>
+</use>
+</pkgmetadata>
