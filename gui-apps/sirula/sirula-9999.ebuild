@@ -8,7 +8,7 @@ CRATES="
 
 inherit cargo
 
-DESCRIPTION="sirula"
+DESCRIPTION="Simple app launcher for wayland written in rust"
 HOMEPAGE="https://github.com/DorianRudolph/sirula"
 
 if [[ "${PV}" == "9999" ]]; then
