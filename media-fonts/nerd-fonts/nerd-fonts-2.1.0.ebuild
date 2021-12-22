@@ -7,12 +7,9 @@ inherit font
 DESCRIPTION="Symbols-only fonts from nerd fonts"
 HOMEPAGE="https://github.com/ryanoasis/nerd-fonts"
 COMMIT="2d218ec31e98c959a368fb9bba45c0ee52103c87"
-SRC_URI="https://github.com/ryanoasis/nerd-fonts/raw/${COMMIT}/10-nerd-font-symbols.conf
-1000-em? ( https://github.com/ryanoasis/nerd-fonts/raw/${COMMIT}/src/glyphs/Symbols-1000-em%20Nerd%20Font%20Complete.ttf )
-2048-em? ( https://github.com/ryanoasis/nerd-fonts/raw/${COMMIT}/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf )"
-
-IUSE="1000-em +2048-em"
-REQUIRED_USE="2048-em? ( !1000-em )"
+SRC_URI="
+	https://github.com/ryanoasis/nerd-fonts/raw/${COMMIT}/10-nerd-font-symbols.conf
+	https://github.com/ryanoasis/nerd-fonts/raw/${COMMIT}/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf"
 
 LICENSE="MIT"
 SLOT="0"
@@ -27,14 +24,5 @@ src_unpack() {
 	do
 		cp "${DISTDIR}/$f" "${S}"
 	done
-}
-
-src_prepare() {
-	if use 1000-em; then
-		mv Symbols-1000-em%20Nerd%20Font%20Complete.ttf "Symbols-1000-em Nerd Font Complete.ttf"
-	fi
-	if use 2048-em; then
-		mv Symbols-2048-em%20Nerd%20Font%20Complete.ttf "Symbols-2048-em Nerd Font Complete.ttf"
-	fi
-	default
+	mv "${S}"/Symbols-2048-em%20Nerd%20Font%20Complete.ttf "${S}"/"Symbols Nerd Font Complete.ttf"
 }
