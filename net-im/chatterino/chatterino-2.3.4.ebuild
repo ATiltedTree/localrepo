@@ -18,9 +18,6 @@ fi
 LICENSE="MIT"
 SLOT="0"
 
-IUSE="streamlink"
-
-
 DEPEND="
 	dev-qt/linguist-tools
 	dev-qt/qtcore
@@ -31,5 +28,4 @@ DEPEND="
 	dev-qt/qtwidgets
 	dev-libs/boost
 	dev-libs/openssl
-	streamlink? ( net-misc/streamlink )
 	"
