@@ -415,7 +415,7 @@ CRATES="
 
 inherit cargo
 
-DESCRIPTION="ncurses Spotify client written in Rust using librespot, inspired by ncmpc and the likes."
+DESCRIPTION="ncurses Spotify client written in Rust using librespot"
 HOMEPAGE="https://github.com/hrkfdn/ncspot"
 
 if [[ "${PV}" == "9999" ]]; then
