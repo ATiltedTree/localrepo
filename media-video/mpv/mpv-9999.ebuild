@@ -7,7 +7,7 @@ LUA_COMPAT=( lua5-{1..2} luajit )
 PYTHON_COMPAT=( python3_{8..10} )
 PYTHON_REQ_USE='threads(+)'
 
-inherit flag-o-matic lua-single optfeature pax-utils python-r1 meson xdg-utils
+inherit lua-single optfeature pax-utils python-r1 meson xdg-utils
 
 DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="https://mpv.io/ https://github.com/mpv-player/mpv"
@@ -34,18 +34,16 @@ IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda doc drm dvb
 REQUIRED_USE="
 	|| ( cli libmpv )
 	aqua? ( opengl )
-	cuda? ( opengl )
-	egl? ( || ( gbm X wayland ) )
+	cuda? ( || ( opengl vulkan ) )
 	gamepad? ( sdl )
-	gbm? ( drm egl opengl )
-	lcms? ( opengl )
+	drm? ( gbm egl opengl )
 	lua? ( ${LUA_REQUIRED_USE} )
 	opengl? ( || ( aqua egl X raspberry-pi !cli ) )
 	raspberry-pi? ( opengl )
 	test? ( opengl )
 	tools? ( cli )
 	uchardet? ( iconv )
-	vaapi? ( || ( gbm X wayland ) )
+	vaapi? ( || ( drm X wayland ) )
 	vdpau? ( X )
 	vulkan? ( || ( X wayland ) )
 	X? ( egl? ( opengl ) )
@@ -138,11 +136,6 @@ pkg_setup() {
 src_configure() {
 	python_setup
 
-	if use raspberry-pi; then
-		append-cflags -I"${SYSROOT%/}${EPREFIX}/opt/vc/include"
-		append-ldflags -L"${SYSROOT%/}${EPREFIX}/opt/vc/lib"
-	fi
-
 	local emesonargs=(
 		$(meson_use cli cplayer)
 		$(meson_use libmpv)
@@ -185,24 +178,16 @@ src_configure() {
 		$(meson_feature aqua cocoa)
 		$(meson_feature drm)
 		$(meson_feature egl)
-		$(usex egl $(meson_feature gbm egl-drm) '')
-		$(usex egl $(meson_feature wayland egl-wayland) '')
-		$(usex egl $(meson_feature X egl-x11) '')
 		$(meson_feature gbm)
 		$(meson_feature opengl gl)
 		$(meson_feature jpeg)
 		$(meson_feature vulkan libplacebo)
-		$(usex opengl $(meson_feature X gl-x11) '')
 		$(meson_feature raspberry-pi rpi)
 		$(meson_feature sdl sdl2-video)
 		$(meson_feature vulkan shaderc)
 		$(usex libmpv "$(meson_feature opengl plain-gl)" '-Dplain-gl=disabled')
 		$(meson_feature vdpau)
-		$(usex vdpau $(meson_feature opengl vdpau-gl-x11) '')
 		$(meson_feature vaapi)
-		$(usex vaapi $(meson_feature gbm vaapi-drm) '')
-		$(usex vaapi $(meson_feature wayland vaapi-wayland) '')
-		$(usex vaapi $(meson_feature X vaapi-x11) '')
 		$(meson_feature vulkan)
 		$(meson_feature wayland)
 		$(meson_feature X x11)
