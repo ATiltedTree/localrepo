@@ -23,7 +23,10 @@ fi
 LICENSE="Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD-2 Boost-1.0 CC0-1.0 MIT MPL-2.0 Unlicense WTFPL-2"
 SLOT="0"
 
-DEPEND="gui-libs/gtk-layer-shell"
+DEPEND="
+	gui-libs/gtk-layer-shell
+	sys-apps/lm-sensors
+"
 
 src_unpack() {
 	if [[ "${PV}" == "9999" ]]; then
