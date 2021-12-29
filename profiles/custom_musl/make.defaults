@@ -1,6 +1,9 @@
 # llvm-as is a LLVM IR to LLVM Bitcode assembler, use clang for asm compilation
 AS="clang"
 
+CHOST="x86_64-unknown-linux-musl"
+CHOST_amd64="${CHOST}"
+
 # Tell rust's cc crate to use libc++
 CXXSTDLIB="c++"
 
