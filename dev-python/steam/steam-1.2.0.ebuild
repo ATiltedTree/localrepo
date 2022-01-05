@@ -33,3 +33,7 @@ RDEPEND="
 		dev-python/protobuf-python[${PYTHON_USEDEP}]
 	)
 "
+
+PATCHES=(
+	"${FILESDIR}"/pycryptodome.patch
+)
