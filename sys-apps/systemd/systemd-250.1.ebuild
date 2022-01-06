@@ -1,4 +1,4 @@
-# Copyright 2011-2021 Gentoo Authors
+# Copyright 2011-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -19,8 +19,9 @@ else
 	MY_PV=${PV/_/-}
 	MY_P=${MY_PN}-${MY_PV}
 	S=${WORKDIR}/${MY_P}
-	SRC_URI="https://github.com/systemd/${MY_PN}/archive/v${MY_PV}/${MY_P}.tar.gz"
-	KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~mips ppc ppc64 ~riscv ~sparc x86"
+	SRC_URI="https://github.com/systemd/${MY_PN}/archive/v${MY_PV}/${MY_P}.tar.gz
+	elibc_musl? ( https://github.com/ATiltedTree/systemd-musl/archive/refs/tags/v${PV}.tar.gz -> systemd-musl-${PV}.tar.gz )"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
 fi
 
 inherit bash-completion-r1 linux-info meson-multilib pam python-any-r1 systemd toolchain-funcs udev usr-ldscript
@@ -30,20 +31,25 @@ HOMEPAGE="https://www.freedesktop.org/wiki/Software/systemd"
 
 LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/2"
-IUSE="acl apparmor audit build cgroup-hybrid cryptsetup curl dns-over-tls elfutils fido2 +gcrypt gnuefi homed http idn importd +kmod +lz4 lzma nat pam pcre pkcs11 policykit pwquality qrcode repart +resolvconf +seccomp selinux split-usr +sysv-utils test tpm vanilla xkb +zstd"
-
+IUSE="
+	acl apparmor audit build cgroup-hybrid cryptsetup curl +dns-over-tls elfutils
+	fido2 +gcrypt gnuefi gnutls homed hostnamed-fallback http idn importd +kmod
+	+lz4 lzma nat +openssl pam pcre pkcs11 policykit pwquality qrcode
+	+resolvconf +seccomp selinux split-usr +sysv-utils test tpm vanilla xkb +zstd
+"
 REQUIRED_USE="
-	homed? ( cryptsetup pam )
-	importd? ( curl gcrypt lzma )
+	dns-over-tls? ( || ( gnutls openssl ) )
+	homed? ( cryptsetup pam openssl )
+	importd? ( curl lzma || ( gcrypt openssl ) )
+	policykit? ( !hostnamed-fallback )
 	pwquality? ( homed )
 "
 RESTRICT="!test? ( test )"
 
 MINKV="3.11"
 
-OPENSSL_DEP=">=dev-libs/openssl-1.1.0:0="
-
-COMMON_DEPEND=">=sys-apps/util-linux-2.30:0=[${MULTILIB_USEDEP}]
+COMMON_DEPEND="
+	>=sys-apps/util-linux-2.30:0=[${MULTILIB_USEDEP}]
 	sys-libs/libcap:0=[${MULTILIB_USEDEP}]
 	virtual/libcrypt:=[${MULTILIB_USEDEP}]
 	acl? ( sys-apps/acl:0= )
@@ -51,15 +57,11 @@ COMMON_DEPEND=">=sys-apps/util-linux-2.30:0=[${MULTILIB_USEDEP}]
 	audit? ( >=sys-process/audit-2:0= )
 	cryptsetup? ( >=sys-fs/cryptsetup-2.0.1:0= )
 	curl? ( net-misc/curl:0= )
-	dns-over-tls? ( >=net-libs/gnutls-3.6.0:0= )
 	elfutils? ( >=dev-libs/elfutils-0.158:0= )
 	fido2? ( dev-libs/libfido2:0= )
 	gcrypt? ( >=dev-libs/libgcrypt-1.4.5:0=[${MULTILIB_USEDEP}] )
-	homed? ( ${OPENSSL_DEP} )
-	http? (
-		>=net-libs/libmicrohttpd-0.9.33:0=[epoll(+)]
-		>=net-libs/gnutls-3.1.4:0=
-	)
+	gnutls? ( >=net-libs/gnutls-3.6.0:0= )
+	http? ( >=net-libs/libmicrohttpd-0.9.33:0=[epoll(+)] )
 	idn? ( net-dns/libidn2:= )
 	importd? (
 		app-arch/bzip2:0=
@@ -69,12 +71,12 @@ COMMON_DEPEND=">=sys-apps/util-linux-2.30:0=[${MULTILIB_USEDEP}]
 	lz4? ( >=app-arch/lz4-0_p131:0=[${MULTILIB_USEDEP}] )
 	lzma? ( >=app-arch/xz-utils-5.0.5-r1:0=[${MULTILIB_USEDEP}] )
 	nat? ( net-firewall/iptables:0= )
+	openssl? ( >=dev-libs/openssl-1.1.0:0= )
 	pam? ( sys-libs/pam:=[${MULTILIB_USEDEP}] )
 	pkcs11? ( app-crypt/p11-kit:0= )
 	pcre? ( dev-libs/libpcre2 )
 	pwquality? ( dev-libs/libpwquality:0= )
 	qrcode? ( media-gfx/qrencode:0= )
-	repart? ( ${OPENSSL_DEP} )
 	seccomp? ( >=sys-libs/libseccomp-2.3.3:0= )
 	selinux? ( sys-libs/libselinux:0= )
 	tpm? ( app-crypt/tpm2-tss:0= )
@@ -94,7 +96,7 @@ RDEPEND="${COMMON_DEPEND}
 	>=acct-group/wheel-0-r1
 	>=acct-group/kmem-0-r1
 	>=acct-group/tty-0-r1
-	>=acct-group/utmp-0-r1
+	!elibc_musl? ( >=acct-group/utmp-0-r1 )
 	>=acct-group/audio-0-r1
 	>=acct-group/cdrom-0-r1
 	>=acct-group/dialout-0-r1
@@ -117,6 +119,10 @@ RDEPEND="${COMMON_DEPEND}
 	>=acct-user/systemd-resolve-0-r1
 	>=acct-user/systemd-timesync-0-r1
 	>=sys-apps/baselayout-2.2
+	hostnamed-fallback? (
+		acct-group/systemd-hostname
+		sys-apps/dbus-broker
+	)
 	selinux? ( sec-policy/selinux-base-policy[systemd] )
 	sysv-utils? (
 		!sys-apps/openrc[sysv-utils(-)]
@@ -235,7 +241,7 @@ src_prepare() {
 	)
 
 	if use elibc_musl; then
-		PATCHES+=( "${FILESDIR}/musl" )
+		PATCHES+=( "${WORKDIR}/systemd-musl-${PV}/" )
 	fi
 
 	if ! use vanilla; then
@@ -252,10 +258,6 @@ src_prepare() {
 src_configure() {
 	# Prevent conflicts with i686 cross toolchain, bug 559726
 	tc-export AR CC NM OBJCOPY RANLIB
-
-	if use elibc_musl; then
-		CFLAGS="${CFLAGS} -D__UAPI_DEF_ETHHDR=0"
-	fi
 
 	python_setup
 
@@ -290,8 +292,8 @@ multilib_src_configure() {
 		$(meson_native_use_bool fido2 libfido2)
 		$(meson_use gcrypt)
 		$(meson_native_use_bool gnuefi gnu-efi)
+		$(meson_native_use_bool gnutls)
 		-Defi-includedir="${ESYSROOT}/usr/include/efi"
-		-Defi-ld="$(tc-getLD)"
 		-Defi-libdir="${ESYSROOT}/usr/$(get_libdir)"
 		$(meson_native_use_bool homed)
 		$(meson_native_use_bool http microhttpd)
@@ -304,13 +306,13 @@ multilib_src_configure() {
 		$(meson_use lzma xz)
 		$(meson_use zstd)
 		$(meson_native_use_bool nat libiptc)
+		$(meson_native_use_bool openssl)
 		$(meson_use pam)
 		$(meson_native_use_bool pkcs11 p11kit)
 		$(meson_native_use_bool pcre pcre2)
 		$(meson_native_use_bool policykit polkit)
 		$(meson_native_use_bool pwquality)
 		$(meson_native_use_bool qrcode qrencode)
-		$(meson_native_use_bool repart)
 		$(meson_native_use_bool seccomp)
 		$(meson_native_use_bool selinux)
 		$(meson_native_use_bool tpm tpm2)
@@ -353,6 +355,7 @@ multilib_src_configure() {
 			-Dnss-resolve=false
 			-Duserdb=false
 			-Dutmp=false
+			-Dsysusers=false
 		)
 	fi
 
@@ -390,9 +393,8 @@ multilib_src_install_all() {
 		rmdir "${ED}${rootprefix}"/sbin || die
 	fi
 
-
 	# https://bugs.gentoo.org/761763
-	rm -r "${ED}"/usr/lib/sysusers.d || die
+	rm -rf "${ED}"/usr/lib/sysusers.d || die
 
 	# Preserve empty dirs in /etc & /var, bug #437008
 	keepdir /etc/{binfmt.d,modules-load.d,tmpfiles.d}
@@ -419,6 +421,16 @@ multilib_src_install_all() {
 		# Avoid breaking boot/reboot
 		dosym ../../../lib/systemd/systemd /usr/lib/systemd/systemd
 		dosym ../../../lib/systemd/systemd-shutdown /usr/lib/systemd/systemd-shutdown
+	fi
+
+	# workaround for https://github.com/systemd/systemd/issues/13501
+	if use hostnamed-fallback; then
+		# this file requires dbus-broker
+		insinto /usr/share/dbus-1/system.d/
+		doins "${FILESDIR}/org.freedesktop.hostname1_no_polkit.conf"
+
+		insinto "${rootprefix}/lib/systemd/system/systemd-hostnamed.service.d/"
+		doins "${FILESDIR}/00-hostnamed-network-user.conf"
 	fi
 
 	gen_usr_ldscript -a systemd udev
