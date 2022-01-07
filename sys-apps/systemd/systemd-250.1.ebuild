@@ -11,6 +11,7 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://github.com/systemd/systemd.git"
 	inherit git-r3
 else
+	MUSL_PV="${PV}-r1"
 	if [[ ${PV} == *.* ]]; then
 		MY_PN=systemd-stable
 	else
@@ -20,7 +21,7 @@ else
 	MY_P=${MY_PN}-${MY_PV}
 	S=${WORKDIR}/${MY_P}
 	SRC_URI="https://github.com/systemd/${MY_PN}/archive/v${MY_PV}/${MY_P}.tar.gz
-	elibc_musl? ( https://github.com/ATiltedTree/systemd-musl/archive/refs/tags/v${PV}.tar.gz -> systemd-musl-${PV}.tar.gz )"
+	elibc_musl? ( https://github.com/ATiltedTree/systemd-musl/archive/refs/tags/v${MUSL_PV}.tar.gz -> systemd-musl-${MUSL_PV}.tar.gz )"
 	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
 fi
 
@@ -241,7 +242,7 @@ src_prepare() {
 	)
 
 	if use elibc_musl; then
-		PATCHES+=( "${WORKDIR}/systemd-musl-${PV}/" )
+		PATCHES+=( "${WORKDIR}/systemd-musl-${MUSL_PV}/" )
 	fi
 
 	if ! use vanilla; then
