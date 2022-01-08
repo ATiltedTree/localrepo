@@ -1,8 +1,8 @@
 diff --git a/osu.Desktop/OsuGameDesktop.cs b/osu.Desktop/OsuGameDesktop.cs
-index b234207848..9ce6bca3d6 100644
+index b234207848..d358054a33 100644
 --- a/osu.Desktop/OsuGameDesktop.cs
 +++ b/osu.Desktop/OsuGameDesktop.cs
-@@ -95,10 +95,7 @@ private string getStableInstallPathFromRegistry()
+@@ -95,19 +95,7 @@ private string getStableInstallPathFromRegistry()
  
          protected override UpdateManager CreateUpdateManager()
          {
@@ -10,7 +10,16 @@ index b234207848..9ce6bca3d6 100644
 -
 -            if (!string.IsNullOrEmpty(packageManaged))
 -                return new NoActionUpdateManager();
+-
+-            switch (RuntimeInfo.OS)
+-            {
+-                case RuntimeInfo.Platform.Windows:
+-                    return new SquirrelUpdateManager();
+-
+-                default:
+-                    return new SimpleUpdateManager();
+-            }
 +            return new NoActionUpdateManager();
+         }
  
-             switch (RuntimeInfo.OS)
-             {
+         protected override void LoadComplete()
