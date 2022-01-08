@@ -1,0 +1,110 @@
+diff --git a/src/realm/util/backtrace.cpp b/src/realm/util/backtrace.cpp
+index 058d1af66..b5fc23a79 100644
+--- a/src/realm/util/backtrace.cpp
++++ b/src/realm/util/backtrace.cpp
+@@ -23,15 +23,8 @@
+ #include <cstdlib>
+ #include <cstring>
+ 
+-#if REALM_PLATFORM_APPLE || (defined(__linux__) && !REALM_ANDROID)
+-#include <execinfo.h>
+-#endif
+-
+ using namespace realm::util;
+ 
+-#if REALM_PLATFORM_APPLE || (defined(__linux__) && !REALM_ANDROID)
+-static const size_t g_backtrace_depth = 128;
+-#endif
+ static const char* g_backtrace_error = "<error calculating backtrace>";
+ static const char* g_backtrace_alloc_error = "<error allocating backtrace>";
+ static const char* g_backtrace_symbolicate_error = "<error symbolicating backtrace>";
+@@ -105,30 +98,9 @@ Backtrace& Backtrace::operator=(const Backtrace& other) noexcept
+ 
+ Backtrace Backtrace::capture() noexcept
+ {
+-#if REALM_PLATFORM_APPLE || (defined(__linux__) && !REALM_ANDROID)
+-    static_cast<void>(g_backtrace_unsupported_error);
+-    void* callstack[g_backtrace_depth];
+-    int frames = ::backtrace(callstack, g_backtrace_depth);
+-    if (REALM_UNLIKELY(frames <= 1)) {
+-        return Backtrace(nullptr, &g_backtrace_error, 1);
+-    }
+-    else {
+-        // Translate the backtrace to symbols (and exclude the call to the
+-        // capture() function from the trace).
+-        --frames;
+-        void* memory = ::backtrace_symbols(callstack + 1, frames);
+-        if (REALM_UNLIKELY(memory == nullptr)) {
+-            return Backtrace(nullptr, &g_backtrace_symbolicate_error, 1);
+-        }
+-        else {
+-            return Backtrace{memory, size_t(frames)};
+-        }
+-    }
+-#else
+     static_cast<void>(g_backtrace_error);
+     static_cast<void>(g_backtrace_symbolicate_error);
+     return Backtrace(nullptr, &g_backtrace_unsupported_error, 1);
+-#endif
+ }
+ 
+ 
+diff --git a/src/realm/util/basic_system_errors.cpp b/src/realm/util/basic_system_errors.cpp
+index d8de3a20e..236710328 100644
+--- a/src/realm/util/basic_system_errors.cpp
++++ b/src/realm/util/basic_system_errors.cpp
+@@ -65,7 +65,7 @@ std::string system_category::message(int value) const
+         }
+     }
+ 
+-#elif !REALM_ANDROID && _GNU_SOURCE // GNU specific version
++#elif !REALM_ANDROID && __GLIBC__ // GNU specific version
+ 
+     {
+         char* msg = nullptr;
+diff --git a/src/realm/util/file.cpp b/src/realm/util/file.cpp
+index d71454eb4..ea4903f07 100644
+--- a/src/realm/util/file.cpp
++++ b/src/realm/util/file.cpp
+@@ -34,6 +34,7 @@
+ #include <io.h>
+ #include <direct.h>
+ #else
++#define _POSIX_C_SOURCE 200112L
+ #include <unistd.h>
+ #include <sys/stat.h>
+ #include <sys/mman.h>
+diff --git a/src/realm/util/file.hpp b/src/realm/util/file.hpp
+index bbe7f816d..17514dabf 100644
+--- a/src/realm/util/file.hpp
++++ b/src/realm/util/file.hpp
+@@ -30,6 +30,7 @@
+ 
+ #ifndef _WIN32
+ #include <dirent.h> // POSIX.1-2001
++#include <sys/types.h> // POSIX.1-2001
+ #endif
+ 
+ #include <realm/utilities.hpp>
+diff --git a/src/realm/util/thread.cpp b/src/realm/util/thread.cpp
+index 9e3d25e46..2f0d3fcd6 100644
+--- a/src/realm/util/thread.cpp
++++ b/src/realm/util/thread.cpp
+@@ -79,7 +79,7 @@ void Thread::join()
+ 
+ void Thread::set_name(const std::string& name)
+ {
+-#if defined _GNU_SOURCE && !REALM_ANDROID && !REALM_PLATFORM_APPLE
++#if defined __GLIBC__ && !REALM_ANDROID && !REALM_PLATFORM_APPLE
+     const size_t max = 16;
+     size_t n = name.size();
+     if (n > max - 1)
+@@ -103,7 +103,7 @@ void Thread::set_name(const std::string& name)
+ 
+ bool Thread::get_name(std::string& name) noexcept
+ {
+-#if (defined _GNU_SOURCE && !REALM_ANDROID) || REALM_PLATFORM_APPLE
++#if (defined __GLIBC__ && !REALM_ANDROID) || REALM_PLATFORM_APPLE
+     const size_t max = 64;
+     char name_2[max];
+     pthread_t id = pthread_self();
