@@ -1,0 +1,16 @@
+diff --git a/osu.Desktop/OsuGameDesktop.cs b/osu.Desktop/OsuGameDesktop.cs
+index b234207848..9ce6bca3d6 100644
+--- a/osu.Desktop/OsuGameDesktop.cs
++++ b/osu.Desktop/OsuGameDesktop.cs
+@@ -95,10 +95,7 @@ private string getStableInstallPathFromRegistry()
+ 
+         protected override UpdateManager CreateUpdateManager()
+         {
+-            string packageManaged = Environment.GetEnvironmentVariable("OSU_EXTERNAL_UPDATE_PROVIDER");
+-
+-            if (!string.IsNullOrEmpty(packageManaged))
+-                return new NoActionUpdateManager();
++            return new NoActionUpdateManager();
+ 
+             switch (RuntimeInfo.OS)
+             {
