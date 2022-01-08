@@ -86,7 +86,7 @@ src_install() {
 		--configuration Release \
 		--runtime $(dotnet_runtime) \
 		--no-self-contained \
-		--no-restore \
+		--no-build \
 		--nologo \
 		--output "${D}"/$dest \
 		"/property:Version=${PV}"
