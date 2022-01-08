@@ -33,10 +33,10 @@ src_prepare() {
 	cmake_src_prepare
 }
 
-src_compile() {
+src_configure() {
 	local mycmakeargs=(
 		-DREALM_USE_SYSTEM_OPENSSL=ON
 	)
 
-	cmake_src_compile
+	cmake_src_configure
 }
