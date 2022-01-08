@@ -7,7 +7,7 @@ inherit desktop xdg
 
 DOTNET_SLOT=5.0
 
-DESCRIPTION="rhythm is just a *click* away!"
+DESCRIPTION="A free-to-win rhythm game. Rhythm is just a click away!"
 HOMEPAGE="https://github.com/ppy/osu"
 SRC_URI="https://github.com/ppy/osu/archive/${PV}.tar.gz -> ${P}.tar.gz"
 KEYWORDS="~amd64 ~arm64"
@@ -104,5 +104,5 @@ src_install() {
 	doins "${FILESDIR}"/${PN}.xml
 
 	newicon assets/lazer.png ${PN}.png
-	make_desktop_entry "/usr/bin/osu %F" "osu!" "${PN}" "Game;ArcadeGame" "MimeType=application/x-osu-beatmap;application/x-osu-skin;x-scheme-handler/osu"
+	domenu "${FILESDIR}"/osu.desktop
 }
