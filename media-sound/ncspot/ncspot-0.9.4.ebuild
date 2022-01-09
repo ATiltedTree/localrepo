@@ -33,7 +33,7 @@ CRATES="
 	bumpalo-3.8.0
 	byteorder-1.4.3
 	bytes-1.1.0
-	cache-padded-1.1.1
+	cache-padded-1.2.0
 	cc-1.0.72
 	cesu8-1.1.0
 	cexpr-0.4.0
@@ -44,6 +44,7 @@ CRATES="
 	cipher-0.2.5
 	clang-sys-1.3.0
 	clap-2.34.0
+	clap-3.0.0
 	clipboard-0.5.0
 	clipboard-win-2.2.0
 	cloudabi-0.0.3
@@ -88,7 +89,7 @@ CRATES="
 	exitfailure-0.5.1
 	failure-0.1.8
 	failure_derive-0.1.8
-	fastrand-1.5.0
+	fastrand-1.6.0
 	fern-0.6.0
 	fixedbitset-0.2.0
 	fnv-1.0.7
@@ -96,16 +97,16 @@ CRATES="
 	foreign-types-shared-0.1.1
 	form_urlencoded-1.0.1
 	futures-0.1.31
-	futures-0.3.18
-	futures-channel-0.3.18
-	futures-core-0.3.18
-	futures-executor-0.3.18
-	futures-io-0.3.18
+	futures-0.3.19
+	futures-channel-0.3.19
+	futures-core-0.3.19
+	futures-executor-0.3.19
+	futures-io-0.3.19
 	futures-lite-1.12.0
-	futures-macro-0.3.18
-	futures-sink-0.3.18
-	futures-task-0.3.18
-	futures-util-0.3.18
+	futures-macro-0.3.19
+	futures-sink-0.3.19
+	futures-task-0.3.19
+	futures-util-0.3.19
 	generic-array-0.14.4
 	getrandom-0.1.16
 	getrandom-0.2.3
@@ -117,9 +118,9 @@ CRATES="
 	headers-0.3.5
 	headers-core-0.2.0
 	heck-0.3.3
-	hermit-abi-0.1.20
+	hermit-abi-0.1.19
 	hmac-0.11.0
-	http-0.2.5
+	http-0.2.6
 	http-body-0.4.4
 	httparse-1.5.1
 	httpdate-1.0.2
@@ -133,6 +134,7 @@ CRATES="
 	ioctl-rs-0.2.0
 	ipnet-2.3.1
 	itoa-0.4.8
+	itoa-1.0.1
 	jni-0.19.0
 	jni-sys-0.3.0
 	jobserver-0.1.24
@@ -141,7 +143,7 @@ CRATES="
 	lazy_static-1.4.0
 	lazycell-1.3.0
 	lewton-0.10.2
-	libc-0.2.110
+	libc-0.2.112
 	libdbus-sys-0.2.2
 	libloading-0.7.2
 	libm-0.2.1
@@ -186,17 +188,21 @@ CRATES="
 	nom-5.1.2
 	notify-rust-4.5.5
 	ntapi-0.3.6
+	num-0.2.1
 	num-0.3.1
+	num-bigint-0.2.6
 	num-bigint-0.4.3
+	num-complex-0.2.4
 	num-complex-0.3.1
 	num-derive-0.3.3
 	num-integer-0.1.44
 	num-iter-0.1.42
+	num-rational-0.2.4
 	num-rational-0.3.2
 	num-traits-0.2.14
-	num_cpus-1.13.0
-	num_enum-0.5.4
-	num_enum_derive-0.5.4
+	num_cpus-1.13.1
+	num_enum-0.5.6
+	num_enum_derive-0.5.6
 	numtoa-0.1.0
 	objc-0.2.7
 	objc-foundation-0.1.1
@@ -205,12 +211,13 @@ CRATES="
 	oboe-0.4.4
 	oboe-sys-0.4.4
 	ogg-0.8.0
-	once_cell-1.8.0
+	once_cell-1.9.0
 	opaque-debug-0.3.0
 	openssl-0.10.38
 	openssl-probe-0.1.4
-	openssl-sys-0.9.71
+	openssl-sys-0.9.72
 	os_pipe-0.9.2
+	os_str_bytes-6.0.0
 	owning_ref-0.4.1
 	pancurses-0.16.1
 	pancurses-0.17.0
@@ -219,32 +226,33 @@ CRATES="
 	parking_lot-0.11.2
 	parking_lot_core-0.7.2
 	parking_lot_core-0.8.5
+	parse_duration-2.1.1
 	pbkdf2-0.8.0
 	pdcurses-sys-0.7.1
 	peeking_take_while-0.1.2
 	percent-encoding-2.1.0
 	petgraph-0.5.1
-	pin-project-lite-0.2.7
+	pin-project-lite-0.2.8
 	pin-utils-0.1.0
-	pkg-config-0.3.23
+	pkg-config-0.3.24
 	platform-dirs-0.3.0
 	polling-2.2.0
 	portaudio-rs-0.3.2
 	portaudio-sys-0.1.1
-	ppv-lite86-0.2.15
+	ppv-lite86-0.2.16
 	priority-queue-1.2.1
 	proc-macro-crate-0.1.5
 	proc-macro-crate-1.1.0
 	proc-macro-error-1.0.4
 	proc-macro-error-attr-1.0.4
 	proc-macro-hack-0.5.19
-	proc-macro2-1.0.33
+	proc-macro2-1.0.36
 	protobuf-2.25.2
 	protobuf-codegen-2.25.2
 	protobuf-codegen-pure-2.25.2
 	psl-types-2.0.10
 	publicsuffix-2.1.1
-	quote-1.0.10
+	quote-1.0.14
 	rand-0.8.4
 	rand_chacha-0.3.1
 	rand_core-0.6.3
@@ -258,7 +266,7 @@ CRATES="
 	regex-1.5.4
 	regex-syntax-0.6.25
 	remove_dir_all-0.5.3
-	reqwest-0.11.7
+	reqwest-0.11.8
 	ring-0.16.20
 	rodio-0.14.0
 	rspotify-0.11.3
@@ -273,7 +281,7 @@ CRATES="
 	rustc_version-0.4.0
 	rustls-0.20.2
 	rustversion-1.0.6
-	ryu-1.0.6
+	ryu-1.0.9
 	same-file-1.0.6
 	schannel-0.1.19
 	scoped-tls-1.0.0
@@ -284,10 +292,10 @@ CRATES="
 	semver-0.9.0
 	semver-1.0.4
 	semver-parser-0.7.0
-	serde-1.0.131
+	serde-1.0.132
 	serde_cbor-0.11.2
-	serde_derive-1.0.131
-	serde_json-1.0.72
+	serde_derive-1.0.132
+	serde_json-1.0.74
 	serde_repr-0.1.7
 	serde_urlencoded-0.7.0
 	sha-1-0.9.8
@@ -296,7 +304,7 @@ CRATES="
 	shannon-0.2.0
 	shell-words-1.0.0
 	shlex-0.1.1
-	signal-hook-0.3.12
+	signal-hook-0.3.13
 	signal-hook-registry-1.4.0
 	slab-0.4.5
 	smallvec-1.7.0
@@ -313,6 +321,7 @@ CRATES="
 	stdweb-internal-runtime-0.1.5
 	strsim-0.8.0
 	strsim-0.9.3
+	strsim-0.10.0
 	structopt-0.3.25
 	structopt-derive-0.4.18
 	strum-0.22.0
@@ -320,13 +329,14 @@ CRATES="
 	strum_macros-0.22.0
 	strum_macros-0.23.1
 	subtle-2.4.1
-	syn-1.0.82
+	syn-1.0.84
 	synstructure-0.12.6
 	tempfile-3.2.0
 	term_size-0.3.2
 	termcolor-1.1.2
 	termion-1.5.6
 	textwrap-0.11.0
+	textwrap-0.14.2
 	thiserror-1.0.30
 	thiserror-impl-1.0.30
 	thread_local-0.3.4
@@ -336,8 +346,8 @@ CRATES="
 	time-macros-impl-0.1.2
 	tinyvec-1.5.1
 	tinyvec_macros-0.1.0
-	tokio-1.14.0
-	tokio-macros-1.6.0
+	tokio-1.15.0
+	tokio-macros-1.7.0
 	tokio-native-tls-0.3.0
 	tokio-stream-0.1.8
 	tokio-util-0.6.9
@@ -347,7 +357,7 @@ CRATES="
 	tracing-core-0.1.21
 	tree_magic-0.2.3
 	try-lock-0.2.3
-	typenum-1.14.0
+	typenum-1.15.0
 	unicase-2.6.0
 	unicode-bidi-0.3.7
 	unicode-normalization-0.1.19
@@ -356,13 +366,13 @@ CRATES="
 	unicode-xid-0.2.2
 	unreachable-1.0.0
 	untrusted-0.7.1
-	ureq-2.3.1
+	ureq-2.4.0
 	url-2.2.2
 	uuid-0.8.2
 	vcpkg-0.2.15
 	vec_map-0.8.2
 	vergen-3.2.0
-	version_check-0.9.3
+	version_check-0.9.4
 	void-1.0.2
 	waker-fn-1.1.0
 	walkdir-2.3.2
@@ -385,7 +395,7 @@ CRATES="
 	web-sys-0.3.55
 	webbrowser-0.5.5
 	webpki-0.22.0
-	webpki-roots-0.22.1
+	webpki-roots-0.22.2
 	wepoll-ffi-0.1.2
 	widestring-0.4.3
 	winapi-0.3.9
@@ -424,7 +434,7 @@ if [[ "${PV}" == "9999" ]]; then
 else
 	SRC_URI="$(cargo_crate_uris)
 			 https://github.com/hrkfdn/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64"
+	KEYWORDS="~amd64 ~arm64"
 fi
 
 LICENSE="0BSD Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD BSD-2 Boost-1.0 CC0-1.0 ISC LGPL-3 MIT MPL-2.0 Unlicense ZLIB"
