@@ -31,11 +31,9 @@ QA_PREBUILT="/usr/lib*/${PN}/libbass*.so"
 QA_PRESTRIPPED="/usr/lib*/${PN}/osu!"
 
 dotnet_runtime() {
-	local os=
-	if use elibc_glibc; then
-		os=linux
-	elif use elibc_musl; then
-		os=linux-musl
+	local os=linux
+	if use elibc_musl; then
+		os="$os-musl"
 	fi
 
 	local arch=
@@ -74,6 +72,7 @@ src_compile() {
 	edotnet build osu.Desktop \
 		--configuration Release \
 		--runtime $(dotnet_runtime) \
+		--framework net$DOTNET_SLOT \
 		--no-restore \
 		--nologo \
 		"/property:Version=${PV}"
@@ -85,18 +84,24 @@ src_install() {
 	edotnet publish osu.Desktop \
 		--configuration Release \
 		--runtime $(dotnet_runtime) \
+		--framework net$DOTNET_SLOT \
 		--no-self-contained \
 		--no-build \
 		--nologo \
 		--output "${D}"/$dest \
 		"/property:Version=${PV}"
 
-	ln -sf ../libSDL2.so "${D}"/${dest}/libSDL2.so || die "failed to symlink SDL2"
-	ln -sf ../libsqlite3.so "${D}"/${dest}/libe_sqlite3.so || die "failed to symlink sqlite"
-	ln -sf ../libstbi.so "${D}"/${dest}/libstbi.so || die "failed to symlink stbi"
-	ln -sf ../librealm-wrappers.so "${D}"/${dest}/librealm-wrappers.so || die "failed to symlink realm"
+	# Remove debugging and documentations
+	find "${ED}" -name '*.pdb' -delete || die
+	find "${ED}" -name '*.xml' -delete || die
 
-	insinto $dest
+	# Remove bundled libs
+	rm "${ED}/$dest"/osu!.deps.json || die
+	rm "${ED}/$dest"/lib{MonoPosixHelper,SDL2,stbi,realm-wrappers}.so || die
+
+	# Replace bundled sqlite with system sqlite
+	ln -sf ../libsqlite3.so "${ED}/$dest"/libe_sqlite3.so || die "failed to symlink sqlite"
+
 	fperms +x "$dest/osu!"
 	dosym -r "$dest/osu!" "/usr/bin/osu"
 
