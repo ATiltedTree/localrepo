@@ -15,7 +15,7 @@ KEYWORDS="~amd64 ~arm64"
 LICENSE="MIT CC-BY-NC-4.0"
 SLOT="0"
 IUSE=""
-RESTRICT="test network-sandbox"
+RESTRICT="test"
 
 DEPEND="
 	media-video/ffmpeg
@@ -59,13 +59,19 @@ edotnet() {
 	dotnet $@ || die "dotnet failed"
 }
 
+src_unpack() {
+	default
+	ebegin "Downloading NuGet sources"
+	edotnet restore "${S}"/osu.Desktop \
+		--runtime $(dotnet_runtime) \
+		>/dev/null
+	eend "Downloaded NuGet sources"
+}
+
 src_prepare() {
 	default
 
 	eapply --binary "${FILESDIR}"/disable-updater.patch
-
-	edotnet restore osu.Desktop \
-		--runtime $(dotnet_runtime)
 }
 
 src_compile() {
