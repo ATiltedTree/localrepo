@@ -5,8 +5,6 @@ EAPI=8
 
 inherit desktop xdg
 
-DOTNET_SLOT=5.0
-
 DESCRIPTION="A free-to-win rhythm game. Rhythm is just a click away!"
 HOMEPAGE="https://github.com/ppy/osu"
 SRC_URI="https://github.com/ppy/osu/archive/${PV}.tar.gz -> ${P}.tar.gz"
@@ -23,7 +21,7 @@ DEPEND="
 	media-libs/libstbi
 	dev-dotnet/realm
 	dev-db/sqlite:3
-	virtual/dotnet-sdk:${DOTNET_SLOT}
+	virtual/dotnet-sdk:5.0
 "
 RDEPEND="${DEPEND}"
 
@@ -78,7 +76,6 @@ src_compile() {
 	edotnet build osu.Desktop \
 		--configuration Release \
 		--runtime $(dotnet_runtime) \
-		--framework net$DOTNET_SLOT \
 		--no-restore \
 		--nologo \
 		"/property:Version=${PV}"
@@ -90,7 +87,6 @@ src_install() {
 	edotnet publish osu.Desktop \
 		--configuration Release \
 		--runtime $(dotnet_runtime) \
-		--framework net$DOTNET_SLOT \
 		--no-self-contained \
 		--no-build \
 		--nologo \
@@ -102,11 +98,15 @@ src_install() {
 	find "${ED}" -name '*.xml' -delete || die
 
 	# Remove bundled libs
-	rm "${ED}/$dest"/osu!.deps.json || die
+	rm "${ED}/$dest"/*.json || die
 	rm "${ED}/$dest"/lib{MonoPosixHelper,SDL2,stbi,realm-wrappers}.so || die
 
 	# Replace bundled sqlite with system sqlite
 	ln -sf ../libsqlite3.so "${ED}/$dest"/libe_sqlite3.so || die "failed to symlink sqlite"
+
+	# Setup the runtimeconfig
+	insinto "$dest"
+	newins "${FILESDIR}"/runtimeconfig.json osu!.runtimeconfig.json
 
 	fperms +x "$dest/osu!"
 	dosym -r "$dest/osu!" "/usr/bin/osu"
