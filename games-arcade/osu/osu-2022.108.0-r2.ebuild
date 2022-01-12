@@ -65,7 +65,7 @@ src_unpack() {
 	edotnet restore "${S}"/osu.Desktop \
 		--runtime $(dotnet_runtime) \
 		>/dev/null
-	eend "Downloaded NuGet sources"
+	eend $?
 }
 
 src_prepare() {
