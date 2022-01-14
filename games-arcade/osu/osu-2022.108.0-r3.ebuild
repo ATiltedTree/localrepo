@@ -8,7 +8,7 @@ inherit desktop xdg
 DESCRIPTION="A free-to-win rhythm game. Rhythm is just a click away!"
 HOMEPAGE="https://github.com/ppy/osu"
 SRC_URI="https://github.com/ppy/osu/archive/${PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="~amd64 ~arm64"
+KEYWORDS="~amd64"
 
 LICENSE="MIT CC-BY-NC-4.0"
 SLOT="0"
@@ -19,13 +19,13 @@ DEPEND="
 	media-video/ffmpeg
 	media-libs/libsdl2[video]
 	media-libs/libstbi
+	media-libs/bass[fx,mix]
 	dev-dotnet/realm
 	dev-db/sqlite:3
 	virtual/dotnet-sdk:5.0
 "
 RDEPEND="${DEPEND}"
 
-QA_PREBUILT="/usr/lib*/${PN}/libbass*.so"
 QA_PRESTRIPPED="/usr/lib*/${PN}/osu!"
 
 dotnet_runtime() {
@@ -99,7 +99,7 @@ src_install() {
 
 	# Remove bundled libs
 	rm "${ED}/$dest"/*.json || die
-	rm "${ED}/$dest"/lib{MonoPosixHelper,SDL2,stbi,realm-wrappers}.so || die
+	rm "${ED}/$dest"/lib{MonoPosixHelper,SDL2,stbi,realm-wrappers,bass,bassmix,bass_fx}.so || die
 
 	# Replace bundled sqlite with system sqlite
 	ln -sf ../libsqlite3.so "${ED}/$dest"/libe_sqlite3.so || die "failed to symlink sqlite"
