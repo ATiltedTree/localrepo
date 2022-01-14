@@ -16,6 +16,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+fx +mix"
 
+BDEPEND="app-arch/unzip"
+
 S="${WORKDIR}"
 
 QA_PREBUILT="/usr/lib*/libbass*.so"
