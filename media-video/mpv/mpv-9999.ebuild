@@ -28,7 +28,7 @@ LICENSE="LGPL-2.1+ GPL-2+ ISC"
 SLOT="0"
 IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda doc drm dvb
 	dvd +egl gamepad gbm +iconv jack javascript jpeg lcms libcaca libmpv +lua
-	openal +opengl pulseaudio raspberry-pi rubberband sdl
+	openal +opengl pipewire pulseaudio raspberry-pi rubberband sdl
 	selinux test tools +uchardet vaapi vdpau vulkan wayland +X +xv zlib zimg"
 
 REQUIRED_USE="
@@ -80,6 +80,7 @@ COMMON_DEPEND="
 	libcaca? ( >=media-libs/libcaca-0.99_beta18 )
 	lua? ( ${LUA_DEPS} )
 	openal? ( >=media-libs/openal-1.13 )
+	pipewire? ( media-video/pipewire:= )
 	pulseaudio? ( media-sound/pulseaudio )
 	raspberry-pi? ( >=media-libs/raspberrypi-userland-0_pre20160305-r1 )
 	rubberband? ( >=media-libs/rubberband-1.8.0 )
@@ -165,13 +166,14 @@ src_configure() {
 		$(meson_feature zlib)
 
 		# Audio outputs:
-		$(meson_feature sdl sdl2-audio)
-		$(meson_feature pulseaudio pulse)
+		$(meson_feature alsa)
+		$(meson_feature coreaudio)
 		$(meson_feature jack)
 		$(meson_feature openal)
 		-Dopensles=disabled
-		$(meson_feature alsa)
-		$(meson_feature coreaudio)
+		$(meson_feature pipewire)
+		$(meson_feature pulseaudio pulse)
+		$(meson_feature sdl sdl2-audio)
 
 		# Video outputs:
 		$(meson_feature libcaca caca)
