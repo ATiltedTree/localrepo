@@ -20,7 +20,7 @@ DEPEND="
 	media-libs/libsdl2[video]
 	media-libs/libstbi
 	media-libs/bass[fx,mix]
-	dev-dotnet/realm
+	=dev-dotnet/realm-10.8.0
 	dev-db/sqlite:3
 	virtual/dotnet-sdk:5.0
 "
