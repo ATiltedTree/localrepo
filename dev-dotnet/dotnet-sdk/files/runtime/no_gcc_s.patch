@@ -1,0 +1,24 @@
+diff --git a/src/coreclr/pal/src/CMakeLists.txt b/src/coreclr/pal/src/CMakeLists.txt
+index ba13ab39..1ebdaf17 100644
+--- a/src/coreclr/pal/src/CMakeLists.txt
++++ b/src/coreclr/pal/src/CMakeLists.txt
+@@ -301,7 +301,6 @@ if(CLR_CMAKE_TARGET_LINUX)
+   # On Android, we don't need to link with gcc_s, pthread and rt
+   if(NOT CLR_CMAKE_TARGET_ANDROID)
+     target_link_libraries(coreclrpal
+-      gcc_s
+       pthread
+       rt
+     )
+diff --git a/src/mono/CMakeLists.txt b/src/mono/CMakeLists.txt
+index 49a73b1b..5b9da903 100644
+--- a/src/mono/CMakeLists.txt
++++ b/src/mono/CMakeLists.txt
+@@ -92,7 +92,6 @@ if(GCC)
+   add_definitions(-g)  # TODO: should this really be on by default?
+   add_definitions(-fPIC)
+   add_definitions(-fvisibility=hidden)
+-  set(USE_GCC_ATOMIC_OPS 1)
+ endif()
+ 
+ set(HAVE_CLASSIC_WINAPI_SUPPORT 1)

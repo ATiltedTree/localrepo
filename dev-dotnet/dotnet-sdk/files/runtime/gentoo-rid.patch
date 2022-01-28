@@ -1,0 +1,15 @@
+diff --git a/eng/native/init-distro-rid.sh b/eng/native/init-distro-rid.sh
+index f71aa864..b95780d2 100644
+--- a/eng/native/init-distro-rid.sh
++++ b/eng/native/init-distro-rid.sh
+@@ -46,6 +46,10 @@ initNonPortableDistroRid()
+                     VERSION_ID="${VERSION_ID%.*}"
+                 fi
+ 
++                if [ "${ID}" = "gentoo" ]; then
++                    unset VERSION_ID
++                fi
++
+                 if [ -z "${VERSION_ID+x}" ]; then
+                         # Rolling release distros do not set VERSION_ID, so omit
+                         # it here to be consistent with everything else.

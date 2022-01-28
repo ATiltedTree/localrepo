@@ -1,0 +1,79 @@
+From db0d7c564822a0d0d28fa2a52fe613e297e80bef Mon Sep 17 00:00:00 2001
+From: "build@apk-groulx" <build@apk-groulx.praxis>
+Date: Thu, 16 Dec 2021 02:38:47 +0000
+Subject: [PATCH 1/1] Force MicrosoftNetCoreIlasmPackageRuntimeId as
+
+Runtime doesn't know to look for linux-musl version of
+Microsoft.NETCore.Ilasm nupkgs. This forces looking for it
+---
+ Directory.Build.props | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/Directory.Build.props b/Directory.Build.props
+index 5cb87bb7c25..24efb6ba2b3 100644
+--- a/Directory.Build.props
++++ b/Directory.Build.props
+@@ -168,8 +168,7 @@
+     <_toolRuntimeRID Condition="'$(_runtimeOS)' == 'maccatalyst' or '$(_runtimeOS)' == 'ios' or '$(_runtimeOS)' == 'iOSSimulator' or '$(_runtimeOS)' == 'tvos' or '$(_runtimeOS)' == 'tvOSSimulator'">osx-x64</_toolRuntimeRID>
+ 
+     <!-- There are no non-portable builds for Ilasm/Ildasm -->
+-    <MicrosoftNetCoreIlasmPackageRuntimeId Condition="'$(PortableBuild)' != 'true' and '$(_portableOS)' == 'linux'">linux-$(_hostArch)</MicrosoftNetCoreIlasmPackageRuntimeId>
+-    <MicrosoftNetCoreIlasmPackageRuntimeId Condition="'$(MicrosoftNetCoreIlasmPackageRuntimeId)' == ''">$(_toolRuntimeRID)</MicrosoftNetCoreIlasmPackageRuntimeId>
++    <MicrosoftNetCoreIlasmPackageRuntimeId>linux-musl-x64</MicrosoftNetCoreIlasmPackageRuntimeId>
+ 
+     <PackageRID>$(_packageOS)-$(TargetArchitecture)</PackageRID>
+ 
+diff --git a/src/libraries/Microsoft.NETCore.Platforms/src/runtime.compatibility.json b/src/libraries/Microsoft.NETCore.Platforms/src/runtime.compatibility.json
+index 98b9472e..edb3a05c 100644
+--- a/src/libraries/Microsoft.NETCore.Platforms/src/runtime.compatibility.json
++++ b/src/libraries/Microsoft.NETCore.Platforms/src/runtime.compatibility.json
+@@ -2991,6 +2991,7 @@
+   ],
+   "gentoo": [
+     "gentoo",
++    "linux-musl",
+     "linux",
+     "unix",
+     "any",
+@@ -2999,6 +3000,8 @@
+   "gentoo-x64": [
+     "gentoo-x64",
+     "gentoo",
++    "linux-musl-x64",
++    "linux-musl",
+     "linux-x64",
+     "linux",
+     "unix-x64",
+diff --git a/src/libraries/Microsoft.NETCore.Platforms/src/runtime.json b/src/libraries/Microsoft.NETCore.Platforms/src/runtime.json
+index 4021d59c..30150b8a 100644
+--- a/src/libraries/Microsoft.NETCore.Platforms/src/runtime.json
++++ b/src/libraries/Microsoft.NETCore.Platforms/src/runtime.json
+@@ -1169,13 +1169,13 @@
+     },
+     "gentoo": {
+       "#import": [
+-        "linux"
++        "linux-musl"
+       ]
+     },
+     "gentoo-x64": {
+       "#import": [
+         "gentoo",
+-        "linux-x64"
++        "linux-musl-x64"
+       ]
+     },
+     "illumos": {
+diff --git a/src/libraries/Microsoft.NETCore.Platforms/src/runtimeGroups.props b/src/libraries/Microsoft.NETCore.Platforms/src/runtimeGroups.props
+index 83837f9c..23ba6d92 100644
+--- a/src/libraries/Microsoft.NETCore.Platforms/src/runtimeGroups.props
++++ b/src/libraries/Microsoft.NETCore.Platforms/src/runtimeGroups.props
+@@ -76,7 +76,7 @@
+     </RuntimeGroup>
+ 
+     <RuntimeGroup Include="gentoo">
+-      <Parent>linux</Parent>
++      <Parent>linux-musl</Parent>
+       <Architectures>x64</Architectures>
+     </RuntimeGroup>
+ 
