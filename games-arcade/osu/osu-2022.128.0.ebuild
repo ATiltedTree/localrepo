@@ -21,19 +21,13 @@ DEPEND="
 	media-libs/libstbi
 	media-libs/bass[fx,mix]
 	=dev-dotnet/realm-10.8.0
-	dev-db/sqlite:3
-	virtual/dotnet-sdk:5.0
+	virtual/dotnet-sdk:6.0
 "
 RDEPEND="${DEPEND}"
 
 QA_PRESTRIPPED="/usr/lib*/${PN}/osu!"
 
 dotnet_runtime() {
-	local os=linux
-	if use elibc_musl; then
-		os="$os-musl"
-	fi
-
 	local arch=
 	case ${ARCH} in
 		amd64)
@@ -47,7 +41,7 @@ dotnet_runtime() {
 			;;
 	esac
 
-	echo "$os-$arch"
+	echo "gentoo-$arch"
 }
 
 edotnet() {
@@ -59,6 +53,9 @@ edotnet() {
 
 src_unpack() {
 	default
+	cd "${S}"
+	eapply --binary "${FILESDIR}"/disable-updater.patch
+	eapply --binary "${FILESDIR}"/net6.patch
 	ebegin "Downloading NuGet sources"
 	edotnet restore "${S}"/osu.Desktop \
 		--runtime $(dotnet_runtime) \
@@ -66,18 +63,11 @@ src_unpack() {
 	eend $?
 }
 
-src_prepare() {
-	default
-
-	eapply --binary "${FILESDIR}"/disable-updater.patch
-}
-
 src_compile() {
 	edotnet build osu.Desktop \
 		--configuration Release \
 		--runtime $(dotnet_runtime) \
-		--no-restore \
-		--nologo \
+		--no-self-contained \
 		"/property:Version=${PV}"
 }
 
@@ -89,7 +79,6 @@ src_install() {
 		--runtime $(dotnet_runtime) \
 		--no-self-contained \
 		--no-build \
-		--nologo \
 		--output "${D}"/$dest \
 		"/property:Version=${PV}"
 
@@ -98,15 +87,8 @@ src_install() {
 	find "${ED}" -name '*.xml' -delete || die
 
 	# Remove bundled libs
-	rm "${ED}/$dest"/*.json || die
-	rm "${ED}/$dest"/lib{MonoPosixHelper,SDL2,stbi,realm-wrappers,bass,bassmix,bass_fx}.so || die
-
-	# Replace bundled sqlite with system sqlite
-	ln -sf ../libsqlite3.so "${ED}/$dest"/libe_sqlite3.so || die "failed to symlink sqlite"
-
-	# Setup the runtimeconfig
-	insinto "$dest"
-	newins "${FILESDIR}"/runtimeconfig.json osu!.runtimeconfig.json
+	find "${ED}" -name '*.so' -delete || die
+	rm "${ED}/$dest"/osu!.deps.json || die
 
 	fperms +x "$dest/osu!"
 	dosym -r "$dest/osu!" "/usr/bin/osu"
