@@ -8,23 +8,38 @@ inherit cmake
 DESCRIPTION="Realm is a mobile database: a replacement for SQLite & ORMs"
 HOMEPAGE="https://github.com/realm/realm-dotnet"
 
-EGIT_REPO_URI="https://github.com/realm/realm-dotnet"
-EGIT_COMMIT="${PV}"
-inherit git-r3
+CORE_PV="11.8.0"
+CORE_P="realm-core-${CORE_PV}"
+NET_P="realm-dotnet-${PV}"
+
+SRC_URI="
+	https://github.com/realm/realm-core/archive/refs/tags/v${CORE_PV}.tar.gz -> ${CORE_P}.tar.gz
+	https://github.com/realm/realm-dotnet/archive/refs/tags/${PV}.tar.gz -> ${NET_P}.tar.gz
+"
 
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
 
-S="${S}/wrappers"
+S="${WORKDIR}/${NET_P}/wrappers"
 
-DEPEND="dev-libs/openssl"
+BDEPEND="
+	sys-devel/bison
+	sys-devel/flex
+"
+DEPEND="
+	dev-libs/openssl
+	sys-libs/zlib
+"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
 	default
 
-	eapply 	"${FILESDIR}"/install.patch
+	rmdir realm-core || die
+	ln -s "${WORKDIR}"/${CORE_P} realm-core || die
+
+	eapply "${FILESDIR}"/install.patch
 
 	pushd realm-core
 		eapply "${FILESDIR}"/core
