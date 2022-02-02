@@ -249,11 +249,11 @@ SRC_URI="
 
 LICENSE="
 	|| ( 0BSD Apache-2.0 MIT )
-	|| ( Apache-2.0 Apache-2.0-WITH-LLVM-exception MIT )
+	|| ( Apache-2.0 Apache-2.0-with-LLVM-exception MIT )
 	|| ( Apache-2.0 Boost-1.0 )
 	|| ( Apache-2.0 ISC MIT )
 	|| ( Apache-2.0 MIT )
-	|| ( Apache-2.0 MIT Zlib )
+	|| ( Apache-2.0 MIT ZLIB )
 	|| ( BSD MIT )
 	|| ( MIT Unlicense )
 	Apache-2.0
