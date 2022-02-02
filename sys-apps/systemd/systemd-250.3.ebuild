@@ -11,7 +11,7 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://github.com/systemd/systemd.git"
 	inherit git-r3
 else
-	MUSL_PV="${PV}"
+	MUSL_PV="${PV}-r1"
 	if [[ ${PV} == *.* ]]; then
 		MY_PN=systemd-stable
 	else
