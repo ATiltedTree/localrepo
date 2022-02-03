@@ -18,7 +18,5 @@ S="${WORKDIR}/${PN}-v${PV}"
 RDEPEND="
 	>=media-libs/libsamplerate-0.1.8
 	>=media-libs/libsndfile-1.0.25
-
-
 "
 DEPEND="${RDEPEND}"
