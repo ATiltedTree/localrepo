@@ -3,7 +3,6 @@
 
 EAPI=8
 
-
 DESCRIPTION="C library for reading and writing YAML."
 HOMEPAGE="https://github.com/tlsa/libcyaml"
 SRC_URI="https://github.com/tlsa/libcyaml/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
