@@ -9,7 +9,7 @@ SRC_URI="https://github.com/troglobit/${PN}/releases/download/v${PV}/${P}.tar.xz
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86 arm64"
+KEYWORDS="amd64 arm64 x86"
 IUSE="+ssl"
 
 DEPEND="
