@@ -1,0 +1,97 @@
+diff --git a/meson.build b/meson.build
+index 107d7f1f3..1c087c64a 100644
+--- a/meson.build
++++ b/meson.build
+@@ -884,25 +884,25 @@ endif
+ # set config defines
+ if not os_darwin
+   x11_dep = dependency (
+-    'x11', required: false, static: all_static)
++    'x11', required: get_option ('x11'), static: all_static)
+   if (x11_dep.found ())
+     cdata.set('HAVE_X11', 1)
+   endif
+ endif
+ alsa_dep = dependency (
+-  'alsa', required: false, static: all_static)
++  'alsa', required: get_option ('alsa'), static: all_static)
+ have_alsa = alsa_dep.found ()
+ if (have_alsa)
+   cdata.set('HAVE_ALSA', 1)
+ endif
+ pulseaudio_dep = dependency (
+-  'libpulse', required: false, static: all_static)
++  'libpulse', required: get_option ('pulseaudio'), static: all_static)
+ have_pulseaudio = pulseaudio_dep.found ()
+ if (have_pulseaudio)
+   cdata.set('HAVE_PULSEAUDIO', 1)
+ endif
+ libsoundio_dep = cc.find_library (
+-  'soundio', required: false, static: all_static)
++  'soundio', required: get_option ('soundio'), static: all_static)
+ have_libsoundio = libsoundio_dep.found ()
+ if (have_libsoundio)
+   cdata.set('HAVE_LIBSOUNDIO', 1)
+@@ -1003,10 +1003,10 @@ fftw3_deps = [
+   dependency (
+     'fftw3', version: '>=3.3.5', static: all_static),
+   dependency (
+-    'fftw3_threads', required: false,
++    'fftw3_threads',
+     static: all_static),
+   dependency (
+-    'fftw3f_threads', required: false,
++    'fftw3f_threads',
+     static: all_static),
+   ]
+ if os_darwin or os_freebsd
+@@ -1058,7 +1058,7 @@ foreach func : fftw3_funcs
+ endforeach
+ 
+ chromaprint_dep = dependency (
+-  'libchromaprint', required: false,
++  'libchromaprint', required: get_option ('chromaprint'),
+   static: all_static)
+ if (chromaprint_dep.found ())
+   cdata.set('HAVE_CHROMAPRINT', 1)
+diff --git a/meson_options.txt b/meson_options.txt
+index d09029c98..9f113d878 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -87,6 +87,36 @@ option (
+   value: 'auto',
+   description: 'Build with LSP DSP support for optimized DSP')
+ 
++option (
++  'chromaprint',
++  type: 'feature',
++  value: 'auto',
++  description: 'Build with chromaprint support')
++
++option (
++  'pulseaudio',
++  type: 'feature',
++  value: 'auto',
++  description: 'Build with pulseaudio support')
++
++option (
++  'alsa',
++  type: 'feature',
++  value: 'auto',
++  description: 'Build with alsa support')
++
++option (
++  'soundio',
++  type: 'feature',
++  value: 'auto',
++  description: 'Build with soundio support')
++
++option (
++  'x11',
++  type: 'feature',
++  value: 'auto',
++  description: 'Build with X11 support')
++
+ option (
+   'static_lsp_dsp',
+   type: 'boolean',
