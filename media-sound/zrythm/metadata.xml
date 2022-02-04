@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+    <maintainer type="person">
+        <email>me@atiltedtree.dev</email>
+        <description>Tilmann Meyer</description>
+    </maintainer>
+    <use>
+        <flag name="rtaudio">Enable <pkg>media-libs/rtaudio</pkg> based audio output</flag>
+        <flag name="soundio">Enable <pkg>media-libs/libsoundio</pkg> based audio output</flag>
+        <flag name="chromaprint">Enables audio fingerprinting support with <pkg>media-libs/chromaprint</pkg></flag>
+    </use>
+</pkgmetadata>
