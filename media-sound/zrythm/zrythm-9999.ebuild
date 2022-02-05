@@ -42,6 +42,7 @@ RDEPEND="
 	media-libs/rubberband
 	media-libs/libepoxy
 	net-misc/curl
+	media-libs/vamp-plugin-sdk
 	portaudio? ( media-libs/portaudio )
 	rtaudio? ( media-libs/rtaudio[alsa?,jack?,pulseaudio?] )
 	sdl? ( media-libs/libsdl2[sound] )
