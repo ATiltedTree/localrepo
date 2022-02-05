@@ -56,7 +56,10 @@ RDEPEND="
 	X? ( x11-libs/libX11 )
 "
 DEPEND="${RDEPEND}"
-BDEPEND="dev-lang/sassc"
+BDEPEND="
+	dev-lang/sassc
+	dev-scheme/guile
+"
 
 PATCHES=(
 	"${FILESDIR}"/execinfo.patch
