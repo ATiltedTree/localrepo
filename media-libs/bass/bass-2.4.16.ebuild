@@ -6,16 +6,16 @@ EAPI=8
 DESCRIPTION="BASS is an audio library for use in software on several platforms"
 HOMEPAGE="https://www.un4seen.com/"
 SRC_URI="
-	https://www.un4seen.com/files/bass24-linux.zip
-	fx? ( https://www.un4seen.com/files/z/0/bass_fx24-linux.zip )
-	mix? ( https://www.un4seen.com/files/bassmix24-linux.zip )
+	https://www.un4seen.com/files/bass24-linux.zip -> ${P}.zip
+	fx? ( https://www.un4seen.com/files/z/0/bass_fx24-linux.zip -> ${PN}-fx-${PV}.zip )
+	mix? ( https://www.un4seen.com/files/bassmix24-linux.zip -> ${PN}-mix-${PV}.zip )
 	arm64? (
-		https://www.un4seen.com/files/bass24-linux-arm.zip
-		fx? ( https://www.un4seen.com/files/z/0/bass_fx24-linux-arm.zip )
+		https://www.un4seen.com/files/bass24-linux-arm.zip -> ${PN}-arm-${PV}.zip
+		fx? ( https://www.un4seen.com/files/z/0/bass_fx24-linux-arm.zip -> ${PN}-arm-fx-${PV}.zip )
 	)
 	arm? (
-		https://www.un4seen.com/files/bass24-linux-arm.zip
-		fx? ( https://www.un4seen.com/files/z/0/bass_fx24-linux-arm.zip )
+		https://www.un4seen.com/files/bass24-linux-arm.zip -> ${PN}-arm-${PV}.zip
+		fx? ( https://www.un4seen.com/files/z/0/bass_fx24-linux-arm.zip -> ${PN}-arm-fx-${PV}.zip )
 	)
 "
 
