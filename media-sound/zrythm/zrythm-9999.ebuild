@@ -37,7 +37,6 @@ RDEPEND="
 	sci-libs/fftw:3.0[threads]
 	x11-libs/gtksourceview:5
 	dev-libs/reproc
-	dev-libs/libbacktrace
 	dev-libs/xxhash
 	media-libs/rubberband
 	media-libs/libepoxy
