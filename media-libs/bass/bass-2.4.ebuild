@@ -9,11 +9,19 @@ SRC_URI="
 	https://www.un4seen.com/files/bass24-linux.zip
 	fx? ( https://www.un4seen.com/files/z/0/bass_fx24-linux.zip )
 	mix? ( https://www.un4seen.com/files/bassmix24-linux.zip )
+	arm64? (
+		https://www.un4seen.com/files/bass24-linux-arm.zip
+		fx? ( https://www.un4seen.com/files/z/0/bass_fx24-linux-arm.zip )
+	)
+	arm? (
+		https://www.un4seen.com/files/bass24-linux-arm.zip
+		fx? ( https://www.un4seen.com/files/z/0/bass_fx24-linux-arm.zip )
+	)
 "
 
 LICENSE="free-noncomm"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="+fx +mix"
 
 BDEPEND="app-arch/unzip"
@@ -26,26 +34,26 @@ src_compile() {	:; }
 
 install_lib() {
 	if use x86; then
-		if use elibc_musl; then
-			patchelf --replace-needed libc.so.6 libc.so lib"$1".so
-			patchelf --remove-needed libdl.so.2 lib"$1".so
-			patchelf --remove-needed libm.so.6 lib"$1".so
-			patchelf --remove-needed libpthread.so.0 lib"$1".so
-			patchelf --remove-needed librt.so.1 lib"$1".so
-		fi
-		dolib.so lib"$1".so
+		:;
 	elif use amd64; then
-		if use elibc_musl; then
-			patchelf --replace-needed libc.so.6 libc.so x64/lib"$1".so
-			patchelf --remove-needed libdl.so.2 x64/lib"$1".so
-			patchelf --remove-needed libm.so.6 x64/lib"$1".so
-			patchelf --remove-needed libpthread.so.0 x64/lib"$1".so
-			patchelf --remove-needed librt.so.1 x64/lib"$1".so
-		fi
-		dolib.so x64/lib"$1".so
+		cd "x64" || die
+	elif use arm64; then
+		cd "aarch64" || die
+	elif use arm; then
+		cd "hardfp" || die
 	else
 		die "unsupported arch"
 	fi
+
+	if use elibc_musl; then
+		patchelf --replace-needed libc.so.6 libc.so lib$1.so
+		patchelf --remove-needed libdl.so.2 lib$1.so
+		patchelf --remove-needed libm.so.6 lib$1.so
+		patchelf --remove-needed libpthread.so.0 lib$1.so
+		patchelf --remove-needed librt.so.1 lib$1.so
+	fi
+	dolib.so lib$1.so
+	cd "${S}" || die
 }
 
 src_install() {
