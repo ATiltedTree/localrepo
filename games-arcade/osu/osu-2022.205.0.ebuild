@@ -8,7 +8,7 @@ inherit desktop xdg
 DESCRIPTION="A free-to-win rhythm game. Rhythm is just a click away!"
 HOMEPAGE="https://github.com/ppy/osu"
 SRC_URI="https://github.com/ppy/osu/archive/${PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~arm64"
 
 LICENSE="MIT CC-BY-NC-4.0"
 SLOT="0"
