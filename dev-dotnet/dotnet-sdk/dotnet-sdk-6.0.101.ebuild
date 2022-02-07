@@ -26,13 +26,13 @@ BOOT_URI="
 		arm? ( https://dotnetcli.azureedge.net/dotnet/Sdk/${BOOT_PV}/${PN}-${BOOT_PV}-linux-arm.tar.gz )
 		arm64? ( https://dotnetcli.azureedge.net/dotnet/Sdk/${BOOT_PV}/${PN}-${BOOT_PV}-linux-arm64.tar.gz )
 	)
+	https://dotnetcli.azureedge.net/source-built-artifacts/assets/${BOOT_ARTIFACTS_P}.tar.gz -> dotnet-${BOOT_ARTIFACTS_P}.tar.gz
 "
 
 SRC_SHA="e42d85d4cf5769e38059ea4f546e20452f4975a2ba448f81999deffb8a4e517d098ef23b8576c4654ec7a3b5e35006a90e5bf5ae2808012d3ed068f9d0a7eb90"
 SRC_URI="
-	${BOOT_URI}
+	!system-bootstrap? ( ${BOOT_URI} )
 	https://src.fedoraproject.org/lookaside/pkgs/dotnet6.0/${MY_P}.tar.gz/sha512/${SRC_SHA}/${MY_P}.tar.gz
-	https://dotnetcli.azureedge.net/source-built-artifacts/assets/${BOOT_ARTIFACTS_P}.tar.gz -> dotnet-${BOOT_ARTIFACTS_P}.tar.gz
 "
 
 S="${WORKDIR}/${MY_P}"
@@ -40,7 +40,7 @@ S="${WORKDIR}/${MY_P}"
 LICENSE="MIT Apache-2.0 BSD"
 SLOT="6.0"
 KEYWORDS="~amd64 ~arm ~arm64"
-IUSE="+dotnet-symlink"
+IUSE="+dotnet-symlink system-bootstrap"
 
 RDEPEND="
 	app-crypt/mit-krb5
@@ -53,6 +53,7 @@ DEPEND="${RDEPEND}"
 BDEPEND="
 	dev-util/cmake
 	dev-vcs/git
+	system-bootstrap? ( >=dev-dotnet/dotnet-sdk-${BOOT_PV} )
 "
 
 CHECKREQS_DISK_BUILD="50G"
@@ -80,13 +81,21 @@ dotnet_rid() {
 }
 
 src_unpack() {
-	mkdir "${WORKDIR}"/dotnet || die
-	cd "${WORKDIR}"/dotnet || die
-	unpack ${PN}-${BOOT_PV}-$(dotnet_rid).tar.gz
+	if use system-bootstrap; then
+		# SDK is modified in-place...
+		mkdir "${WORKDIR}"/dotnet || die
+		cp -a "${BROOT}"/usr/lib/dotnet-sdk-${SLOT}/{host,packs,shared,sdk,dotnet} "${WORKDIR}"/dotnet || die
 
-	mkdir "${WORKDIR}"/packages || die
-	cd "${WORKDIR}"/packages || die
-	unpack dotnet-${BOOT_ARTIFACTS_P}.tar.gz
+		ln -s "${BROOT}"/usr/lib/dotnet-sdk-${SLOT}/packages "${WORKDIR}"/packages || die
+	else
+		mkdir "${WORKDIR}"/dotnet || die
+		cd "${WORKDIR}"/dotnet || die
+		unpack ${PN}-${BOOT_PV}-$(dotnet_rid).tar.gz
+
+		mkdir "${WORKDIR}"/packages || die
+		cd "${WORKDIR}"/packages || die
+		unpack dotnet-${BOOT_ARTIFACTS_P}.tar.gz
+	fi
 
 	cd "${WORKDIR}" || die
 	unpack ${MY_P}.tar.gz
@@ -104,6 +113,7 @@ src_prepare() {
 		cd "${S}"
 	}
 
+	eapply "${FILESDIR}"/system-bootstrap.patch
 	if use elibc_musl; then
 		eapply "${FILESDIR}"/musl.patch
 	fi
@@ -163,6 +173,8 @@ src_install() {
 
 	dodir "${dest}"
 	tar xf artifacts/*/Release/dotnet-sdk-*.tar.gz -C "${ddest}" || die
+	dodir "${dest}/packages"
+	tar xf artifacts/*/Release/Private.SourceBuilt.Artifacts.*.tar.gz -C "${ddest}/packages"
 
 	# Unneeded prebuilt things
 	rm "${ddest}"/sdk/${PV}/{testhost.x86,vstest.console,TestHost/testhost.x86}
