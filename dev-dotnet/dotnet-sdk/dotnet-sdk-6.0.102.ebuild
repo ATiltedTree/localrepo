@@ -39,7 +39,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="MIT Apache-2.0 BSD"
 SLOT="6.0"
-KEYWORDS="~amd64 ~arm ~arm64"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="+dotnet-symlink system-bootstrap"
 
 RDEPEND="
@@ -61,23 +61,20 @@ CHECKREQS_DISK_USR="600M"
 
 dotnet_os() {
 	if use elibc_musl; then
-		echo linux-musl
+		echo $1-musl
 	else
-		echo linux
+		echo $1
 	fi
 }
 
 dotnet_arch() {
 	local arch=""
 	use amd64 && arch="x64"
+	use x86 && arch="x86"
 	use arm && arch="arm"
 	use arm64 && arch="arm64"
-	[[ -z "$arch" ]] && die "Architecture not supported by .NET Core"
+	[[ -z "$arch" ]] && die "Architecture not supported by .NET"
 	echo "$arch"
-}
-
-dotnet_rid() {
-	echo "$(dotnet_os)-$(dotnet_arch)"
 }
 
 src_unpack() {
@@ -90,7 +87,7 @@ src_unpack() {
 	else
 		mkdir "${WORKDIR}"/dotnet || die
 		cd "${WORKDIR}"/dotnet || die
-		unpack ${PN}-${BOOT_PV}-$(dotnet_rid).tar.gz
+		unpack ${PN}-${BOOT_PV}-$(dotnet_os linux)-$(dotnet_arch).tar.gz
 
 		mkdir "${WORKDIR}"/packages || die
 		cd "${WORKDIR}"/packages || die
@@ -117,15 +114,10 @@ src_prepare() {
 	if use elibc_musl; then
 		eapply "${FILESDIR}"/musl.patch
 	fi
-	patch_module aspnetcore
 	patch_module command-line-api
-	patch_module fsharp
 	patch_module installer
 	patch_module runtime
 	patch_module sdk
-	patch_module source-build-reference-packages
-	patch_module vstest
-	patch_module xliff-tasks
 
 	default
 }
@@ -139,7 +131,7 @@ src_compile() {
 		--
 
 		/p:UseSystemLibraries=true
-		/p:TargetRid=gentoo-$(dotnet_arch)
+		/p:TargetRid="$(dotnet_os gentoo)-$(dotnet_arch)"
 
 		/p:LogVerbosity=normal
 		/p:MinimalConsoleLogOutput=false
