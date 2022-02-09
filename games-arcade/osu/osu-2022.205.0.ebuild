@@ -27,23 +27,6 @@ RDEPEND="${DEPEND}"
 
 QA_PRESTRIPPED="/usr/lib*/${PN}/osu!"
 
-dotnet_runtime() {
-	local arch=
-	case ${ARCH} in
-		amd64)
-			arch="x64"
-			;;
-		x86|arm|arm64)
-			arch="${ARCH}"
-			;;
-		*)
-			die "unsupported architecture ${ARCH}"
-			;;
-	esac
-
-	echo "gentoo-$arch"
-}
-
 edotnet() {
 	DOTNET_CLI_TELEMETRY_OPTOUT="true" \
 	DOTNET_NOLOGO="true" \
@@ -58,7 +41,8 @@ src_unpack() {
 	eapply --binary "${FILESDIR}"/net6.patch
 	ebegin "Downloading NuGet sources"
 	edotnet restore "${S}"/osu.Desktop \
-		--runtime $(dotnet_runtime) \
+		--use-current-runtime \
+		--no-cache \
 		>/dev/null
 	eend $?
 }
@@ -66,7 +50,7 @@ src_unpack() {
 src_compile() {
 	edotnet build osu.Desktop \
 		--configuration Release \
-		--runtime $(dotnet_runtime) \
+		--use-current-runtime \
 		--no-self-contained \
 		"/property:Version=${PV}"
 }
@@ -76,7 +60,7 @@ src_install() {
 
 	edotnet publish osu.Desktop \
 		--configuration Release \
-		--runtime $(dotnet_runtime) \
+		--use-current-runtime \
 		--no-self-contained \
 		--no-build \
 		--output "${D}"/$dest \
