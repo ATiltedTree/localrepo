@@ -1,0 +1,126 @@
+From 4ef7a755401b608e3257682a1705658a3223889b Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Wed, 9 Feb 2022 16:56:16 +0100
+Subject: [PATCH 1/2] glibc
+
+---
+ eng/native/init-distro-rid.sh                 |  4 +++
+ .../src/runtime.compatibility.json            | 30 +++++++++++++++++++
+ .../src/runtime.json                          | 18 +++++++++++
+ .../src/runtimeGroups.props                   |  2 +-
+ 4 files changed, 53 insertions(+), 1 deletion(-)
+
+diff --git a/eng/native/init-distro-rid.sh b/eng/native/init-distro-rid.sh
+index f71aa8640b1..b95780d2b94 100644
+--- a/eng/native/init-distro-rid.sh
++++ b/eng/native/init-distro-rid.sh
+@@ -46,6 +46,10 @@ initNonPortableDistroRid()
+                     VERSION_ID="${VERSION_ID%.*}"
+                 fi
+ 
++                if [ "${ID}" = "gentoo" ]; then
++                    unset VERSION_ID
++                fi
++
+                 if [ -z "${VERSION_ID+x}" ]; then
+                         # Rolling release distros do not set VERSION_ID, so omit
+                         # it here to be consistent with everything else.
+diff --git a/src/libraries/Microsoft.NETCore.Platforms/src/runtime.compatibility.json b/src/libraries/Microsoft.NETCore.Platforms/src/runtime.compatibility.json
+index 98b9472e508..7b64f0783e1 100644
+--- a/src/libraries/Microsoft.NETCore.Platforms/src/runtime.compatibility.json
++++ b/src/libraries/Microsoft.NETCore.Platforms/src/runtime.compatibility.json
+@@ -2996,6 +2996,26 @@
+     "any",
+     "base"
+   ],
++  "gentoo-arm": [
++    "gentoo-arm",
++    "gentoo",
++    "linux-arm",
++    "linux",
++    "unix-arm",
++    "unix",
++    "any",
++    "base"
++  ],
++  "gentoo-arm64": [
++    "gentoo-arm64",
++    "gentoo",
++    "linux-arm64",
++    "linux",
++    "unix-arm64",
++    "unix",
++    "any",
++    "base"
++  ],
+   "gentoo-x64": [
+     "gentoo-x64",
+     "gentoo",
+@@ -3006,6 +3026,16 @@
+     "any",
+     "base"
+   ],
++  "gentoo-x86": [
++    "gentoo-x86",
++    "gentoo",
++    "linux-x86",
++    "linux",
++    "unix-x86",
++    "unix",
++    "any",
++    "base"
++  ],
+   "illumos": [
+     "illumos",
+     "unix",
+diff --git a/src/libraries/Microsoft.NETCore.Platforms/src/runtime.json b/src/libraries/Microsoft.NETCore.Platforms/src/runtime.json
+index 4021d59c820..20950e7f39e 100644
+--- a/src/libraries/Microsoft.NETCore.Platforms/src/runtime.json
++++ b/src/libraries/Microsoft.NETCore.Platforms/src/runtime.json
+@@ -1172,12 +1172,30 @@
+         "linux"
+       ]
+     },
++    "gentoo-arm": {
++      "#import": [
++        "gentoo",
++        "linux-arm"
++      ]
++    },
++    "gentoo-arm64": {
++      "#import": [
++        "gentoo",
++        "linux-arm64"
++      ]
++    },
+     "gentoo-x64": {
+       "#import": [
+         "gentoo",
+         "linux-x64"
+       ]
+     },
++    "gentoo-x86": {
++      "#import": [
++        "gentoo",
++        "linux-x86"
++      ]
++    },
+     "illumos": {
+       "#import": [
+         "unix"
+diff --git a/src/libraries/Microsoft.NETCore.Platforms/src/runtimeGroups.props b/src/libraries/Microsoft.NETCore.Platforms/src/runtimeGroups.props
+index 83837f9c19c..6da522bc5a7 100644
+--- a/src/libraries/Microsoft.NETCore.Platforms/src/runtimeGroups.props
++++ b/src/libraries/Microsoft.NETCore.Platforms/src/runtimeGroups.props
+@@ -77,7 +77,7 @@
+ 
+     <RuntimeGroup Include="gentoo">
+       <Parent>linux</Parent>
+-      <Architectures>x64</Architectures>
++      <Architectures>x64;x86;arm;arm64</Architectures>
+     </RuntimeGroup>
+ 
+     <RuntimeGroup Include="ios">
+-- 
+2.35.1
+

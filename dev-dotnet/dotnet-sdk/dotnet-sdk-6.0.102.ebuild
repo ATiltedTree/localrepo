@@ -61,9 +61,9 @@ CHECKREQS_DISK_USR="600M"
 
 dotnet_os() {
 	if use elibc_musl; then
-		echo $1-musl
+		echo linux-musl
 	else
-		echo $1
+		echo linux
 	fi
 }
 
@@ -87,7 +87,7 @@ src_unpack() {
 	else
 		mkdir "${WORKDIR}"/dotnet || die
 		cd "${WORKDIR}"/dotnet || die
-		unpack ${PN}-${BOOT_PV}-$(dotnet_os linux)-$(dotnet_arch).tar.gz
+		unpack ${PN}-${BOOT_PV}-$(dotnet_os)-$(dotnet_arch).tar.gz
 
 		mkdir "${WORKDIR}"/packages || die
 		cd "${WORKDIR}"/packages || die
@@ -104,7 +104,7 @@ src_prepare() {
 		cp -r "${FILESDIR}"/$1 patches
 		cd src/$1.*/
 		if ! use elibc_musl; then
-			rm "${S}"/patches/$1/musl.patch
+			rm "${S}"/patches/$1/*musl*.patch
 		fi
 		eapply "${S}"/patches/$1
 		cd "${S}"
@@ -131,7 +131,7 @@ src_compile() {
 		--
 
 		/p:UseSystemLibraries=true
-		/p:TargetRid="$(dotnet_os gentoo)-$(dotnet_arch)"
+		/p:TargetRid="gentoo-$(dotnet_arch)"
 
 		/p:LogVerbosity=normal
 		/p:MinimalConsoleLogOutput=false
