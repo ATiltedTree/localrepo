@@ -396,10 +396,10 @@ RDEPEND="${DEPEND}"
 QA_PRESTRIPPED="/usr/lib*/${PN}/osu!"
 
 edotnet() {
-       DOTNET_CLI_TELEMETRY_OPTOUT="true" \
-       DOTNET_NOLOGO="true" \
-       DOTNET_SKIP_FIRST_TIME_EXPERIENCE="true" \
-       dotnet $@ || die "dotnet failed"
+	DOTNET_CLI_TELEMETRY_OPTOUT="true" \
+	DOTNET_NOLOGO="true" \
+	DOTNET_SKIP_FIRST_TIME_EXPERIENCE="true" \
+	dotnet $@ || die "dotnet failed"
 }
 
 src_prepare() {
