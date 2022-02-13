@@ -1,0 +1,30 @@
+From b36dcc3d9d21caecd1aa2ca47693414782e781ca Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Sun, 13 Feb 2022 12:42:07 +0100
+Subject: [PATCH 4/4] meson: make libbacktrace truly optional
+
+---
+ meson.build | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index b06c606c5..c09a7a890 100644
+--- a/meson.build
++++ b/meson.build
+@@ -1220,11 +1220,9 @@ endif
+ 
+ libbacktrace_dep = cc.find_library (
+   'backtrace', required: false)
+-if not libbacktrace_dep.found ()
+-  libbacktrace_proj = subproject ('libbacktrace')
+-  libbacktrace_dep = libbacktrace_proj.get_variable ('libbacktrace_dep')
++if libbacktrace_dep.found ()
++  cdata.set ('HAVE_LIBBACKTRACE', 1)
+ endif
+-cdata.set ('HAVE_LIBBACKTRACE', 1)
+ 
+ xxhash_dep = dependency (
+   'libxxhash',
+-- 
+2.35.1
+

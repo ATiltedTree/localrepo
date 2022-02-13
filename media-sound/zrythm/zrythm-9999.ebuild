@@ -61,9 +61,10 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}"/execinfo.patch
-	"${FILESDIR}"/meson.patch
-	"${FILESDIR}"/carlaless.patch
+	"${FILESDIR}"/0001-meson-add-chromaprint-option.patch
+	"${FILESDIR}"/0002-carla-support-build-without-carla.patch
+	"${FILESDIR}"/0003-backtrace-remove-execinfo-make-it-musl-compatible.patch
+	"${FILESDIR}"/0004-meson-make-libbacktrace-truly-optional.patch
 )
 
 src_configure() {
@@ -85,7 +86,7 @@ src_configure() {
 		$(meson_feature graphviz)
 		$(meson_feature guile)
 		$(meson_feature chromaprint)
-		$(meson_feature pulseaudio)
+		$(meson_feature pulseaudio pulse)
 		$(meson_feature alsa)
 		$(meson_feature soundio)
 		$(meson_feature X x11)

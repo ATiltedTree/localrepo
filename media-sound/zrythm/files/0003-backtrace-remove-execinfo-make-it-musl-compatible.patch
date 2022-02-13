@@ -1,3 +1,12 @@
+From fb6322542e7d2d0361e3242c06eff0a5dfe11b2b Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Sun, 13 Feb 2022 12:37:07 +0100
+Subject: [PATCH 3/4] backtrace: remove execinfo, make it musl compatible
+
+---
+ src/utils/backtrace.c | 26 --------------------------
+ 1 file changed, 26 deletions(-)
+
 diff --git a/src/utils/backtrace.c b/src/utils/backtrace.c
 index c36aefae0..c8b1f2f2b 100644
 --- a/src/utils/backtrace.c
@@ -42,3 +51,6 @@ index c36aefae0..c8b1f2f2b 100644
  #endif
  
    return g_strdup (message);
+-- 
+2.35.1
+

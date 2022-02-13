@@ -1,3 +1,12 @@
+From 8df3f05dce07067b3203bf678658f9d70eb30ab9 Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Sun, 13 Feb 2022 12:36:42 +0100
+Subject: [PATCH 2/4] carla: support build without carla
+
+---
+ src/audio/engine.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
 diff --git a/src/audio/engine.c b/src/audio/engine.c
 index 1c29e939d..1d1831577 100644
 --- a/src/audio/engine.c
@@ -13,3 +22,6 @@ index 1c29e939d..1d1831577 100644
                  }
                else if (
                  pl->setting->descr->protocol ==
+-- 
+2.35.1
+

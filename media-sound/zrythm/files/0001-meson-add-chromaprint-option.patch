@@ -1,0 +1,43 @@
+From 89dcdf605305dab7f17621eb74087c3b6cb745a6 Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Sun, 13 Feb 2022 12:36:20 +0100
+Subject: [PATCH 1/4] meson: add chromaprint option
+
+---
+ meson.build       | 2 +-
+ meson_options.txt | 6 ++++++
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index c15978b0e..b06c606c5 100644
+--- a/meson.build
++++ b/meson.build
+@@ -1056,7 +1056,7 @@ foreach func : fftw3_funcs
+ endforeach
+ 
+ chromaprint_dep = dependency (
+-  'libchromaprint', required: false,
++  'libchromaprint', required: get_option ('chromaprint'),
+   static: all_static)
+ if (chromaprint_dep.found ())
+   cdata.set('HAVE_CHROMAPRINT', 1)
+diff --git a/meson_options.txt b/meson_options.txt
+index 1861c02b6..3549addce 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -87,6 +87,12 @@ option (
+   value: 'auto',
+   description: 'Build with LSP DSP support for optimized DSP')
+ 
++option (
++  'chromaprint',
++  type: 'feature',
++  value: 'auto',
++  description: 'Build with chromaprint support')
++
+ option (
+   'static_lsp_dsp',
+   type: 'boolean',
+-- 
+2.35.1
+
