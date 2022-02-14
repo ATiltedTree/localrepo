@@ -101,12 +101,17 @@ src_unpack() {
 src_prepare() {
 	mkdir patches || die
 	patch_module() {
+		local patch_dir="${S}"/patches/$1
 		cp -r "${FILESDIR}"/$1 patches
 		cd src/$1.*/
 		if ! use elibc_musl; then
-			rm "${S}"/patches/$1/*musl*.patch
+			rm $patch_dir/*musl*.patch
 		fi
-		eapply "${S}"/patches/$1
+		if [ -z "$(ls -A $patch_dir)" ]; then
+			:;
+		else
+			eapply $patch_dir
+		fi
 		cd "${S}"
 	}
 
