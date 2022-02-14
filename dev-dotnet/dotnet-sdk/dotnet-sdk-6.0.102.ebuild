@@ -137,6 +137,7 @@ src_compile() {
 
 		/p:UseSystemLibraries=true
 		/p:TargetRid="gentoo-$(dotnet_arch)"
+		/p:Architecture="$(dotnet_arch)"
 
 		/p:LogVerbosity=normal
 		/p:MinimalConsoleLogOutput=false
