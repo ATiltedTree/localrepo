@@ -8,7 +8,7 @@ inherit cmake
 DESCRIPTION="Realm is a mobile database: a replacement for SQLite & ORMs"
 HOMEPAGE="https://github.com/realm/realm-dotnet"
 
-CORE_PV="11.8.0"
+CORE_PV="11.9.0"
 CORE_P="realm-core-${CORE_PV}"
 NET_P="realm-dotnet-${PV}"
 
@@ -41,9 +41,9 @@ src_prepare() {
 
 	eapply "${FILESDIR}"/install.patch
 
-	pushd realm-core
+	cd "${S}"/realm-core
 		eapply "${FILESDIR}"/core
-	popd
+	cd "${S}"
 
 	cmake_src_prepare
 }
