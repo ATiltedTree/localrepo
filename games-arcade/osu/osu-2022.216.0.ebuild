@@ -4,65 +4,66 @@
 EAPI=8
 
 NUGET_PKGS="
-	automapper-11.0.0
+	automapper-11.0.1
 	deltacompressiondotnet-2.0.0
 	diffplex-1.7.0
 	discordrichpresence-1.0.175
 	ffmpeg.autogen-4.3.0.1
 	fody-6.6.0
 	hidsharpcore-1.2.1.1
-	htmlagilitypack-1.11.40
-	humanizer-2.13.14
+	htmlagilitypack-1.11.42
+	humanizer-2.14.1
 	humanizer.core-2.2.0
-	humanizer.core-2.13.14
-	humanizer.core.af-2.13.14
-	humanizer.core.ar-2.13.14
-	humanizer.core.az-2.13.14
-	humanizer.core.bg-2.13.14
-	humanizer.core.bn-bd-2.13.14
-	humanizer.core.cs-2.13.14
-	humanizer.core.da-2.13.14
-	humanizer.core.de-2.13.14
-	humanizer.core.el-2.13.14
-	humanizer.core.es-2.13.14
-	humanizer.core.fa-2.13.14
-	humanizer.core.fi-fi-2.13.14
-	humanizer.core.fr-2.13.14
-	humanizer.core.fr-be-2.13.14
-	humanizer.core.he-2.13.14
-	humanizer.core.hr-2.13.14
-	humanizer.core.hu-2.13.14
-	humanizer.core.hy-2.13.14
-	humanizer.core.id-2.13.14
-	humanizer.core.is-2.13.14
-	humanizer.core.it-2.13.14
-	humanizer.core.ja-2.13.14
-	humanizer.core.ko-kr-2.13.14
-	humanizer.core.ku-2.13.14
-	humanizer.core.lv-2.13.14
-	humanizer.core.ms-my-2.13.14
-	humanizer.core.mt-2.13.14
-	humanizer.core.nb-2.13.14
-	humanizer.core.nb-no-2.13.14
-	humanizer.core.nl-2.13.14
-	humanizer.core.pl-2.13.14
-	humanizer.core.pt-2.13.14
-	humanizer.core.ro-2.13.14
-	humanizer.core.ru-2.13.14
-	humanizer.core.sk-2.13.14
-	humanizer.core.sl-2.13.14
-	humanizer.core.sr-2.13.14
-	humanizer.core.sr-latn-2.13.14
-	humanizer.core.sv-2.13.14
-	humanizer.core.th-th-2.13.14
-	humanizer.core.tr-2.13.14
-	humanizer.core.uk-2.13.14
-	humanizer.core.uz-cyrl-uz-2.13.14
-	humanizer.core.uz-latn-uz-2.13.14
-	humanizer.core.vi-2.13.14
-	humanizer.core.zh-cn-2.13.14
-	humanizer.core.zh-hans-2.13.14
-	humanizer.core.zh-hant-2.13.14
+	humanizer.core-2.8.26
+	humanizer.core-2.14.1
+	humanizer.core.af-2.14.1
+	humanizer.core.ar-2.14.1
+	humanizer.core.az-2.14.1
+	humanizer.core.bg-2.14.1
+	humanizer.core.bn-bd-2.14.1
+	humanizer.core.cs-2.14.1
+	humanizer.core.da-2.14.1
+	humanizer.core.de-2.14.1
+	humanizer.core.el-2.14.1
+	humanizer.core.es-2.14.1
+	humanizer.core.fa-2.14.1
+	humanizer.core.fi-fi-2.14.1
+	humanizer.core.fr-2.14.1
+	humanizer.core.fr-be-2.14.1
+	humanizer.core.he-2.14.1
+	humanizer.core.hr-2.14.1
+	humanizer.core.hu-2.14.1
+	humanizer.core.hy-2.14.1
+	humanizer.core.id-2.14.1
+	humanizer.core.is-2.14.1
+	humanizer.core.it-2.14.1
+	humanizer.core.ja-2.14.1
+	humanizer.core.ko-kr-2.14.1
+	humanizer.core.ku-2.14.1
+	humanizer.core.lv-2.14.1
+	humanizer.core.ms-my-2.14.1
+	humanizer.core.mt-2.14.1
+	humanizer.core.nb-2.14.1
+	humanizer.core.nb-no-2.14.1
+	humanizer.core.nl-2.14.1
+	humanizer.core.pl-2.14.1
+	humanizer.core.pt-2.14.1
+	humanizer.core.ro-2.14.1
+	humanizer.core.ru-2.14.1
+	humanizer.core.sk-2.14.1
+	humanizer.core.sl-2.14.1
+	humanizer.core.sr-2.14.1
+	humanizer.core.sr-latn-2.14.1
+	humanizer.core.sv-2.14.1
+	humanizer.core.th-th-2.14.1
+	humanizer.core.tr-2.14.1
+	humanizer.core.uk-2.14.1
+	humanizer.core.uz-cyrl-uz-2.14.1
+	humanizer.core.uz-latn-uz-2.14.1
+	humanizer.core.vi-2.14.1
+	humanizer.core.zh-cn-2.14.1
+	humanizer.core.zh-hans-2.14.1
+	humanizer.core.zh-hant-2.14.1
 	jetbrains.annotations-2021.3.0
 	managed-midi-1.9.14
 	managedbass-3.1.0
@@ -71,19 +72,18 @@ NUGET_PKGS="
 	markdig-0.23.0
 	messagepack-2.3.85
 	messagepack.annotations-2.3.85
-	microsoft.aspnetcore.app.runtime.linux-musl-x64-6.0.2
-	microsoft.aspnetcore.connections.abstractions-5.0.11
-	microsoft.aspnetcore.http.connections.client-5.0.11
-	microsoft.aspnetcore.http.connections.common-5.0.11
-	microsoft.aspnetcore.http.features-5.0.11
-	microsoft.aspnetcore.signalr.client-5.0.11
-	microsoft.aspnetcore.signalr.client.core-5.0.11
-	microsoft.aspnetcore.signalr.common-5.0.11
-	microsoft.aspnetcore.signalr.protocols.json-5.0.11
-	microsoft.aspnetcore.signalr.protocols.messagepack-5.0.11
-	microsoft.aspnetcore.signalr.protocols.newtonsoftjson-5.0.11
+	microsoft.aspnetcore.connections.abstractions-6.0.2
+	microsoft.aspnetcore.http.connections.client-6.0.2
+	microsoft.aspnetcore.http.connections.common-6.0.2
+	microsoft.aspnetcore.signalr.client-6.0.2
+	microsoft.aspnetcore.signalr.client.core-6.0.2
+	microsoft.aspnetcore.signalr.common-6.0.2
+	microsoft.aspnetcore.signalr.protocols.json-6.0.2
+	microsoft.aspnetcore.signalr.protocols.messagepack-6.0.2
+	microsoft.aspnetcore.signalr.protocols.newtonsoftjson-6.0.2
 	microsoft.bcl.asyncinterfaces-1.0.0
 	microsoft.bcl.asyncinterfaces-5.0.0
+	microsoft.bcl.asyncinterfaces-6.0.0
 	microsoft.build.framework-16.5.0
 	microsoft.build.locator-1.4.1
 	microsoft.codeanalysis.analyzers-3.3.2
@@ -91,63 +91,56 @@ NUGET_PKGS="
 	microsoft.codeanalysis.common-3.11.0
 	microsoft.codeanalysis.csharp-3.11.0
 	microsoft.codeanalysis.csharp.workspaces-3.11.0
-	microsoft.codeanalysis.netanalyzers-5.0.3
+	microsoft.codeanalysis.netanalyzers-6.0.0
 	microsoft.codeanalysis.workspaces.common-3.11.0
 	microsoft.codeanalysis.workspaces.msbuild-3.11.0
-	microsoft.csharp-4.0.1
 	microsoft.csharp-4.5.0
 	microsoft.csharp-4.7.0
-	microsoft.data.sqlite.core-2.2.6
+	microsoft.data.sqlite.core-5.0.14
 	microsoft.diagnostics.netcore.client-0.2.61701
 	microsoft.diagnostics.runtime-2.0.161401
-	microsoft.dotnet.platformabstractions-2.1.0
-	microsoft.entityframeworkcore-2.2.6
-	microsoft.entityframeworkcore.abstractions-2.2.6
-	microsoft.entityframeworkcore.analyzers-2.2.6
-	microsoft.entityframeworkcore.design-2.2.6
-	microsoft.entityframeworkcore.relational-2.2.6
-	microsoft.entityframeworkcore.sqlite-2.2.6
-	microsoft.entityframeworkcore.sqlite.core-2.2.6
-	microsoft.extensions.caching.abstractions-2.2.0
-	microsoft.extensions.caching.memory-2.2.0
-	microsoft.extensions.configuration-2.2.0
-	microsoft.extensions.configuration.abstractions-2.2.0
+	microsoft.dotnet.platformabstractions-3.1.6
+	microsoft.entityframeworkcore-5.0.14
+	microsoft.entityframeworkcore.abstractions-5.0.14
+	microsoft.entityframeworkcore.analyzers-5.0.14
+	microsoft.entityframeworkcore.design-5.0.14
+	microsoft.entityframeworkcore.relational-5.0.14
+	microsoft.entityframeworkcore.sqlite-5.0.14
+	microsoft.entityframeworkcore.sqlite.core-5.0.14
+	microsoft.extensions.caching.abstractions-5.0.0
+	microsoft.extensions.caching.memory-5.0.0
 	microsoft.extensions.configuration.abstractions-5.0.0
-	microsoft.extensions.configuration.binder-2.2.0
-	microsoft.extensions.dependencyinjection-2.2.0
+	microsoft.extensions.configuration.abstractions-6.0.0
 	microsoft.extensions.dependencyinjection-5.0.2
+	microsoft.extensions.dependencyinjection-6.0.0
 	microsoft.extensions.dependencyinjection-6.0.0-rc.1.21451.13
-	microsoft.extensions.dependencyinjection.abstractions-2.2.0
 	microsoft.extensions.dependencyinjection.abstractions-5.0.0
+	microsoft.extensions.dependencyinjection.abstractions-6.0.0
 	microsoft.extensions.dependencyinjection.abstractions-6.0.0-rc.1.21451.13
-	microsoft.extensions.dependencymodel-2.1.0
-	microsoft.extensions.logging-2.2.0
+	microsoft.extensions.dependencymodel-5.0.0
+	microsoft.extensions.features-6.0.2
 	microsoft.extensions.logging-5.0.0
-	microsoft.extensions.logging.abstractions-2.2.0
+	microsoft.extensions.logging-6.0.0
 	microsoft.extensions.logging.abstractions-5.0.0
+	microsoft.extensions.logging.abstractions-6.0.0
 	microsoft.extensions.objectpool-5.0.11
-	microsoft.extensions.options-2.2.0
 	microsoft.extensions.options-5.0.0
-	microsoft.extensions.primitives-2.2.0
+	microsoft.extensions.options-6.0.0
 	microsoft.extensions.primitives-5.0.0
-	microsoft.extensions.primitives-5.0.1
-	microsoft.netcore.app.runtime.linux-musl-x64-6.0.2
+	microsoft.extensions.primitives-6.0.0
 	microsoft.netcore.platforms-1.0.1
 	microsoft.netcore.platforms-1.1.0
 	microsoft.netcore.platforms-2.1.2
 	microsoft.netcore.platforms-5.0.0
 	microsoft.netcore.targets-3.1.0
 	microsoft.netcore.targets-5.0.0
-	microsoft.win32.primitives-4.0.1
 	microsoft.win32.primitives-4.3.0
 	microsoft.win32.registry-5.0.0
 	mongodb.bson-2.11.3
 	mono.cecil-0.9.6.1
 	mono.posix.netstandard-1.0.0
-	netstandard.library-1.6.0
 	netstandard.library-1.6.1
 	netstandard.library-2.0.0
-	newtonsoft.json-9.0.1
 	newtonsoft.json-12.0.2
 	newtonsoft.json-13.0.1
 	nuget.common-5.11.0
@@ -165,25 +158,21 @@ NUGET_PKGS="
 	opentabletdriver.native-0.6.0.2
 	opentabletdriver.plugin-0.6.0.2
 	ppy.localisationanalyser-2021.1210.0
-	ppy.osu.framework-2022.204.0
+	ppy.osu.framework-2022.214.0
 	ppy.osu.framework.nativelibs-2021.1221.0
-	ppy.osu.game.resources-2022.204.0
+	ppy.osu.game.resources-2022.211.0
 	ppy.osutk.ns20-1.0.187
 	ppy.sdl2-cs-1.0.501-alpha
 	ppy.squirrel.windows-1.9.0.5
-	realm-10.8.0
-	realm.fody-10.8.0
+	realm-10.9.0
+	realm.fody-10.9.0
 	remotion.linq-2.2.0
 	runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl-4.3.0
 	runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl-4.3.0
 	runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl-4.3.0
-	runtime.native.system-4.0.0
 	runtime.native.system-4.3.0
-	runtime.native.system.io.compression-4.1.0
 	runtime.native.system.io.compression-4.3.0
-	runtime.native.system.net.http-4.0.1
 	runtime.native.system.net.http-4.3.0
-	runtime.native.system.security.cryptography-4.0.0
 	runtime.native.system.security.cryptography.apple-4.3.0
 	runtime.native.system.security.cryptography.openssl-4.3.0
 	runtime.opensuse.13.2-x64.runtime.native.system.security.cryptography.openssl-4.3.0
@@ -194,33 +183,28 @@ NUGET_PKGS="
 	runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl-4.3.0
 	runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl-4.3.0
 	runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl-4.3.0
-	sentry-3.13.0
+	sentry-3.14.0
 	sharpcompress-0.17.1
 	sharpcompress-0.30.1
 	sharpfnt-2.0.0
 	sixlabors.imagesharp-1.0.4
 	splat-1.6.2
-	sqlitepclraw.bundle_green-1.1.12
-	sqlitepclraw.core-1.1.12
-	sqlitepclraw.lib.e_sqlite3.linux-1.1.12
-	sqlitepclraw.lib.e_sqlite3.osx-1.1.12
-	sqlitepclraw.lib.e_sqlite3.v110_xp-1.1.12
-	sqlitepclraw.provider.e_sqlite3.netstandard11-1.1.12
-	stbisharp-1.0.13
-	system.appcontext-4.1.0
+	sqlitepclraw.bundle_e_sqlite3-2.0.4
+	sqlitepclraw.core-2.0.4
+	sqlitepclraw.lib.e_sqlite3-2.0.4
+	sqlitepclraw.provider.dynamic_cdecl-2.0.4
+	sqlitepclraw.provider.e_sqlite3-2.0.4
+	stbisharp-1.1.0
 	system.appcontext-4.3.0
-	system.buffers-4.0.0
 	system.buffers-4.3.0
 	system.buffers-4.4.0
 	system.buffers-4.5.1
 	system.collections-4.0.11
 	system.collections-4.3.0
-	system.collections.concurrent-4.0.12
 	system.collections.concurrent-4.3.0
 	system.collections.immutable-1.5.0
 	system.collections.immutable-1.7.1
 	system.collections.immutable-5.0.0
-	system.componentmodel.annotations-4.5.0
 	system.componentmodel.annotations-5.0.0
 	system.composition-1.0.31
 	system.composition.attributedmodel-1.0.31
@@ -228,53 +212,38 @@ NUGET_PKGS="
 	system.composition.hosting-1.0.31
 	system.composition.runtime-1.0.31
 	system.composition.typedparts-1.0.31
-	system.console-4.0.0
 	system.console-4.3.0
 	system.diagnostics.debug-4.0.11
 	system.diagnostics.debug-4.3.0
-	system.diagnostics.diagnosticsource-4.0.0
 	system.diagnostics.diagnosticsource-4.3.0
-	system.diagnostics.diagnosticsource-4.5.0
-	system.diagnostics.diagnosticsource-5.0.0
-	system.diagnostics.tools-4.0.1
+	system.diagnostics.diagnosticsource-5.0.1
+	system.diagnostics.diagnosticsource-6.0.0
 	system.diagnostics.tools-4.3.0
-	system.diagnostics.tracing-4.1.0
 	system.diagnostics.tracing-4.3.0
-	system.dynamic.runtime-4.0.11
 	system.dynamic.runtime-4.3.0
 	system.formats.asn1-5.0.0
 	system.globalization-4.0.11
 	system.globalization-4.3.0
-	system.globalization.calendars-4.0.1
 	system.globalization.calendars-4.3.0
-	system.globalization.extensions-4.0.1
 	system.globalization.extensions-4.3.0
-	system.interactive.async-3.2.0
 	system.io-4.1.0
 	system.io-4.3.0
-	system.io.compression-4.1.0
 	system.io.compression-4.3.0
-	system.io.compression.zipfile-4.0.1
 	system.io.compression.zipfile-4.3.0
-	system.io.filesystem-4.0.1
 	system.io.filesystem-4.3.0
-	system.io.filesystem.primitives-4.0.1
 	system.io.filesystem.primitives-4.3.0
-	system.io.packaging-5.0.0
+	system.io.packaging-6.0.0
 	system.io.pipelines-5.0.1
+	system.io.pipelines-6.0.2
 	system.linq-4.1.0
 	system.linq-4.3.0
 	system.linq.expressions-4.1.0
 	system.linq.expressions-4.3.0
 	system.linq.queryable-4.0.1
-	system.memory-4.5.1
 	system.memory-4.5.3
 	system.memory-4.5.4
-	system.net.http-4.1.0
 	system.net.http-4.3.0
-	system.net.primitives-4.0.11
 	system.net.primitives-4.3.0
-	system.net.sockets-4.1.0
 	system.net.sockets-4.3.0
 	system.numerics.vectors-4.4.0
 	system.numerics.vectors-4.5.0
@@ -302,68 +271,55 @@ NUGET_PKGS="
 	system.resources.resourcemanager-4.3.0
 	system.runtime-4.1.0
 	system.runtime-4.3.0
-	system.runtime.compilerservices.unsafe-4.5.1
 	system.runtime.compilerservices.unsafe-4.5.2
 	system.runtime.compilerservices.unsafe-4.5.3
 	system.runtime.compilerservices.unsafe-4.7.1
 	system.runtime.compilerservices.unsafe-5.0.0
+	system.runtime.compilerservices.unsafe-6.0.0
 	system.runtime.compilerservices.unsafe-6.0.0-rc.1.21451.13
 	system.runtime.extensions-4.1.0
 	system.runtime.extensions-4.3.0
-	system.runtime.handles-4.0.1
 	system.runtime.handles-4.3.0
-	system.runtime.interopservices-4.1.0
 	system.runtime.interopservices-4.3.0
-	system.runtime.interopservices.runtimeinformation-4.0.0
 	system.runtime.interopservices.runtimeinformation-4.3.0
-	system.runtime.numerics-4.0.1
 	system.runtime.numerics-4.3.0
 	system.runtime.serialization.primitives-4.1.1
 	system.security.accesscontrol-5.0.0
-	system.security.cryptography.algorithms-4.2.0
 	system.security.cryptography.algorithms-4.3.0
-	system.security.cryptography.cng-4.2.0
 	system.security.cryptography.cng-4.3.0
 	system.security.cryptography.cng-5.0.0
-	system.security.cryptography.csp-4.0.0
 	system.security.cryptography.csp-4.3.0
-	system.security.cryptography.encoding-4.0.0
 	system.security.cryptography.encoding-4.3.0
-	system.security.cryptography.openssl-4.0.0
 	system.security.cryptography.openssl-4.3.0
 	system.security.cryptography.pkcs-5.0.0
-	system.security.cryptography.primitives-4.0.0
 	system.security.cryptography.primitives-4.3.0
 	system.security.cryptography.protecteddata-4.4.0
-	system.security.cryptography.x509certificates-4.1.0
 	system.security.cryptography.x509certificates-4.3.0
 	system.security.principal.windows-5.0.0
 	system.text.encoding-4.0.11
 	system.text.encoding-4.3.0
 	system.text.encoding.codepages-4.5.1
 	system.text.encoding.codepages-5.0.0
-	system.text.encoding.extensions-4.0.11
 	system.text.encoding.extensions-4.3.0
+	system.text.encodings.web-5.0.0
 	system.text.encodings.web-5.0.1
+	system.text.encodings.web-6.0.0
 	system.text.json-4.7.0
+	system.text.json-5.0.0
 	system.text.json-5.0.2
-	system.text.regularexpressions-4.1.0
+	system.text.json-6.0.2
 	system.text.regularexpressions-4.3.0
 	system.threading-4.0.11
 	system.threading-4.3.0
-	system.threading.channels-5.0.0
+	system.threading.channels-6.0.0
 	system.threading.tasks-4.0.11
 	system.threading.tasks-4.3.0
-	system.threading.tasks.extensions-4.0.0
 	system.threading.tasks.extensions-4.3.0
 	system.threading.tasks.extensions-4.5.3
 	system.threading.tasks.extensions-4.5.4
 	system.threading.thread-4.0.0
-	system.threading.timer-4.0.1
 	system.threading.timer-4.3.0
-	system.xml.readerwriter-4.0.11
 	system.xml.readerwriter-4.3.0
-	system.xml.xdocument-4.0.11
 	system.xml.xdocument-4.3.0
 	taglibsharp-2.2.0
 "
@@ -388,7 +344,7 @@ DEPEND="
 	media-libs/libsdl2[video]
 	media-libs/libstbi
 	media-libs/bass[fx,mix]
-	~dev-dotnet/realm-10.8.0
+	~dev-dotnet/realm-10.9.0
 	virtual/dotnet-sdk:6.0
 "
 RDEPEND="${DEPEND}"
@@ -405,7 +361,6 @@ edotnet() {
 src_prepare() {
 	default
 	eapply --binary "${FILESDIR}"/disable-updater.patch
-	eapply --binary "${FILESDIR}"/net6.patch
 
 	edotnet restore osu.Desktop \
 		--use-current-runtime \
