@@ -72,6 +72,7 @@ NUGET_PKGS="
 	markdig-0.23.0
 	messagepack-2.3.85
 	messagepack.annotations-2.3.85
+	microsoft.aspnetcore.app.runtime.linux-musl-x64-6.0.2
 	microsoft.aspnetcore.connections.abstractions-6.0.2
 	microsoft.aspnetcore.http.connections.client-6.0.2
 	microsoft.aspnetcore.http.connections.common-6.0.2
@@ -128,6 +129,7 @@ NUGET_PKGS="
 	microsoft.extensions.options-6.0.0
 	microsoft.extensions.primitives-5.0.0
 	microsoft.extensions.primitives-6.0.0
+	microsoft.netcore.app.runtime.linux-musl-x64-6.0.2
 	microsoft.netcore.platforms-1.0.1
 	microsoft.netcore.platforms-1.1.0
 	microsoft.netcore.platforms-2.1.2
