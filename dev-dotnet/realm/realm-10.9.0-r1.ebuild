@@ -9,11 +9,11 @@ DESCRIPTION="Realm is a mobile database: a replacement for SQLite & ORMs"
 HOMEPAGE="https://github.com/realm/realm-dotnet"
 
 CORE_SHA="d8cfb353751fe42292446507a8a4846489326bd3"
-CORE_P="realm-core-${PV}"
+CORE_P="realm-core-${CORE_SHA}"
 NET_P="realm-dotnet-${PV}"
 
 SRC_URI="
-	https://github.com/realm/realm-core/archive/d8cfb353751fe42292446507a8a4846489326bd3.tar.gz -> ${CORE_P}.tar.gz
+	https://github.com/realm/realm-core/archive/${CORE_SHA}.tar.gz -> ${CORE_P}.tar.gz
 	https://github.com/realm/realm-dotnet/archive/refs/tags/${PV}.tar.gz -> ${NET_P}.tar.gz
 "
 
