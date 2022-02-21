@@ -5,7 +5,8 @@ EAPI=8
 
 DESCRIPTION="A terminal iptv player written in bash"
 HOMEPAGE="https://github.com/Roshan-R/termv"
-SRC_URI="https://github.com/Roshan-R/termv/archive/refs/tags/v1.2.tar.gz -> ${P}.tar.gz"
+#SRC_URI="https://github.com/Roshan-R/termv/archive/refs/tags/v1.2.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/Roshan-R/termv/archive/4030df4e50fe2ab79fae354ca72fac0c6b48c1a7.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
