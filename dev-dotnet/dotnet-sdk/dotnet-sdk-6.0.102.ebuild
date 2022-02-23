@@ -28,7 +28,7 @@ BOOT_URI="
 	)
 "
 
-SRC_SHA="e42d85d4cf5769e38059ea4f546e20452f4975a2ba448f81999deffb8a4e517d098ef23b8576c4654ec7a3b5e35006a90e5bf5ae2808012d3ed068f9d0a7eb90"
+SRC_SHA="dcb4102b1a6c9e1889d80f8cecf30da00ad16320cbbf14de891db632ebaa0b872501865957429107ade0caef569a2f2ed5ccb70111de7772838b820997f0c36e"
 SRC_URI="
 	!system-bootstrap? ( ${BOOT_URI} )
 	https://dotnetcli.azureedge.net/source-built-artifacts/assets/${BOOT_ARTIFACTS_P}.tar.gz -> dotnet-${BOOT_ARTIFACTS_P}.tar.gz
