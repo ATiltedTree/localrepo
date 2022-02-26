@@ -13,7 +13,6 @@ NUGET_PKGS="
 	hidsharpcore-1.2.1.1
 	htmlagilitypack-1.11.42
 	humanizer-2.14.1
-	humanizer.core-2.2.0
 	humanizer.core-2.8.26
 	humanizer.core-2.14.1
 	humanizer.core.af-2.14.1
@@ -85,16 +84,7 @@ NUGET_PKGS="
 	microsoft.bcl.asyncinterfaces-1.0.0
 	microsoft.bcl.asyncinterfaces-5.0.0
 	microsoft.bcl.asyncinterfaces-6.0.0
-	microsoft.build.framework-16.5.0
-	microsoft.build.locator-1.4.1
-	microsoft.codeanalysis.analyzers-3.3.2
 	microsoft.codeanalysis.bannedapianalyzers-3.3.3
-	microsoft.codeanalysis.common-3.11.0
-	microsoft.codeanalysis.csharp-3.11.0
-	microsoft.codeanalysis.csharp.workspaces-3.11.0
-	microsoft.codeanalysis.netanalyzers-6.0.0
-	microsoft.codeanalysis.workspaces.common-3.11.0
-	microsoft.codeanalysis.workspaces.msbuild-3.11.0
 	microsoft.csharp-4.5.0
 	microsoft.csharp-4.7.0
 	microsoft.data.sqlite.core-5.0.14
@@ -132,7 +122,6 @@ NUGET_PKGS="
 	microsoft.netcore.app.runtime.linux-musl-x64-6.0.2
 	microsoft.netcore.platforms-1.0.1
 	microsoft.netcore.platforms-1.1.0
-	microsoft.netcore.platforms-2.1.2
 	microsoft.netcore.platforms-5.0.0
 	microsoft.netcore.targets-3.1.0
 	microsoft.netcore.targets-5.0.0
@@ -160,8 +149,8 @@ NUGET_PKGS="
 	opentabletdriver.native-0.6.0.2
 	opentabletdriver.plugin-0.6.0.2
 	ppy.localisationanalyser-2021.1210.0
-	ppy.osu.framework-2022.217.0
-	ppy.osu.framework.nativelibs-2021.1221.0
+	ppy.osu.framework-2022.223.0
+	ppy.osu.framework.nativelibs-2022.222.0
 	ppy.osu.game.resources-2022.211.0
 	ppy.osutk.ns20-1.0.187
 	ppy.sdl2-cs-1.0.501-alpha
@@ -208,12 +197,6 @@ NUGET_PKGS="
 	system.collections.immutable-1.7.1
 	system.collections.immutable-5.0.0
 	system.componentmodel.annotations-5.0.0
-	system.composition-1.0.31
-	system.composition.attributedmodel-1.0.31
-	system.composition.convention-1.0.31
-	system.composition.hosting-1.0.31
-	system.composition.runtime-1.0.31
-	system.composition.typedparts-1.0.31
 	system.console-4.3.0
 	system.diagnostics.debug-4.0.11
 	system.diagnostics.debug-4.3.0
@@ -235,7 +218,6 @@ NUGET_PKGS="
 	system.io.filesystem-4.3.0
 	system.io.filesystem.primitives-4.3.0
 	system.io.packaging-6.0.0
-	system.io.pipelines-5.0.1
 	system.io.pipelines-6.0.2
 	system.linq-4.1.0
 	system.linq-4.3.0
@@ -285,7 +267,6 @@ NUGET_PKGS="
 	system.runtime.interopservices-4.3.0
 	system.runtime.interopservices.runtimeinformation-4.3.0
 	system.runtime.numerics-4.3.0
-	system.runtime.serialization.primitives-4.1.1
 	system.security.accesscontrol-5.0.0
 	system.security.cryptography.algorithms-4.3.0
 	system.security.cryptography.cng-4.3.0
@@ -300,13 +281,11 @@ NUGET_PKGS="
 	system.security.principal.windows-5.0.0
 	system.text.encoding-4.0.11
 	system.text.encoding-4.3.0
-	system.text.encoding.codepages-4.5.1
 	system.text.encoding.codepages-5.0.0
 	system.text.encoding.extensions-4.3.0
 	system.text.encodings.web-5.0.0
 	system.text.encodings.web-5.0.1
 	system.text.encodings.web-6.0.0
-	system.text.json-4.7.0
 	system.text.json-5.0.0
 	system.text.json-5.0.2
 	system.text.json-6.0.2
@@ -319,7 +298,6 @@ NUGET_PKGS="
 	system.threading.tasks.extensions-4.3.0
 	system.threading.tasks.extensions-4.5.3
 	system.threading.tasks.extensions-4.5.4
-	system.threading.thread-4.0.0
 	system.threading.timer-4.3.0
 	system.xml.readerwriter-4.3.0
 	system.xml.xdocument-4.3.0
