@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -28,7 +28,7 @@ LICENSE="LGPL-2.1+ GPL-2+ ISC"
 SLOT="0"
 IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda doc drm dvb
 	dvd +egl gamepad gbm +iconv jack javascript jpeg lcms libcaca libmpv +lua
-	openal +opengl pipewire pulseaudio raspberry-pi rubberband sdl
+	openal +opengl pipewire pulseaudio raspberry-pi rubberband sdl sndio
 	selinux test tools +uchardet vaapi vdpau vulkan wayland +X +xv zlib zimg"
 
 REQUIRED_USE="
@@ -85,6 +85,7 @@ COMMON_DEPEND="
 	raspberry-pi? ( >=media-libs/raspberrypi-userland-0_pre20160305-r1 )
 	rubberband? ( >=media-libs/rubberband-1.8.0 )
 	sdl? ( media-libs/libsdl2[sound,threads,video] )
+	sndio? ( media-sound/sndio )
 	vaapi? ( x11-libs/libva:=[drm?,X?,wayland?] )
 	vdpau? ( x11-libs/libvdpau )
 	vulkan? (
@@ -174,6 +175,7 @@ src_configure() {
 		$(meson_feature pipewire)
 		$(meson_feature pulseaudio pulse)
 		$(meson_feature sdl sdl2-audio)
+		$(meson_feature sndio)
 
 		# Video outputs:
 		$(meson_feature libcaca caca)
