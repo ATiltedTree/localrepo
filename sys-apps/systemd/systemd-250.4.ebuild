@@ -354,9 +354,7 @@ multilib_src_configure() {
 			-Dnss-systemd=false
 			-Dnss-mymachines=false
 			-Dnss-resolve=false
-			-Duserdb=false
 			-Dutmp=false
-			-Dsysusers=false
 		)
 	fi
 
