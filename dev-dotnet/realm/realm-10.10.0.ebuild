@@ -8,7 +8,7 @@ inherit cmake
 DESCRIPTION="Realm is a mobile database: a replacement for SQLite & ORMs"
 HOMEPAGE="https://github.com/realm/realm-dotnet"
 
-CORE_SHA="d8cfb353751fe42292446507a8a4846489326bd3"
+CORE_SHA="1a6a69a0f32bfd6988e4a67842ff8022f6869daf"
 CORE_P="realm-core-${CORE_SHA}"
 NET_P="realm-dotnet-${PV}"
 
