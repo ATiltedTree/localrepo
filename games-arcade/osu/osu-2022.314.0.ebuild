@@ -301,7 +301,7 @@ NUGET_PKGS="
 	taglibsharp-2.2.0
 "
 
-inherit nuget desktop xdg
+inherit nuget desktop xdg wrapper
 
 DESCRIPTION="A free-to-win rhythm game. Rhythm is just a click away!"
 HOMEPAGE="https://github.com/ppy/osu"
@@ -335,10 +335,7 @@ edotnet() {
 	dotnet $@ || die "dotnet failed"
 }
 
-src_prepare() {
-	default
-	eapply --binary "${FILESDIR}"/disable-updater.patch
-
+src_configure() {
 	edotnet restore osu.Desktop \
 		--use-current-runtime \
 		--source "$(nuget_registry)"
@@ -373,11 +370,19 @@ src_install() {
 	rm "${ED}/$dest"/osu!.deps.json || die
 
 	fperms +x "$dest/osu!"
-	dosym -r "$dest/osu!" "/usr/bin/osu"
 
+	# Disable update notifications
+	make_wrapper osu "OSU_EXTERNAL_UPDATE_PROVIDER=1 $dest/osu!"
+
+	# Create a desktop entry
+	make_desktop_entry \
+		"/usr/bin/osu %F" "osu!" "osu" "Game;ArcadeGame;" \
+		"MimeType=application/x-osu-beatmap;application/x-osu-skin;x-scheme-handler/osu"
+
+	# Install mime types
 	insinto "/usr/share/mime/packages"
 	doins "${FILESDIR}"/${PN}.xml
 
+	# Install icon
 	newicon assets/lazer.png ${PN}.png
-	domenu "${FILESDIR}"/osu.desktop
 }
