@@ -372,7 +372,7 @@ src_install() {
 	fperms +x "$dest/osu!"
 
 	# Disable update notifications
-	make_wrapper osu "OSU_EXTERNAL_UPDATE_PROVIDER=1 $dest/osu!"
+	make_wrapper osu "env OSU_EXTERNAL_UPDATE_PROVIDER=1 $dest/osu!"
 
 	# Create a desktop entry
 	make_desktop_entry \
