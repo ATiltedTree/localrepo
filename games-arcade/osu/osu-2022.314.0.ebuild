@@ -5,8 +5,8 @@ EAPI=8
 
 NUGET_PKGS="
 	automapper-11.0.1
-	deltacompressiondotnet-2.0.0
-	diffplex-1.7.0
+	clowd.squirrel-2.8.28-pre
+	diffplex-1.7.1
 	discordrichpresence-1.0.175
 	ffmpeg.autogen-4.3.0.1
 	fody-6.6.0
@@ -72,15 +72,15 @@ NUGET_PKGS="
 	messagepack-2.3.85
 	messagepack.annotations-2.3.85
 	microsoft.aspnetcore.app.runtime.linux-musl-x64-6.0.2
-	microsoft.aspnetcore.connections.abstractions-6.0.2
-	microsoft.aspnetcore.http.connections.client-6.0.2
-	microsoft.aspnetcore.http.connections.common-6.0.2
-	microsoft.aspnetcore.signalr.client-6.0.2
-	microsoft.aspnetcore.signalr.client.core-6.0.2
-	microsoft.aspnetcore.signalr.common-6.0.2
-	microsoft.aspnetcore.signalr.protocols.json-6.0.2
-	microsoft.aspnetcore.signalr.protocols.messagepack-6.0.2
-	microsoft.aspnetcore.signalr.protocols.newtonsoftjson-6.0.2
+	microsoft.aspnetcore.connections.abstractions-6.0.3
+	microsoft.aspnetcore.http.connections.client-6.0.3
+	microsoft.aspnetcore.http.connections.common-6.0.3
+	microsoft.aspnetcore.signalr.client-6.0.3
+	microsoft.aspnetcore.signalr.client.core-6.0.3
+	microsoft.aspnetcore.signalr.common-6.0.3
+	microsoft.aspnetcore.signalr.protocols.json-6.0.3
+	microsoft.aspnetcore.signalr.protocols.messagepack-6.0.3
+	microsoft.aspnetcore.signalr.protocols.newtonsoftjson-6.0.3
 	microsoft.bcl.asyncinterfaces-1.0.0
 	microsoft.bcl.asyncinterfaces-5.0.0
 	microsoft.bcl.asyncinterfaces-6.0.0
@@ -109,11 +109,12 @@ NUGET_PKGS="
 	microsoft.extensions.dependencyinjection.abstractions-6.0.0
 	microsoft.extensions.dependencyinjection.abstractions-6.0.0-rc.1.21451.13
 	microsoft.extensions.dependencymodel-5.0.0
-	microsoft.extensions.features-6.0.2
+	microsoft.extensions.features-6.0.3
 	microsoft.extensions.logging-5.0.0
 	microsoft.extensions.logging-6.0.0
 	microsoft.extensions.logging.abstractions-5.0.0
 	microsoft.extensions.logging.abstractions-6.0.0
+	microsoft.extensions.logging.abstractions-6.0.1
 	microsoft.extensions.objectpool-5.0.11
 	microsoft.extensions.options-5.0.0
 	microsoft.extensions.options-6.0.0
@@ -128,7 +129,6 @@ NUGET_PKGS="
 	microsoft.win32.primitives-4.3.0
 	microsoft.win32.registry-5.0.0
 	mongodb.bson-2.11.3
-	mono.cecil-0.9.6.1
 	mono.posix.netstandard-1.0.0
 	netstandard.library-1.6.1
 	netstandard.library-2.0.0
@@ -149,14 +149,13 @@ NUGET_PKGS="
 	opentabletdriver.native-0.6.0.2
 	opentabletdriver.plugin-0.6.0.2
 	ppy.localisationanalyser-2021.1210.0
-	ppy.osu.framework-2022.304.0
+	ppy.osu.framework-2022.314.0
 	ppy.osu.framework.nativelibs-2022.222.0
 	ppy.osu.game.resources-2022.304.0
 	ppy.osutk.ns20-1.0.187
 	ppy.sdl2-cs-1.0.501-alpha
-	ppy.squirrel.windows-1.9.0.5
-	realm-10.9.0
-	realm.fody-10.9.0
+	realm-10.10.0
+	realm.fody-10.10.0
 	remotion.linq-2.2.0
 	runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl-4.3.0
 	runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl-4.3.0
@@ -174,12 +173,10 @@ NUGET_PKGS="
 	runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl-4.3.0
 	runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl-4.3.0
 	runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl-4.3.0
-	sentry-3.14.0
-	sharpcompress-0.17.1
+	sentry-3.14.1
 	sharpcompress-0.30.1
 	sharpfnt-2.0.0
 	sixlabors.imagesharp-1.0.4
-	splat-1.6.2
 	sqlitepclraw.bundle_e_sqlite3-2.0.4
 	sqlitepclraw.core-2.0.4
 	sqlitepclraw.lib.e_sqlite3-2.0.4
@@ -324,7 +321,7 @@ DEPEND="
 	media-libs/libsdl2[video]
 	media-libs/libstbi
 	media-libs/bass[fx,mix]
-	~dev-dotnet/realm-10.9.0
+	~dev-dotnet/realm-10.10.0
 	virtual/dotnet-sdk:6.0
 "
 RDEPEND="${DEPEND}"
