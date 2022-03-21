@@ -7,13 +7,19 @@ inherit meson-multilib
 
 DESCRIPTION="Vulkan-based implementation of D3D9, D3D10 and D3D11 for Linux / Wine"
 HOMEPAGE="https://github.com/doitsujin/dxvk"
-SRC_URI="
-	https://github.com/doitsujin/dxvk/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
-"
+
+if [[ "${PV}" == "9999" ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/doitsujin/dxvk"
+else
+	SRC_URI="
+		https://github.com/doitsujin/dxvk/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
+	"
+	KEYWORDS="-* ~amd64 ~x86"
+fi
 
 LICENSE="ZLIB"
 SLOT="0"
-KEYWORDS="-* ~amd64 ~x86"
 IUSE="+abi_x86_32 +abi_x86_64"
 REQUIRED_USE="|| ( abi_x86_32 abi_x86_64 )"
 
@@ -30,23 +36,19 @@ pkg_pretend() {
 }
 
 multilib_src_configure() {
+	local arch=
+	if [[ ${ABI} == amd64 ]]; then
+		arch="64"
+	else
+		arch="32"
+	fi
+
 	local emesonargs=(
 		--prefix /usr/lib/dxvk/
+		--cross-file "${S}"/build-win$arch.txt
+		--libdir x$arch
+		--bindir x$arch
 	)
-
-	if [[ ${ABI} == amd64 ]]; then
-		emesonargs+=(
-			--cross-file "${S}"/build-win64.txt
-			--libdir x64
-			--bindir x64
-		)
-	else
-		emesonargs+=(
-			--cross-file "${S}"/build-win32.txt
-			--libdir x32
-			--bindir x32
-		)
-	fi
 
 	meson_src_configure
 }

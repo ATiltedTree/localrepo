@@ -36,23 +36,19 @@ pkg_pretend() {
 }
 
 multilib_src_configure() {
+	local arch=
+	if [[ ${ABI} == amd64 ]]; then
+		arch="64"
+	else
+		arch="32"
+	fi
+
 	local emesonargs=(
 		--prefix /usr/lib/dxvk/
+		--cross-file "${S}"/build-win$arch.txt
+		--libdir x$arch
+		--bindir x$arch
 	)
-
-	if [[ ${ABI} == amd64 ]]; then
-		emesonargs+=(
-			--cross-file "${S}"/build-win64.txt
-			--libdir x64
-			--bindir x64
-		)
-	else
-		emesonargs+=(
-			--cross-file "${S}"/build-win32.txt
-			--libdir x32
-			--bindir x32
-		)
-	fi
 
 	meson_src_configure
 }
