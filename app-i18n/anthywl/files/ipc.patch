@@ -1,0 +1,32 @@
+diff --git a/include/anthywl.h b/include/anthywl.h
+index 6f1191f..03e17a3 100644
+--- a/include/anthywl.h
++++ b/include/anthywl.h
+@@ -3,6 +3,7 @@
+ #include <anthy/anthy.h>
+ #include <stdbool.h>
+ #include <stdlib.h>
++#include <time.h>
+ #include <wayland-client-core.h>
+ #include <xkbcommon/xkbcommon.h>
+ 
+@@ -17,7 +18,9 @@
+ #include "actions.h"
+ #include "buffer.h"
+ #include "config.h"
++#ifdef ANTHYWL_IPC_SUPPORT
+ #include "ipc.h"
++#endif
+ 
+ enum anthyl_modifier_index {
+     ANTHYWL_SHIFT_INDEX,
+@@ -58,7 +61,9 @@ struct anthywl_state {
+     struct wl_list outputs;
+     struct wl_list timers;
+     struct anthywl_config config;
++#ifdef ANTHYWL_IPC_SUPPORT
+     struct anthywl_ipc ipc;
++#endif
+     int max_scale;
+ };
+ 

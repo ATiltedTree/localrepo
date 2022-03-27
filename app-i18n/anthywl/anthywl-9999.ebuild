@@ -33,6 +33,10 @@ DEPEND="
 RDEPEND="${DEPEND}"
 BDEPEND="man? ( app-text/scdoc )"
 
+PATCHES=(
+	"${FILEDIR}/ipc.patch"
+)
+
 src_configure() {
 	local emesonargs=(
 		$(meson_feature ipc)
