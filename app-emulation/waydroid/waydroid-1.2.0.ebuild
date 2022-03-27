@@ -4,7 +4,7 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
-inherit python-single-r1 desktop systemd linux-info
+inherit linux-info python-single-r1 desktop systemd
 
 DESCRIPTION="Waydroid uses a container-based approach to boot a full Android system."
 HOMEPAGE="https://waydro.id"
@@ -35,6 +35,11 @@ CONFIG_CHECK="
 	~ANDROID_BINDER_IPC
 	~ASHMEM
 "
+
+pkg_setup() {
+	linux-info_pkg_setup
+	python-single-r1_pkg_setup
+}
 
 src_prepare() {
 	default
