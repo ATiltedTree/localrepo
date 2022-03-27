@@ -34,7 +34,7 @@ RDEPEND="${DEPEND}"
 BDEPEND="man? ( app-text/scdoc )"
 
 PATCHES=(
-	"${FILEDIR}/ipc.patch"
+	"${FILESDIR}/ipc.patch"
 )
 
 src_configure() {
