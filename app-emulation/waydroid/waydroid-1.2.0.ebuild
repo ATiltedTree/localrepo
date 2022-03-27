@@ -4,7 +4,7 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
-inherit python-single-r1 desktop systemd
+inherit python-single-r1 desktop systemd linux-info
 
 DESCRIPTION="Waydroid uses a container-based approach to boot a full Android system."
 HOMEPAGE="https://waydro.id"
@@ -29,15 +29,22 @@ RDEPEND="
 	${DEPEND}
 "
 
+CONFIG_CHECK="
+	~ANDROID
+	~ANDROID_BINDERFS
+	~ANDROID_BINDER_IPC
+	~ASHMEM
+"
+
 src_prepare() {
 	default
 
 	mv data/Waydroid.desktop . || die
 	mv data/AppIcon.png . || die
 
-	sed -i -e 's/tools/waydroid/' waydroid.py tools/**/*.py || die
 	sed -i -e 's#tools_src = .*#tools_src = "/usr/share/waydroid/"#' tools/config/__init__.py || die
 	sed -i -e 's#/usr/lib/waydroid/data/AppIcon.png#waydroid#' Waydroid.desktop || die
+	sed -i -e 's/tools/waydroid/g' waydroid.py tools/**/*.py || die
 }
 
 src_install() {
