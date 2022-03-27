@@ -2,14 +2,6 @@ diff --git a/include/anthywl.h b/include/anthywl.h
 index 6f1191f..03e17a3 100644
 --- a/include/anthywl.h
 +++ b/include/anthywl.h
-@@ -3,6 +3,7 @@
- #include <anthy/anthy.h>
- #include <stdbool.h>
- #include <stdlib.h>
-+#include <time.h>
- #include <wayland-client-core.h>
- #include <xkbcommon/xkbcommon.h>
- 
 @@ -17,7 +18,9 @@
  #include "actions.h"
  #include "buffer.h"
