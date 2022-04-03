@@ -21,4 +21,5 @@ DEPEND="
 RDEPEND="${DEPEND}
 	dev-python/python-mpv[${PYTHON_USEDEP}]
 	dev-python/jellyfin-apiclient-python[${PYTHON_USEDEP}]
+	dev-python/python-mpv-jsonipc[${PYTHON_USEDEP}]
 "
