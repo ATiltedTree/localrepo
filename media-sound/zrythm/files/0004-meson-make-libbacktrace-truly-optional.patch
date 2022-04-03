@@ -1,4 +1,4 @@
-From b36dcc3d9d21caecd1aa2ca47693414782e781ca Mon Sep 17 00:00:00 2001
+From ccfc1618706430a7e07d4f854f79535f8dfbd91f Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Sun, 13 Feb 2022 12:42:07 +0100
 Subject: [PATCH 4/4] meson: make libbacktrace truly optional
@@ -8,10 +8,10 @@ Subject: [PATCH 4/4] meson: make libbacktrace truly optional
  1 file changed, 2 insertions(+), 4 deletions(-)
 
 diff --git a/meson.build b/meson.build
-index b06c606c5..c09a7a890 100644
+index 8400c057e..c707f4f70 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -1220,11 +1220,9 @@ endif
+@@ -1234,11 +1234,9 @@ endif
  
  libbacktrace_dep = cc.find_library (
    'backtrace', required: false)
