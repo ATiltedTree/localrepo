@@ -1,0 +1,12 @@
+diff --git a/helix-loader/src/lib.rs b/helix-loader/src/lib.rs
+index a2c4d96f..e7739e1f 100644
+--- a/helix-loader/src/lib.rs
++++ b/helix-loader/src/lib.rs
+@@ -6,6 +6,7 @@ pub static RUNTIME_DIR: once_cell::sync::Lazy<std::path::PathBuf> =
+     once_cell::sync::Lazy::new(runtime_dir);
+ 
+ pub fn runtime_dir() -> std::path::PathBuf {
++    return std::path::PathBuf::from("%%DATADIR%%");
+     if let Ok(dir) = std::env::var("HELIX_RUNTIME") {
+         return dir.into();
+     }

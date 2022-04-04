@@ -147,8 +147,22 @@ SRC_URI="
 	https://github.com/helix-editor/helix/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz
 	$(cargo_crate_uris)"
 
-S="${S}/helix-term"
-
 LICENSE="Apache-2.0 Apache-2.0-with-LLVM-exceptions Boost-1.0 ISC MIT MPL-2.0 Unlicense ZLIB"
 SLOT="0"
 KEYWORDS="~amd64"
+
+PATCHES=(
+	"${FILESDIR}/gentoo.patch"
+)
+
+src_configure() {
+	export HELIX_DISABLE_AUTO_GRAMMAR_BUILD=1
+	sed -i "s!%%DATADIR%%!${EPREFIX}/usr/share/helix!" helix-loader/src/lib.rs || die
+}
+
+src_install() {
+	cargo_src_install --path helix-term
+
+	insinto /usr/share/helix
+	doins -r runtime
+}
