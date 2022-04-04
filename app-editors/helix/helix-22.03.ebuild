@@ -157,7 +157,7 @@ PATCHES=(
 
 src_configure() {
 	export HELIX_DISABLE_AUTO_GRAMMAR_BUILD=1
-	sed -i "s!%%DATADIR%%!${EPREFIX}/usr/share/helix!" helix-loader/src/lib.rs || die
+	sed -i "s!%%DATADIR%%!${EPREFIX}/usr/share/helix/runtime!" helix-loader/src/lib.rs || die
 }
 
 src_install() {
