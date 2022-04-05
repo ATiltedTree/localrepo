@@ -149,9 +149,9 @@ NUGET_PKGS="
 	opentabletdriver.native-0.6.0.2
 	opentabletdriver.plugin-0.6.0.2
 	ppy.localisationanalyser-2022.320.0
-	ppy.osu.framework-2022.325.0
+	ppy.osu.framework-2022.404.0
 	ppy.osu.framework.nativelibs-2022.222.0
-	ppy.osu.game.resources-2022.325.0
+	ppy.osu.game.resources-2022.405.0
 	ppy.osutk.ns20-1.0.187
 	ppy.sdl2-cs-1.0.501-alpha
 	realm-10.10.0
@@ -176,7 +176,7 @@ NUGET_PKGS="
 	sentry-3.14.1
 	sharpcompress-0.30.1
 	sharpfnt-2.0.0
-	sixlabors.imagesharp-1.0.4
+	sixlabors.imagesharp-2.1.0
 	sqlitepclraw.bundle_e_sqlite3-2.0.4
 	sqlitepclraw.core-2.0.4
 	sqlitepclraw.lib.e_sqlite3-2.0.4
