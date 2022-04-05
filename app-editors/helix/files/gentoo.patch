@@ -1,12 +1,39 @@
+diff --git a/helix-loader/src/grammar.rs b/helix-loader/src/grammar.rs
+index 299a06bf..a10ce02d 100644
+--- a/helix-loader/src/grammar.rs
++++ b/helix-loader/src/grammar.rs
+@@ -59,7 +59,7 @@ const REMOTE_NAME: &str = "origin";
+ 
+ pub fn get_language(name: &str) -> Result<Language> {
+     let name = name.to_ascii_lowercase();
+-    let mut library_path = crate::runtime_dir().join("grammars").join(&name);
++    let mut library_path = PathBuf::from("%%LIBDIR%%").join(format!("libtree-sitter-{}", name));
+     library_path.set_extension(DYLIB_EXTENSION);
+ 
+     let library = unsafe { Library::new(&library_path) }
 diff --git a/helix-loader/src/lib.rs b/helix-loader/src/lib.rs
-index a2c4d96f..e7739e1f 100644
+index a2c4d96f..a893691b 100644
 --- a/helix-loader/src/lib.rs
 +++ b/helix-loader/src/lib.rs
-@@ -6,6 +6,7 @@ pub static RUNTIME_DIR: once_cell::sync::Lazy<std::path::PathBuf> =
-     once_cell::sync::Lazy::new(runtime_dir);
- 
- pub fn runtime_dir() -> std::path::PathBuf {
-+    return std::path::PathBuf::from("%%DATADIR%%");
-     if let Ok(dir) = std::env::var("HELIX_RUNTIME") {
-         return dir.into();
+@@ -21,11 +21,7 @@ pub fn runtime_dir() -> std::path::PathBuf {
+         return std::path::PathBuf::from(dir).parent().unwrap().join(RT_DIR);
      }
+ 
+-    // fallback to location of the executable being run
+-    std::env::current_exe()
+-        .ok()
+-        .and_then(|path| path.parent().map(|path| path.to_path_buf().join(RT_DIR)))
+-        .unwrap()
++    std::path::PathBuf::from("%%DATADIR%%").join(RT_DIR)
+ }
+ 
+ pub fn config_dir() -> std::path::PathBuf {
+diff --git a/rust-toolchain.toml b/rust-toolchain.toml
+deleted file mode 100644
+index 79f6f8f6..00000000
+--- a/rust-toolchain.toml
++++ /dev/null
+@@ -1,3 +0,0 @@
+-[toolchain]
+-channel = "stable"
+-components = ["rustfmt", "rust-src"]

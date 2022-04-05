@@ -151,13 +151,16 @@ LICENSE="Apache-2.0 Apache-2.0-with-LLVM-exceptions Boost-1.0 ISC MIT MPL-2.0 Un
 SLOT="0"
 KEYWORDS="~amd64"
 
+RDEPEND="dev-libs/tree-sitter-meta"
+
 PATCHES=(
 	"${FILESDIR}/gentoo.patch"
 )
 
 src_configure() {
 	export HELIX_DISABLE_AUTO_GRAMMAR_BUILD=1
-	sed -i "s!%%DATADIR%%!${EPREFIX}/usr/share/helix/runtime!" helix-loader/src/lib.rs || die
+	sed -i "s!%%DATADIR%%!${EPREFIX}/usr/share/helix!" helix-loader/src/lib.rs || die
+	sed -i "s!%%LIBDIR%%!${EPREFIX}/usr/$(get_libdir)!" helix-loader/src/grammar.rs || die
 }
 
 src_install() {
