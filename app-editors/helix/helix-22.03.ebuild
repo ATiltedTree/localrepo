@@ -155,6 +155,7 @@ RDEPEND="dev-libs/tree-sitter-meta"
 
 PATCHES=(
 	"${FILESDIR}/gentoo.patch"
+	"${FILESDIR}/ebuild.patch"
 )
 
 src_configure() {
