@@ -20,8 +20,7 @@ RDEPEND="
   acct-group/signald
   acct-user/signald
 "
-DEPEND="
-  ${RDEPEND}
+BDEPEND="
   virtual/jdk:11
   dev-java/gradle-bin:*
 "
@@ -35,12 +34,10 @@ src_install() {
   insinto /usr/share
   doins -r build/install/signald
   dosym -r /usr/share/signald/bin/signald /usr/bin/signald
+  fchmod +x /usr/bin/signald
 
   if use systemd; then
     cp debian/signald.service .
     systemd_dounit signald.service
   fi
-
-  keepdir /var/run/signald
-  fowners signald:signald /var/run/signald
 }
