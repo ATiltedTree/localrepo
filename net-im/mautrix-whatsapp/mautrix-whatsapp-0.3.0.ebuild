@@ -35,7 +35,7 @@ src_compile() {
 src_install() {
 	dobin mautrix-whatsapp
 	insinto /etc/${PN}
-	doins example-config.yaml
+	newins example-config.yaml ${PN}.yaml
 	fperms -R 0640 /etc/${PN}/
 	fowners -R root:mautrix-whatsapp /etc/${PN}/
 
