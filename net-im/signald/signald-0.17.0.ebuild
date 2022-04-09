@@ -12,6 +12,9 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE="systemd"
 
+# Gradle deps
+RESTRICT="network-sandbox"
+
 RDEPEND="
   virtual/jre:11
   acct-group/signald
