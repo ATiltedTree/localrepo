@@ -37,7 +37,8 @@ src_install() {
   dosym -r /usr/share/signald/bin/signald /usr/bin/signald
 
   if use systemd; then
-    systemd_dounit debian/signald.service
+    cp debian/signald.service .
+    systemd_dounit signald.service
   fi
 
   keepdir /var/run/signald
