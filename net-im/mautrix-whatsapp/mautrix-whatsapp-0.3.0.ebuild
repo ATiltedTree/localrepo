@@ -22,6 +22,11 @@ BDEPEND="
 	dev-lang/go
 	dev-libs/olm
 "
+RDEPEND="
+	${DEPEND}
+	acct-group/mautrix-whatsapp
+	acct-user/mautrix-whatsapp
+"
 
 src_compile() {
 	./build.sh -o "${S}"/mautrix-whatsapp
@@ -31,6 +36,8 @@ src_install() {
 	dobin mautrix-whatsapp
 	insinto /etc/${PN}
 	doins example-config.yaml
+	fperms -R 0640 /etc/${PN}/
+	fowners -R root:mautrix-whatsapp /etc/${PN}/
 
 	if use systemd; then
 		systemd_dounit "${FILESDIR}/${PN}.service"
