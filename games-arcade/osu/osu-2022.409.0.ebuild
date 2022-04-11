@@ -123,10 +123,12 @@ NUGET_PKGS="
 	microsoft.netcore.app.runtime.linux-musl-x64-6.0.2
 	microsoft.netcore.platforms-1.0.1
 	microsoft.netcore.platforms-1.1.0
+	microsoft.netcore.platforms-2.0.0
 	microsoft.netcore.platforms-5.0.0
-	microsoft.netcore.targets-3.1.0
-	microsoft.netcore.targets-5.0.0
+	microsoft.netcore.targets-1.0.1
+	microsoft.netcore.targets-1.1.0
 	microsoft.win32.primitives-4.3.0
+	microsoft.win32.registry-4.5.0
 	microsoft.win32.registry-5.0.0
 	mongodb.bson-2.11.3
 	mono.posix.netstandard-1.0.0
@@ -149,14 +151,31 @@ NUGET_PKGS="
 	opentabletdriver.native-0.6.0.2
 	opentabletdriver.plugin-0.6.0.2
 	ppy.localisationanalyser-2022.320.0
-	ppy.osu.framework-2022.404.0
+	ppy.osu.framework-2022.408.0
 	ppy.osu.framework.nativelibs-2022.222.0
-	ppy.osu.game.resources-2022.405.0
+	ppy.osu.game.resources-2022.407.0
 	ppy.osutk.ns20-1.0.187
 	ppy.sdl2-cs-1.0.501-alpha
 	realm-10.10.0
 	realm.fody-10.10.0
 	remotion.linq-2.2.0
+	runtime.any.system.collections-4.3.0
+	runtime.any.system.diagnostics.tools-4.3.0
+	runtime.any.system.diagnostics.tracing-4.3.0
+	runtime.any.system.globalization-4.3.0
+	runtime.any.system.globalization.calendars-4.3.0
+	runtime.any.system.io-4.3.0
+	runtime.any.system.reflection-4.3.0
+	runtime.any.system.reflection.extensions-4.3.0
+	runtime.any.system.reflection.primitives-4.3.0
+	runtime.any.system.resources.resourcemanager-4.3.0
+	runtime.any.system.runtime-4.3.0
+	runtime.any.system.runtime.handles-4.3.0
+	runtime.any.system.runtime.interopservices-4.3.0
+	runtime.any.system.text.encoding-4.3.0
+	runtime.any.system.text.encoding.extensions-4.3.0
+	runtime.any.system.threading.tasks-4.3.0
+	runtime.any.system.threading.timer-4.3.0
 	runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl-4.3.0
 	runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl-4.3.0
 	runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl-4.3.0
@@ -173,6 +192,14 @@ NUGET_PKGS="
 	runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl-4.3.0
 	runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl-4.3.0
 	runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl-4.3.0
+	runtime.unix.microsoft.win32.primitives-4.3.0
+	runtime.unix.system.console-4.3.0
+	runtime.unix.system.diagnostics.debug-4.3.0
+	runtime.unix.system.io.filesystem-4.3.0
+	runtime.unix.system.net.primitives-4.3.0
+	runtime.unix.system.net.sockets-4.3.0
+	runtime.unix.system.private.uri-4.3.0
+	runtime.unix.system.runtime.extensions-4.3.0
 	sentry-3.14.1
 	sharpcompress-0.30.1
 	sharpfnt-2.0.0
@@ -224,12 +251,14 @@ NUGET_PKGS="
 	system.memory-4.5.3
 	system.memory-4.5.4
 	system.net.http-4.3.0
+	system.net.nameresolution-4.3.0
 	system.net.primitives-4.3.0
 	system.net.sockets-4.3.0
 	system.numerics.vectors-4.4.0
 	system.numerics.vectors-4.5.0
 	system.objectmodel-4.0.12
 	system.objectmodel-4.3.0
+	system.private.uri-4.3.0
 	system.reflection-4.1.0
 	system.reflection-4.3.0
 	system.reflection.emit-4.0.1
@@ -264,7 +293,9 @@ NUGET_PKGS="
 	system.runtime.interopservices-4.3.0
 	system.runtime.interopservices.runtimeinformation-4.3.0
 	system.runtime.numerics-4.3.0
+	system.security.accesscontrol-4.5.0
 	system.security.accesscontrol-5.0.0
+	system.security.claims-4.3.0
 	system.security.cryptography.algorithms-4.3.0
 	system.security.cryptography.cng-4.3.0
 	system.security.cryptography.cng-5.0.0
@@ -275,6 +306,9 @@ NUGET_PKGS="
 	system.security.cryptography.primitives-4.3.0
 	system.security.cryptography.protecteddata-4.4.0
 	system.security.cryptography.x509certificates-4.3.0
+	system.security.principal-4.3.0
+	system.security.principal.windows-4.3.0
+	system.security.principal.windows-4.5.0
 	system.security.principal.windows-5.0.0
 	system.text.encoding-4.0.11
 	system.text.encoding-4.3.0
@@ -295,6 +329,7 @@ NUGET_PKGS="
 	system.threading.tasks.extensions-4.3.0
 	system.threading.tasks.extensions-4.5.3
 	system.threading.tasks.extensions-4.5.4
+	system.threading.threadpool-4.3.0
 	system.threading.timer-4.3.0
 	system.xml.readerwriter-4.3.0
 	system.xml.xdocument-4.3.0
