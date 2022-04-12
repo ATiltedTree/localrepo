@@ -1,0 +1,13 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index 780811f7..e26cbf92 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -18,7 +18,7 @@ default-members = [
+ split-debuginfo = "unpacked"
+ 
+ [profile.release]
+-lto = "thin"
++# lto = "thin"
+ # debug = true
+ 
+ [profile.opt]

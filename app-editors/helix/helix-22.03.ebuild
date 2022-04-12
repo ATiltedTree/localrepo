@@ -155,6 +155,7 @@ RDEPEND="dev-libs/tree-sitter-meta"
 
 PATCHES=(
 	"${FILESDIR}/gentoo.patch"
+	"${FILESDIR}/no-lto.patch"
 )
 
 src_configure() {
