@@ -1,0 +1,12 @@
+diff --git a/generated/meson.build b/generated/meson.build
+index 1104bdc21a..6b80000d7a 100644
+--- a/generated/meson.build
++++ b/generated/meson.build
+@@ -11,7 +11,6 @@ ebml_types = custom_target('ebml_types.h',
+ version_h = custom_target('version.h',
+     output: 'version.h',
+     command: [version_py, '@OUTPUT@'],
+-    build_always_stale: true,
+ )
+ 
+ sources += [ebml_defs, ebml_types, version_h]
