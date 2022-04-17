@@ -5,7 +5,7 @@ EAPI=8
 
 NUGET_PKGS="
 	automapper-11.0.1
-	clowd.squirrel-2.8.28-pre
+	clowd.squirrel-2.9.23-gc8da1a
 	diffplex-1.7.1
 	discordrichpresence-1.0.175
 	ffmpeg.autogen-4.3.0.1
@@ -150,10 +150,10 @@ NUGET_PKGS="
 	opentabletdriver.configurations-0.6.0.2
 	opentabletdriver.native-0.6.0.2
 	opentabletdriver.plugin-0.6.0.2
-	ppy.localisationanalyser-2022.320.0
-	ppy.osu.framework-2022.408.0
+	ppy.localisationanalyser-2022.417.0
+	ppy.osu.framework-2022.415.0
 	ppy.osu.framework.nativelibs-2022.222.0
-	ppy.osu.game.resources-2022.407.0
+	ppy.osu.game.resources-2022.417.0
 	ppy.osutk.ns20-1.0.187
 	ppy.sdl2-cs-1.0.501-alpha
 	realm-10.10.0
@@ -202,6 +202,7 @@ NUGET_PKGS="
 	runtime.unix.system.runtime.extensions-4.3.0
 	sentry-3.14.1
 	sharpcompress-0.30.1
+	sharpcompress-0.31.0
 	sharpfnt-2.0.0
 	sixlabors.imagesharp-2.1.0
 	sqlitepclraw.bundle_e_sqlite3-2.0.4
