@@ -9,18 +9,16 @@ DESCRIPTION=".NET is a free, cross-platform, open-source developer platform"
 HOMEPAGE="https://dotnet.microsoft.com/"
 LICENSE="MIT"
 
-URI_BASE="https://dotnetcli.azureedge.net/dotnet/Sdk/${MY_PV}/dotnet-sdk-${MY_PV}-linux"
-
 SRC_URI="
-	elibc_glibc? (
-		amd64? ( ${URI_BASE}-x64.tar.gz )
-		arm? ( ${URI_BASE}-arm.tar.gz )
-		arm64? ( ${URI_BASE}-arm64.tar.gz )
-	)
 	elibc_musl? (
-		amd64? ( ${URI_BASE}-musl-x64.tar.gz )
-		arm? ( ${URI_BASE}-musl-arm.tar.gz )
-		arm64? ( ${URI_BASE}-musl-arm64.tar.gz )
+		amd64? ( https://dotnetcli.azureedge.net/dotnet/Sdk/${MY_PV}/dotnet-sdk-${MY_PV}-linux-musl-x64.tar.gz )
+		arm? ( https://dotnetcli.azureedge.net/dotnet/Sdk/${MY_PV}/dotnet-sdk-${MY_PV}-linux-musl-arm.tar.gz )
+		arm64? ( https://dotnetcli.azureedge.net/dotnet/Sdk/${MY_PV}/dotnet-sdk-${MY_PV}-linux-musl-arm64.tar.gz )
+	)
+	!elibc_musl? (
+		amd64? ( https://dotnetcli.azureedge.net/dotnet/Sdk/${MY_PV}/dotnet-sdk-${MY_PV}-linux-x64.tar.gz )
+		arm? ( https://dotnetcli.azureedge.net/dotnet/Sdk/${MY_PV}/dotnet-sdk-${MY_PV}-linux-arm.tar.gz )
+		arm64? ( https://dotnetcli.azureedge.net/dotnet/Sdk/${MY_PV}/dotnet-sdk-${MY_PV}-linux-arm64.tar.gz )
 	)
 "
 
@@ -35,6 +33,7 @@ RDEPEND="
 	sys-libs/zlib:0/1
 	dotnet-symlink? (
 		!dev-dotnet/dotnet-sdk[dotnet-symlink(+)]
+		!dev-dotnet/dotnet-sdk-bin:3.1[dotnet-symlink(+)]
 		!dev-dotnet/dotnet-sdk-bin:5.0[dotnet-symlink(+)]
 	)
 "
