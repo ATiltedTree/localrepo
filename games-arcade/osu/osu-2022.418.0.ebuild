@@ -371,6 +371,12 @@ edotnet() {
 	dotnet $@ || die "dotnet failed"
 }
 
+src_prepare() {
+	default
+
+	addpredict $(dirname $(dotnet --list-sdks | grep -o "\[.*\]" | sed 's/\[//' | sed 's/\]//'))
+}
+
 src_configure() {
 	edotnet restore osu.Desktop \
 		--use-current-runtime \
