@@ -35,7 +35,7 @@ RDEPEND="
 	media-libs/sratom:0
 	media-libs/lilv:0
 	sci-libs/fftw:3.0[threads]
-	x11-libs/gtksourceview:5
+	gui-libs/gtksourceview:5
 	dev-libs/reproc
 	dev-libs/xxhash
 	media-libs/rubberband
