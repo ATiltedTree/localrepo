@@ -151,9 +151,9 @@ NUGET_PKGS="
 	opentabletdriver.native-0.6.0.2
 	opentabletdriver.plugin-0.6.0.2
 	ppy.localisationanalyser-2022.417.0
-	ppy.osu.framework-2022.415.0
+	ppy.osu.framework-2022.423.0
 	ppy.osu.framework.nativelibs-2022.222.0
-	ppy.osu.game.resources-2022.417.0
+	ppy.osu.game.resources-2022.422.0
 	ppy.osutk.ns20-1.0.187
 	ppy.sdl2-cs-1.0.501-alpha
 	realm-10.10.0
