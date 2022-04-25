@@ -2,50 +2,53 @@ diff --git a/src/realm/util/backtrace.cpp b/src/realm/util/backtrace.cpp
 index 058d1af66..b5fc23a79 100644
 --- a/src/realm/util/backtrace.cpp
 +++ b/src/realm/util/backtrace.cpp
-@@ -23,15 +23,8 @@
+@@ -23,15 +23,15 @@
  #include <cstdlib>
  #include <cstring>
  
 -#if REALM_PLATFORM_APPLE || (defined(__linux__) && !REALM_ANDROID)
--#include <execinfo.h>
--#endif
--
++#if REALM_PLATFORM_APPLE || (defined(__GLIBC__) && !REALM_ANDROID)
+ #include <execinfo.h>
+ #endif
+ 
  using namespace realm::util;
  
 -#if REALM_PLATFORM_APPLE || (defined(__linux__) && !REALM_ANDROID)
--static const size_t g_backtrace_depth = 128;
--#endif
++#if REALM_PLATFORM_APPLE || (defined(__GLIBC__) && !REALM_ANDROID)
+ static const size_t g_backtrace_depth = 128;
+ #endif
  static const char* g_backtrace_error = "<error calculating backtrace>";
  static const char* g_backtrace_alloc_error = "<error allocating backtrace>";
  static const char* g_backtrace_symbolicate_error = "<error symbolicating backtrace>";
-@@ -105,30 +98,9 @@ Backtrace& Backtrace::operator=(const Backtrace& other) noexcept
+@@ -105,30 +98,30 @@ Backtrace& Backtrace::operator=(const Backtrace& other) noexcept
  
  Backtrace Backtrace::capture() noexcept
  {
 -#if REALM_PLATFORM_APPLE || (defined(__linux__) && !REALM_ANDROID)
--    static_cast<void>(g_backtrace_unsupported_error);
--    void* callstack[g_backtrace_depth];
--    int frames = ::backtrace(callstack, g_backtrace_depth);
--    if (REALM_UNLIKELY(frames <= 1)) {
--        return Backtrace(nullptr, &g_backtrace_error, 1);
--    }
--    else {
--        // Translate the backtrace to symbols (and exclude the call to the
--        // capture() function from the trace).
--        --frames;
--        void* memory = ::backtrace_symbols(callstack + 1, frames);
--        if (REALM_UNLIKELY(memory == nullptr)) {
--            return Backtrace(nullptr, &g_backtrace_symbolicate_error, 1);
--        }
--        else {
--            return Backtrace{memory, size_t(frames)};
--        }
--    }
--#else
++#if REALM_PLATFORM_APPLE || (defined(__GLIBC__) && !REALM_ANDROID)
+     static_cast<void>(g_backtrace_unsupported_error);
+     void* callstack[g_backtrace_depth];
+     int frames = ::backtrace(callstack, g_backtrace_depth);
+     if (REALM_UNLIKELY(frames <= 1)) {
+         return Backtrace(nullptr, &g_backtrace_error, 1);
+     }
+     else {
+         // Translate the backtrace to symbols (and exclude the call to the
+         // capture() function from the trace).
+         --frames;
+         void* memory = ::backtrace_symbols(callstack + 1, frames);
+         if (REALM_UNLIKELY(memory == nullptr)) {
+             return Backtrace(nullptr, &g_backtrace_symbolicate_error, 1);
+         }
+         else {
+             return Backtrace{memory, size_t(frames)};
+         }
+     }
+ #else
      static_cast<void>(g_backtrace_error);
      static_cast<void>(g_backtrace_symbolicate_error);
      return Backtrace(nullptr, &g_backtrace_unsupported_error, 1);
--#endif
+ #endif
  }
  
  
