@@ -71,7 +71,7 @@ NUGET_PKGS="
 	markdig-0.23.0
 	messagepack-2.3.85
 	messagepack.annotations-2.3.85
-	microsoft.aspnetcore.app.runtime.linux-musl-x64-6.0.3
+	microsoft.aspnetcore.app.runtime.linux-musl-x64-6.0.4
 	microsoft.aspnetcore.connections.abstractions-6.0.3
 	microsoft.aspnetcore.http.connections.client-6.0.3
 	microsoft.aspnetcore.http.connections.common-6.0.3
@@ -120,7 +120,7 @@ NUGET_PKGS="
 	microsoft.extensions.options-6.0.0
 	microsoft.extensions.primitives-5.0.0
 	microsoft.extensions.primitives-6.0.0
-	microsoft.netcore.app.runtime.linux-musl-x64-6.0.3
+	microsoft.netcore.app.runtime.linux-musl-x64-6.0.4
 	microsoft.netcore.platforms-1.0.1
 	microsoft.netcore.platforms-1.1.0
 	microsoft.netcore.platforms-2.0.0
@@ -151,7 +151,7 @@ NUGET_PKGS="
 	opentabletdriver.native-0.6.0.2
 	opentabletdriver.plugin-0.6.0.2
 	ppy.localisationanalyser-2022.417.0
-	ppy.osu.framework-2022.430.0
+	ppy.osu.framework-2022.509.0
 	ppy.osu.framework.nativelibs-2022.429.0
 	ppy.osu.game.resources-2022.422.0
 	ppy.osutk.ns20-1.0.187
