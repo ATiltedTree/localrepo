@@ -11,7 +11,6 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://github.com/systemd/systemd.git"
 	inherit git-r3
 else
-	MUSL_PV="${PV}"
 	if [[ ${PV} == *.* ]]; then
 		MY_PN=systemd-stable
 	else
@@ -20,9 +19,8 @@ else
 	MY_PV=${PV/_/-}
 	MY_P=${MY_PN}-${MY_PV}
 	S=${WORKDIR}/${MY_P}
-	SRC_URI="https://github.com/systemd/${MY_PN}/archive/v${MY_PV}/${MY_P}.tar.gz
-	elibc_musl? ( https://github.com/ATiltedTree/systemd-musl/archive/refs/tags/v${MUSL_PV}.tar.gz -> systemd-musl-${MUSL_PV}.tar.gz )"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
+	SRC_URI="https://github.com/systemd/${MY_PN}/archive/v${MY_PV}/${MY_P}.tar.gz"
+	#KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
 fi
 
 inherit bash-completion-r1 linux-info meson-multilib pam python-any-r1 systemd toolchain-funcs udev usr-ldscript
@@ -34,7 +32,7 @@ LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/2"
 IUSE="
 	acl apparmor audit build cgroup-hybrid cryptsetup curl +dns-over-tls elfutils
-	fido2 +gcrypt gnuefi gnutls homed hostnamed-fallback http idn importd +kmod
+	fido2 +gcrypt gnuefi gnutls homed http idn importd +kmod
 	+lz4 lzma nat +openssl pam pcre pkcs11 policykit pwquality qrcode
 	+resolvconf +seccomp selinux split-usr +sysv-utils test tpm vanilla xkb +zstd
 "
@@ -42,12 +40,11 @@ REQUIRED_USE="
 	dns-over-tls? ( || ( gnutls openssl ) )
 	homed? ( cryptsetup pam openssl )
 	importd? ( curl lzma || ( gcrypt openssl ) )
-	policykit? ( !hostnamed-fallback )
 	pwquality? ( homed )
 "
 RESTRICT="!test? ( test )"
 
-MINKV="3.11"
+MINKV="4.15"
 
 COMMON_DEPEND="
 	>=sys-apps/util-linux-2.30:0=[${MULTILIB_USEDEP}]
@@ -97,7 +94,7 @@ RDEPEND="${COMMON_DEPEND}
 	>=acct-group/wheel-0-r1
 	>=acct-group/kmem-0-r1
 	>=acct-group/tty-0-r1
-	!elibc_musl? ( >=acct-group/utmp-0-r1 )
+	>=acct-group/utmp-0-r1
 	>=acct-group/audio-0-r1
 	>=acct-group/cdrom-0-r1
 	>=acct-group/dialout-0-r1
@@ -120,10 +117,6 @@ RDEPEND="${COMMON_DEPEND}
 	>=acct-user/systemd-resolve-0-r1
 	>=acct-user/systemd-timesync-0-r1
 	>=sys-apps/baselayout-2.2
-	hostnamed-fallback? (
-		acct-group/systemd-hostname
-		sys-apps/dbus-broker
-	)
 	selinux? ( sec-policy/selinux-base-policy[systemd] )
 	sysv-utils? (
 		!sys-apps/openrc[sysv-utils(-)]
@@ -183,8 +176,8 @@ pkg_pretend() {
 			ewarn "See https://bugs.gentoo.org/674458."
 		fi
 
-		local CONFIG_CHECK="~AUTOFS4_FS ~BLK_DEV_BSG ~CGROUPS
-			~DEVTMPFS ~EPOLL ~FANOTIFY ~FHANDLE
+		local CONFIG_CHECK=" ~BINFMT_MISC ~BLK_DEV_BSG ~CGROUPS
+			~CGROUP_BPF ~DEVTMPFS ~EPOLL ~FANOTIFY ~FHANDLE
 			~INOTIFY_USER ~IPV6 ~NET ~NET_NS ~PROC_FS ~SIGNALFD ~SYSFS
 			~TIMERFD ~TMPFS_XATTR ~UNIX ~USER_NS
 			~CRYPTO_HMAC ~CRYPTO_SHA256 ~CRYPTO_USER_API_HASH
@@ -193,14 +186,17 @@ pkg_pretend() {
 
 		use acl && CONFIG_CHECK+=" ~TMPFS_POSIX_ACL"
 		use seccomp && CONFIG_CHECK+=" ~SECCOMP ~SECCOMP_FILTER"
-		kernel_is -lt 3 7 && CONFIG_CHECK+=" ~HOTPLUG"
-		kernel_is -lt 4 7 && CONFIG_CHECK+=" ~DEVPTS_MULTIPLE_INSTANCES"
-		kernel_is -ge 4 10 && CONFIG_CHECK+=" ~CGROUP_BPF"
 
-		if kernel_is -lt 5 10 20; then
-			CONFIG_CHECK+=" ~CHECKPOINT_RESTORE"
-		else
+		if kernel_is -ge 5 10 20; then
 			CONFIG_CHECK+=" ~KCMP"
+		else
+			CONFIG_CHECK+=" ~CHECKPOINT_RESTORE"
+		fi
+
+		if kernel_is -ge 4 18; then
+			CONFIG_CHECK+=" ~AUTOFS_FS"
+		else
+			CONFIG_CHECK+=" ~AUTOFS4_FS"
 		fi
 
 		if linux_config_exists; then
@@ -238,12 +234,7 @@ src_prepare() {
 	[[ -d "${WORKDIR}"/patches ]] && PATCHES+=( "${WORKDIR}"/patches )
 
 	# Add local patches here
-	PATCHES+=(
-	)
-
-	if use elibc_musl; then
-		PATCHES+=( "${WORKDIR}/systemd-musl-${MUSL_PV}/" )
-	fi
+	PATCHES+=()
 
 	if ! use vanilla; then
 		PATCHES+=(
@@ -252,6 +243,9 @@ src_prepare() {
 			"${FILESDIR}/gentoo-journald-audit.patch"
 		)
 	fi
+
+	# Fails with split-usr.
+	sed -i -e '2i exit 77' test/test-rpm-macros.sh || die
 
 	default
 }
@@ -346,18 +340,6 @@ multilib_src_configure() {
 		$(meson_native_true vconsole)
 	)
 
-	if use elibc_musl; then
-		myconf+=(
-			-Dgshadow=false
-			-Didn=false
-			-Dnss-myhostname=false
-			-Dnss-systemd=false
-			-Dnss-mymachines=false
-			-Dnss-resolve=false
-			-Dutmp=false
-		)
-	fi
-
 	meson_src_configure "${myconf[@]}"
 }
 
@@ -393,7 +375,7 @@ multilib_src_install_all() {
 	fi
 
 	# https://bugs.gentoo.org/761763
-	rm -rf "${ED}"/usr/lib/sysusers.d || die
+	rm -r "${ED}"/usr/lib/sysusers.d || die
 
 	# Preserve empty dirs in /etc & /var, bug #437008
 	keepdir /etc/{binfmt.d,modules-load.d,tmpfiles.d}
@@ -420,16 +402,6 @@ multilib_src_install_all() {
 		# Avoid breaking boot/reboot
 		dosym ../../../lib/systemd/systemd /usr/lib/systemd/systemd
 		dosym ../../../lib/systemd/systemd-shutdown /usr/lib/systemd/systemd-shutdown
-	fi
-
-	# workaround for https://github.com/systemd/systemd/issues/13501
-	if use hostnamed-fallback; then
-		# this file requires dbus-broker
-		insinto /usr/share/dbus-1/system.d/
-		doins "${FILESDIR}/org.freedesktop.hostname1_no_polkit.conf"
-
-		insinto "${rootprefix}/lib/systemd/system/systemd-hostnamed.service.d/"
-		doins "${FILESDIR}/00-hostnamed-network-user.conf"
 	fi
 
 	gen_usr_ldscript -a systemd udev
