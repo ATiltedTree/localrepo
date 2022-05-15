@@ -5,11 +5,11 @@ EAPI=8
 
 NUGET_PKGS="
 	automapper-11.0.1
-	clowd.squirrel-2.9.23-gc8da1a
+	clowd.squirrel-2.9.40
 	diffplex-1.7.1
 	discordrichpresence-1.0.175
 	ffmpeg.autogen-4.3.0.1
-	fody-6.6.0
+	fody-6.6.1
 	hidsharpcore-1.2.1.1
 	htmlagilitypack-1.11.42
 	humanizer-2.14.1
@@ -71,16 +71,16 @@ NUGET_PKGS="
 	markdig-0.23.0
 	messagepack-2.3.85
 	messagepack.annotations-2.3.85
-	microsoft.aspnetcore.app.runtime.linux-musl-x64-6.0.4
-	microsoft.aspnetcore.connections.abstractions-6.0.3
-	microsoft.aspnetcore.http.connections.client-6.0.3
-	microsoft.aspnetcore.http.connections.common-6.0.3
-	microsoft.aspnetcore.signalr.client-6.0.3
-	microsoft.aspnetcore.signalr.client.core-6.0.3
-	microsoft.aspnetcore.signalr.common-6.0.3
-	microsoft.aspnetcore.signalr.protocols.json-6.0.3
-	microsoft.aspnetcore.signalr.protocols.messagepack-6.0.3
-	microsoft.aspnetcore.signalr.protocols.newtonsoftjson-6.0.3
+	microsoft.aspnetcore.app.runtime.linux-musl-x64-6.0.5
+	microsoft.aspnetcore.connections.abstractions-6.0.5
+	microsoft.aspnetcore.http.connections.client-6.0.5
+	microsoft.aspnetcore.http.connections.common-6.0.5
+	microsoft.aspnetcore.signalr.client-6.0.5
+	microsoft.aspnetcore.signalr.client.core-6.0.5
+	microsoft.aspnetcore.signalr.common-6.0.5
+	microsoft.aspnetcore.signalr.protocols.json-6.0.5
+	microsoft.aspnetcore.signalr.protocols.messagepack-6.0.5
+	microsoft.aspnetcore.signalr.protocols.newtonsoftjson-6.0.5
 	microsoft.bcl.asyncinterfaces-1.0.0
 	microsoft.bcl.asyncinterfaces-5.0.0
 	microsoft.bcl.asyncinterfaces-6.0.0
@@ -109,7 +109,7 @@ NUGET_PKGS="
 	microsoft.extensions.dependencyinjection.abstractions-6.0.0
 	microsoft.extensions.dependencyinjection.abstractions-6.0.0-rc.1.21451.13
 	microsoft.extensions.dependencymodel-5.0.0
-	microsoft.extensions.features-6.0.3
+	microsoft.extensions.features-6.0.5
 	microsoft.extensions.logging-5.0.0
 	microsoft.extensions.logging-6.0.0
 	microsoft.extensions.logging.abstractions-5.0.0
@@ -120,7 +120,7 @@ NUGET_PKGS="
 	microsoft.extensions.options-6.0.0
 	microsoft.extensions.primitives-5.0.0
 	microsoft.extensions.primitives-6.0.0
-	microsoft.netcore.app.runtime.linux-musl-x64-6.0.4
+	microsoft.netcore.app.runtime.linux-musl-x64-6.0.5
 	microsoft.netcore.platforms-1.0.1
 	microsoft.netcore.platforms-1.1.0
 	microsoft.netcore.platforms-2.0.0
@@ -145,19 +145,19 @@ NUGET_PKGS="
 	nuget.projectmodel-5.11.0
 	nuget.protocol-5.11.0
 	nuget.versioning-5.11.0
-	nunit-3.13.2
+	nunit-3.13.3
 	opentabletdriver-0.6.0.2
 	opentabletdriver.configurations-0.6.0.2
 	opentabletdriver.native-0.6.0.2
 	opentabletdriver.plugin-0.6.0.2
 	ppy.localisationanalyser-2022.417.0
-	ppy.osu.framework-2022.509.0
+	ppy.osu.framework-2022.511.0
 	ppy.osu.framework.nativelibs-2022.429.0
-	ppy.osu.game.resources-2022.422.0
+	ppy.osu.game.resources-2022.513.0
 	ppy.osutk.ns20-1.0.187
-	ppy.sdl2-cs-1.0.501-alpha
-	realm-10.10.0
-	realm.fody-10.10.0
+	ppy.sdl2-cs-1.0.518-alpha
+	realm-10.12.0
+	realm.fody-10.12.0
 	remotion.linq-2.2.0
 	runtime.any.system.collections-4.3.0
 	runtime.any.system.diagnostics.tools-4.3.0
@@ -200,8 +200,7 @@ NUGET_PKGS="
 	runtime.unix.system.net.sockets-4.3.0
 	runtime.unix.system.private.uri-4.3.0
 	runtime.unix.system.runtime.extensions-4.3.0
-	sentry-3.14.1
-	sharpcompress-0.30.1
+	sentry-3.17.1
 	sharpcompress-0.31.0
 	sharpfnt-2.0.0
 	sixlabors.imagesharp-2.1.0
@@ -243,7 +242,7 @@ NUGET_PKGS="
 	system.io.filesystem-4.3.0
 	system.io.filesystem.primitives-4.3.0
 	system.io.packaging-6.0.0
-	system.io.pipelines-6.0.2
+	system.io.pipelines-6.0.3
 	system.linq-4.1.0
 	system.linq-4.3.0
 	system.linq.expressions-4.1.0
@@ -320,7 +319,7 @@ NUGET_PKGS="
 	system.text.encodings.web-6.0.0
 	system.text.json-5.0.0
 	system.text.json-5.0.2
-	system.text.json-6.0.2
+	system.text.json-6.0.4
 	system.text.regularexpressions-4.3.0
 	system.threading-4.0.11
 	system.threading-4.3.0
