@@ -23,16 +23,12 @@ SLOT="0"
 IUSE="+abi_x86_32 +abi_x86_64"
 REQUIRED_USE="|| ( abi_x86_32 abi_x86_64 )"
 
+BDEPEND="dev-util/mingw64-toolchain[${MULTILIB_USEDEP}]"
 RDEPEND="virtual/wine"
 
-pkg_pretend() {
-	if use abi_x86_32 && ! has_version "cross-i686-w64-mingw32/gcc"; then
-			die "but no compiler to support it was found."
-	fi
-
-	if use abi_x86_64 && ! has_version "cross-x86_64-w64-mingw32/gcc"; then
-			die "MinGW build was enabled, but no compiler to support it was found."
-	fi
+src_configure() {
+	PATH=${BROOT}/usr/lib/mingw64-toolchain/bin:${PATH}
+	multilib-minimal_src_configure
 }
 
 multilib_src_configure() {
