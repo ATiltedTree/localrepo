@@ -67,13 +67,19 @@ src_configure() {
 		--source "$(nuget_registry)"
 }
 
+version() {
+	if [[ "${PV}" != "9999" ]]; then
+		echo "/property:Version=${PV}"
+	fi
+}
+
 src_compile() {
 	edotnet build osu.Desktop \
 		--configuration Release \
 		--use-current-runtime \
 		--no-self-contained \
 		--no-restore \
-		"/property:Version=${PV}"
+		$(version)
 }
 
 src_install() {
@@ -85,7 +91,7 @@ src_install() {
 		--no-self-contained \
 		--no-build \
 		--output "${D}"/$dest \
-		"/property:Version=${PV}"
+		$(version)
 
 	# Remove debugging and documentations
 	find "${ED}" -name '*.pdb' -delete || die
