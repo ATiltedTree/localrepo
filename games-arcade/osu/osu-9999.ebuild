@@ -10,7 +10,7 @@ inherit nuget desktop xdg wrapper
 DESCRIPTION="A free-to-win rhythm game. Rhythm is just a click away!"
 HOMEPAGE="https://github.com/ppy/osu"
 
-if [[ "${PV}" == "9999.999.9" ]]; then
+if [[ "${PV}" == "9999" ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/ppy/osu"
 else
@@ -46,7 +46,7 @@ edotnet() {
 }
 
 src_unpack() {
-	if [[ "${PV}" == "9999.999.9" ]]; then
+	if [[ "${PV}" == "9999" ]]; then
 		git-r3_src_unpack
 		cd "${S}"
 		edotnet restore osu.Desktop --use-current-runtime --packages "$(nuget_registry)"
