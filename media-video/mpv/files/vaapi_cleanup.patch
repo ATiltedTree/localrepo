@@ -1,8 +1,8 @@
 diff --git a/meson.build b/meson.build
-index 407fd1ddea..eaf6d47885 100644
+index 0b07582a33..38a0e95201 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -1441,6 +1441,7 @@ vaapi_drm = {
+@@ -1424,6 +1424,7 @@ vaapi_drm = {
  }
  vaapi_drm += {'use': vaapi['use'] and egl_drm.allowed() and vaapi_drm['deps'].found()}
  if vaapi_drm['use']
@@ -10,18 +10,19 @@ index 407fd1ddea..eaf6d47885 100644
      features += vaapi_drm['name']
  endif
  
-@@ -1448,8 +1449,9 @@ vaapi_wayland = {
+@@ -1431,9 +1432,10 @@ vaapi_wayland = {
      'name': 'vaapi-wayland',
      'deps': dependency('libva-wayland', version: '>= 1.1.0', required: get_option('vaapi-wayland')),
  }
 -vaapi_wayland += {'use': vaapi['use'] and egl_wayland['use'] and vaapi_wayland['deps'].found()}
 +vaapi_wayland += {'use': vaapi['use'] and wayland['use'] and vaapi_wayland['deps'].found()}
+ 
  if vaapi_wayland['use']
 +    dependencies += vaapi_wayland['deps']
      features += vaapi_wayland['name']
  endif
  
-@@ -1464,20 +1466,11 @@ if vaapi_x11['use']
+@@ -1453,20 +1455,11 @@ if vaapi_x11['use']
      sources += files('video/out/vo_vaapi.c')
  endif
  
@@ -44,10 +45,10 @@ index 407fd1ddea..eaf6d47885 100644
      sources += files('video/out/hwdec/hwdec_vaapi_gl.c')
  endif
 diff --git a/meson_options.txt b/meson_options.txt
-index 196119e4d6..1b41693153 100644
+index 21367817b6..f5f1e9281b 100644
 --- a/meson_options.txt
 +++ b/meson_options.txt
-@@ -85,7 +85,6 @@ option('vaapi', type: 'feature', value: 'auto', description: 'VAAPI acceleration
+@@ -87,7 +87,6 @@ option('vaapi', type: 'feature', value: 'auto', description: 'VAAPI acceleration
  option('vaapi-drm', type: 'feature', value: 'auto', description: 'VAAPI (DRM/EGL support)')
  option('vaapi-wayland', type: 'feature', value: 'auto', description: 'VAAPI (Wayland support)')
  option('vaapi-x11', type: 'feature', value: 'auto', description: 'VAAPI (X11 support)')
