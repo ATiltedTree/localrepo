@@ -26,7 +26,7 @@ DOCS+=( README.md DOCS/{client-api,interface}-changes.rst )
 # See Copyright in sources and Gentoo bug 506946. Waf is BSD, libmpv is ISC.
 LICENSE="LGPL-2.1+ GPL-2+ ISC"
 SLOT="0"
-IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins nvenc doc drm dvb
+IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins nvenc doc +drm dvb
 	dvd +egl gamepad gbm +iconv jack javascript jpeg lcms libcaca libmpv +lua
 	openal +opengl pipewire pulseaudio raspberry-pi rubberband sdl sndio
 	selinux test tools +uchardet vaapi vdpau vulkan wayland +X +xv zlib zimg"
@@ -36,7 +36,6 @@ REQUIRED_USE="
 	aqua? ( opengl )
 	nvenc? ( || ( opengl vulkan ) )
 	gamepad? ( sdl )
-	drm? ( gbm egl opengl )
 	lua? ( ${LUA_REQUIRED_USE} )
 	opengl? ( || ( aqua egl X raspberry-pi !cli ) )
 	raspberry-pi? ( opengl )
