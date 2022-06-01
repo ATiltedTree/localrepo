@@ -181,6 +181,7 @@ src_configure() {
 src_install() {
 	cargo_src_install --path helix-term
 
+	rm -r runtime/grammars/sources || die
 	insinto /usr/share/helix
 	doins -r runtime
 }
