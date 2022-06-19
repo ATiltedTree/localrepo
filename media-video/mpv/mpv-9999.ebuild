@@ -127,6 +127,7 @@ BDEPEND="dev-python/docutils
 "
 
 PATCHES=(
+	"${FILESDIR}"/vaapi_cleanup.patch
 	"${FILESDIR}"/version_once.patch
 )
 
