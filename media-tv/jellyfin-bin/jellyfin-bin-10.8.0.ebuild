@@ -25,7 +25,7 @@ S="${WORKDIR}"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="-* ~amd64 ~arm64"
+KEYWORDS="-* amd64 arm64"
 
 RESTRICT="strip"
 
