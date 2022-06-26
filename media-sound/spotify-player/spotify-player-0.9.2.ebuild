@@ -1,0 +1,510 @@
+# Copyright 2021 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+CRATES="
+	addr2line-0.17.0
+	adler-1.0.2
+	adler32-1.2.0
+	aes-0.6.0
+	aes-ctr-0.6.0
+	aes-soft-0.6.4
+	aesni-0.10.0
+	ahash-0.7.6
+	aho-corasick-0.7.18
+	alsa-0.6.0
+	alsa-sys-0.3.1
+	ansi_colours-1.1.1
+	ansi_term-0.12.1
+	anyhow-1.0.58
+	array-init-2.0.0
+	async-stream-0.3.3
+	async-stream-impl-0.3.3
+	async-trait-0.1.56
+	atty-0.2.14
+	autocfg-1.1.0
+	backtrace-0.3.65
+	base64-0.13.0
+	bindgen-0.59.2
+	bit_field-0.10.1
+	bitflags-1.3.2
+	block-0.1.6
+	block-buffer-0.9.0
+	block-buffer-0.10.2
+	bumpalo-3.10.0
+	bytemuck-1.9.1
+	byteorder-1.4.3
+	bytes-1.1.0
+	calloop-0.9.3
+	cassowary-0.3.0
+	cc-1.0.73
+	cesu8-1.1.0
+	cexpr-0.6.0
+	cfg-expr-0.10.3
+	cfg-if-0.1.10
+	cfg-if-1.0.0
+	chrono-0.4.19
+	cipher-0.2.5
+	clang-sys-1.3.3
+	clap-3.2.6
+	clap_lex-0.2.3
+	cocoa-0.24.0
+	cocoa-foundation-0.1.0
+	color_quant-1.1.0
+	combine-4.6.4
+	config_parser2-0.1.3
+	config_parser_derive-0.1.1
+	console-0.15.0
+	core-foundation-0.7.0
+	core-foundation-0.9.3
+	core-foundation-sys-0.7.0
+	core-foundation-sys-0.8.3
+	core-graphics-0.19.2
+	core-graphics-0.22.3
+	core-graphics-types-0.1.1
+	core-video-sys-0.1.4
+	coreaudio-rs-0.10.0
+	coreaudio-sys-0.2.10
+	cpal-0.13.5
+	cpufeatures-0.2.2
+	crc32fast-1.3.2
+	crossbeam-channel-0.5.5
+	crossbeam-deque-0.8.1
+	crossbeam-epoch-0.9.9
+	crossbeam-utils-0.8.9
+	crossterm-0.23.2
+	crossterm_winapi-0.9.0
+	crypto-common-0.1.3
+	crypto-mac-0.11.1
+	ctr-0.6.0
+	cty-0.2.2
+	darling-0.13.4
+	darling_core-0.13.4
+	darling_macro-0.13.4
+	dbus-0.9.5
+	dbus-crossroads-0.5.0
+	deflate-1.0.0
+	digest-0.9.0
+	digest-0.10.3
+	dirs-next-2.0.0
+	dirs-sys-next-0.1.2
+	dispatch-0.2.0
+	dlib-0.5.0
+	downcast-rs-1.2.0
+	either-1.6.1
+	encode_unicode-0.3.6
+	encoding_rs-0.8.31
+	env_logger-0.9.0
+	exr-1.4.2
+	fastrand-1.7.0
+	fixedbitset-0.4.1
+	flate2-1.0.24
+	flume-0.10.13
+	fnv-1.0.7
+	foreign-types-0.3.2
+	foreign-types-shared-0.1.1
+	form_urlencoded-1.0.1
+	futf-0.1.5
+	futures-0.3.21
+	futures-channel-0.3.21
+	futures-core-0.3.21
+	futures-executor-0.3.21
+	futures-io-0.3.21
+	futures-macro-0.3.21
+	futures-sink-0.3.21
+	futures-task-0.3.21
+	futures-util-0.3.21
+	generic-array-0.14.5
+	getrandom-0.1.16
+	getrandom-0.2.7
+	gif-0.11.3
+	gimli-0.26.1
+	glib-0.15.11
+	glib-macros-0.15.11
+	glib-sys-0.15.10
+	glob-0.3.0
+	gobject-sys-0.15.10
+	gstreamer-0.18.8
+	gstreamer-app-0.18.7
+	gstreamer-app-sys-0.18.0
+	gstreamer-audio-0.18.7
+	gstreamer-audio-sys-0.18.3
+	gstreamer-base-0.18.0
+	gstreamer-base-sys-0.18.0
+	gstreamer-sys-0.18.0
+	h2-0.3.13
+	half-1.8.2
+	hashbrown-0.11.2
+	hashbrown-0.12.1
+	headers-0.3.7
+	headers-core-0.2.0
+	heck-0.4.0
+	hermit-abi-0.1.19
+	hmac-0.11.0
+	hostname-0.3.1
+	html5ever-0.25.2
+	http-0.2.8
+	http-body-0.4.5
+	httparse-1.7.1
+	httpdate-1.0.2
+	humantime-2.1.0
+	hyper-0.14.19
+	hyper-proxy-0.9.1
+	hyper-tls-0.5.0
+	ident_case-1.0.1
+	idna-0.2.3
+	if-addrs-0.7.0
+	image-0.24.2
+	indexmap-1.9.1
+	inflate-0.4.5
+	instant-0.1.12
+	ipnet-2.5.0
+	itoa-1.0.2
+	jack-0.8.3
+	jack-0.10.0
+	jack-sys-0.2.2
+	jack-sys-0.4.0
+	jni-0.19.0
+	jni-sys-0.3.0
+	jobserver-0.1.24
+	jpeg-decoder-0.2.6
+	js-sys-0.3.58
+	lazy_static-1.4.0
+	lazycell-1.3.0
+	lebe-0.5.1
+	lewton-0.10.2
+	libc-0.2.126
+	libdbus-sys-0.2.2
+	libloading-0.6.7
+	libloading-0.7.3
+	libm-0.2.2
+	libmdns-0.7.0
+	libpulse-binding-2.26.0
+	libpulse-simple-binding-2.25.0
+	libpulse-simple-sys-1.19.2
+	libpulse-sys-1.19.3
+	librespot-audio-0.4.1
+	librespot-connect-0.4.1
+	librespot-core-0.4.1
+	librespot-discovery-0.4.1
+	librespot-metadata-0.4.1
+	librespot-playback-0.4.1
+	librespot-protocol-0.4.1
+	lock_api-0.4.7
+	log-0.4.17
+	lru-0.7.7
+	mac-0.1.1
+	mach-0.3.2
+	malloc_buf-0.0.6
+	markup5ever-0.10.1
+	markup5ever_rcdom-0.1.0
+	match_cfg-0.1.0
+	matchers-0.1.0
+	matches-0.1.9
+	maybe-async-0.2.6
+	memchr-2.5.0
+	memmap2-0.3.1
+	memoffset-0.6.5
+	mime-0.3.16
+	minimal-lexical-0.2.1
+	miniz_oxide-0.5.3
+	mio-0.8.4
+	muldiv-1.0.0
+	multimap-0.8.3
+	nanorand-0.7.0
+	native-tls-0.2.10
+	ndk-0.5.0
+	ndk-0.6.0
+	ndk-context-0.1.1
+	ndk-glue-0.5.2
+	ndk-glue-0.6.2
+	ndk-macro-0.3.0
+	ndk-sys-0.2.2
+	ndk-sys-0.3.0
+	new_debug_unreachable-1.0.4
+	nix-0.22.3
+	nix-0.23.1
+	nom-7.1.1
+	num-bigint-0.4.3
+	num-derive-0.3.3
+	num-integer-0.1.45
+	num-iter-0.1.43
+	num-rational-0.4.0
+	num-traits-0.2.15
+	num_cpus-1.13.1
+	num_enum-0.5.7
+	num_enum_derive-0.5.7
+	objc-0.2.7
+	object-0.28.4
+	oboe-0.4.6
+	oboe-sys-0.4.5
+	ogg-0.8.0
+	once_cell-1.12.0
+	opaque-debug-0.3.0
+	openssl-0.10.40
+	openssl-macros-0.1.0
+	openssl-probe-0.1.5
+	openssl-sys-0.9.74
+	option-operations-0.4.0
+	os_str_bytes-6.1.0
+	parking_lot-0.11.2
+	parking_lot-0.12.1
+	parking_lot_core-0.8.5
+	parking_lot_core-0.9.3
+	paste-1.0.7
+	pbkdf2-0.8.0
+	peeking_take_while-0.1.2
+	percent-encoding-2.1.0
+	petgraph-0.6.2
+	phf-0.8.0
+	phf_codegen-0.8.0
+	phf_generator-0.8.0
+	phf_generator-0.10.0
+	phf_shared-0.8.0
+	phf_shared-0.10.0
+	pin-project-1.0.10
+	pin-project-internal-1.0.10
+	pin-project-lite-0.2.9
+	pin-utils-0.1.0
+	pkg-config-0.3.25
+	png-0.17.5
+	portaudio-rs-0.3.2
+	portaudio-sys-0.1.1
+	ppv-lite86-0.2.16
+	precomputed-hash-0.1.1
+	pretty-hex-0.3.0
+	priority-queue-1.2.2
+	proc-macro-crate-1.1.3
+	proc-macro-error-1.0.4
+	proc-macro-error-attr-1.0.4
+	proc-macro2-1.0.40
+	protobuf-2.27.1
+	protobuf-codegen-2.27.1
+	protobuf-codegen-pure-2.27.1
+	quote-1.0.20
+	rand-0.7.3
+	rand-0.8.5
+	rand_chacha-0.2.2
+	rand_chacha-0.3.1
+	rand_core-0.5.1
+	rand_core-0.6.3
+	rand_distr-0.4.3
+	rand_hc-0.2.0
+	rand_pcg-0.2.1
+	raw-window-handle-0.3.4
+	raw-window-handle-0.4.3
+	rayon-1.5.3
+	rayon-core-1.9.3
+	redox_syscall-0.2.13
+	redox_users-0.4.3
+	regex-1.5.6
+	regex-automata-0.1.10
+	regex-syntax-0.6.26
+	remove_dir_all-0.5.3
+	reqwest-0.11.11
+	rgb-0.8.33
+	rodio-0.15.0
+	rpassword-6.0.1
+	rspotify-0.11.5
+	rspotify-http-0.11.5
+	rspotify-macros-0.11.5
+	rspotify-model-0.11.5
+	rustc-demangle-0.1.21
+	rustc-hash-1.1.0
+	rustc-serialize-0.3.24
+	rustc_version-0.4.0
+	rustversion-1.0.7
+	ryu-1.0.10
+	same-file-1.0.6
+	schannel-0.1.20
+	scoped-tls-1.0.0
+	scoped_threadpool-0.1.9
+	scopeguard-1.1.0
+	sdl2-0.35.2
+	sdl2-sys-0.35.2
+	security-framework-2.6.1
+	security-framework-sys-2.6.1
+	semver-1.0.10
+	serde-1.0.137
+	serde_derive-1.0.137
+	serde_json-1.0.81
+	serde_urlencoded-0.7.1
+	sha-1-0.9.8
+	sha-1-0.10.0
+	sha2-0.10.2
+	shannon-0.2.0
+	sharded-slab-0.1.4
+	shell-words-1.1.0
+	shlex-1.1.0
+	signal-hook-0.3.14
+	signal-hook-mio-0.2.3
+	signal-hook-registry-1.4.0
+	siphasher-0.3.10
+	slab-0.4.6
+	smallvec-1.8.0
+	smithay-client-toolkit-0.15.4
+	socket2-0.4.4
+	souvlaki-0.5.1
+	spin-0.9.3
+	stdweb-0.1.3
+	string_cache-0.8.4
+	string_cache_codegen-0.5.2
+	strsim-0.10.0
+	strum-0.24.1
+	strum_macros-0.24.0
+	subtle-2.4.1
+	syn-1.0.98
+	synstructure-0.12.6
+	system-deps-6.0.2
+	tempfile-3.3.0
+	tendril-0.4.3
+	termcolor-1.1.3
+	terminal_size-0.1.17
+	textwrap-0.15.0
+	thiserror-1.0.31
+	thiserror-impl-1.0.31
+	thread-id-4.0.0
+	thread_local-1.1.4
+	threadpool-1.8.1
+	tiff-0.7.2
+	time-0.1.44
+	tinyvec-1.6.0
+	tinyvec_macros-0.1.0
+	tokio-1.19.2
+	tokio-macros-1.8.0
+	tokio-native-tls-0.3.0
+	tokio-socks-0.5.1
+	tokio-stream-0.1.9
+	tokio-util-0.7.3
+	toml-0.5.9
+	tower-service-0.3.2
+	tracing-0.1.35
+	tracing-attributes-0.1.21
+	tracing-core-0.1.27
+	tracing-log-0.1.3
+	tracing-subscriber-0.3.11
+	try-lock-0.2.3
+	tui-0.18.0
+	typenum-1.15.0
+	unicode-bidi-0.3.8
+	unicode-ident-1.0.1
+	unicode-normalization-0.1.19
+	unicode-segmentation-1.9.0
+	unicode-width-0.1.9
+	unicode-xid-0.2.3
+	url-2.2.2
+	utf-8-0.7.6
+	uuid-1.1.2
+	valuable-0.1.0
+	vcpkg-0.2.15
+	vergen-3.2.0
+	version-compare-0.1.0
+	version_check-0.9.4
+	viuer-0.6.1
+	walkdir-2.3.2
+	want-0.3.0
+	wasi-0.9.0+wasi-snapshot-preview1
+	wasi-0.10.0+wasi-snapshot-preview1
+	wasi-0.11.0+wasi-snapshot-preview1
+	wasm-bindgen-0.2.81
+	wasm-bindgen-backend-0.2.81
+	wasm-bindgen-futures-0.4.31
+	wasm-bindgen-macro-0.2.81
+	wasm-bindgen-macro-support-0.2.81
+	wasm-bindgen-shared-0.2.81
+	wayland-client-0.29.4
+	wayland-commons-0.29.4
+	wayland-cursor-0.29.4
+	wayland-protocols-0.29.4
+	wayland-scanner-0.29.4
+	wayland-sys-0.29.4
+	web-sys-0.3.58
+	weezl-0.1.6
+	winapi-0.3.9
+	winapi-i686-pc-windows-gnu-0.4.0
+	winapi-util-0.1.5
+	winapi-x86_64-pc-windows-gnu-0.4.0
+	windows-0.29.0
+	windows-sys-0.36.1
+	windows_aarch64_msvc-0.29.0
+	windows_aarch64_msvc-0.36.1
+	windows_i686_gnu-0.29.0
+	windows_i686_gnu-0.36.1
+	windows_i686_msvc-0.29.0
+	windows_i686_msvc-0.36.1
+	windows_x86_64_gnu-0.29.0
+	windows_x86_64_gnu-0.36.1
+	windows_x86_64_msvc-0.29.0
+	windows_x86_64_msvc-0.36.1
+	winit-0.26.1
+	winreg-0.10.1
+	x11-dl-2.19.1
+	xcursor-0.3.4
+	xml-rs-0.8.4
+	xml5ever-0.16.2
+	zerocopy-0.6.1
+	zerocopy-derive-0.3.1
+"
+
+inherit cargo
+
+DESCRIPTION="A command driven spotify player"
+HOMEPAGE="https://github.com/aome510/spotify-player"
+
+if [[ "${PV}" == "9999" ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/aome510/${PN}.git"
+else
+	SRC_URI="$(cargo_crate_uris)
+			 https://github.com/aome510/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~amd64 ~arm64"
+fi
+
+S="${S}/spotify_player"
+
+LICENSE="
+	|| ( Apache-2.0 Apache-2.0-with-LLVM-exceptions MIT )
+	|| ( Apache-2.0 BSD-2 MIT )
+	|| ( Apache-2.0 Boost-1.0 )
+	|| ( Apache-2.0 ISC MIT )
+	|| ( Apache-2.0 MIT )
+	|| ( Apache-2.0 MIT ZLIB )
+	|| ( LGPL-3 MPL-2.0 )
+	|| ( MIT Unlicense )
+	Apache-2.0
+	BSD-2
+	BSD
+	CC0-1.0
+	MIT
+	MPL-2.0"
+SLOT="0"
+IUSE="alsa pulseaudio portaudio jack sdl mpris +streaming +image lyrics"
+REQUIRED_USE="streaming? ( || ( alsa pulseaudio portaudio jack sdl ) )"
+
+DEPEND="
+	dev-libs/openssl
+
+	alsa? ( media-libs/alsa-lib )
+	pulseaudio? ( media-sound/pulseaudio )
+	portaudio? ( media-libs/portaudio )
+	jack? ( virtual/jack )
+	sdl? ( media-libs/libsdl2 )
+	mpris? ( sys-apps/dbus )
+"
+RDEPEND="${DEPEND}"
+
+src_configure() {
+	local myfeatures=(
+		$(usev alsa alsa-backend)
+		$(usev pulseaudio pulseaudio-backend)
+		$(usev portaudio portaudio-backend)
+		$(usev jack jackaudio-backend)
+		$(usev sdl sdl-backend)
+
+		$(usev mpris media-control)
+		$(usev image)
+		$(usev lyrics lyric-finder)
+	)
+	cargo_src_configure --no-default-features
+}
