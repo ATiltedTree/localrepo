@@ -438,7 +438,7 @@ src_configure() {
 
 		$(usev mpris)
 		$(usev notify)
-		$(usev clipboard $(usev X share_clipboard))
+		$(usev clipboard share_clipboard)
 		$(usev clipboard $(usev wayland wayland_clipboard))
 	)
 	cargo_src_configure --no-default-features
