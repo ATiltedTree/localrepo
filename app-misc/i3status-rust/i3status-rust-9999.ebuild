@@ -22,11 +22,11 @@ fi
 
 LICENSE="Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD-2 Boost-1.0 CC0-1.0 MIT MPL-2.0 Unlicense WTFPL-2"
 SLOT="0"
-IUSE="notmuch maildir"
+IUSE="notmuch maildir pulseaudio"
 
 DEPEND="
 	sys-apps/lm-sensors
-	media-sound/pulseaudio
+	pulseaudio? ( media-sound/pulseaudio )
 	notmuch? ( net-mail/notmuch )
 "
 
@@ -43,6 +43,7 @@ src_configure() {
 	local myfeatures=(
 		$(usev notmuch)
 		$(usev maildir)
+		$(usev pulseaudio)
 	)
 	cargo_src_configure --no-default-features
 }
