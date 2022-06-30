@@ -14,7 +14,6 @@ HOMEPAGE="https://github.com/greshake/i3status-rust"
 if [[ "${PV}" == "9999" ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/greshake/i3status-rust"
-	EGIT_BRANCH="async"
 else
 	SRC_URI="$(cargo_crate_uris)
 			https://github.com/greshake/i3status-rust/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
