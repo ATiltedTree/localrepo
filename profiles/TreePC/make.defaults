@@ -9,4 +9,3 @@ CXXSTDLIB="c++"
 
 # Compile linux kernel with LLVM
 LLVM=1
-LLVM_IAS=1
