@@ -33,3 +33,12 @@ RDEPEND="
 		dev-python/protobuf-python[${PYTHON_USEDEP}]
 	)
 "
+
+PATCHES=(
+	"${FILESDIR}"/crypt.patch
+)
+
+src_prepare() {
+	default
+	sed -i -e 's/pycryptodomex/pycryptodome/' setup.py steam.egg-info/requires.txt steam/versions_report/__init__.py || die
+}

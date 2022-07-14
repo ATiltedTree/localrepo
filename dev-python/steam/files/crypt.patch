@@ -1,0 +1,19 @@
+diff --git a/steam/core/crypto.py b/steam/core/crypto.py
+index 583bbde..1b7c7c8 100644
+--- a/steam/core/crypto.py
++++ b/steam/core/crypto.py
+@@ -6,10 +6,10 @@ from os import urandom as random_bytes
+ from struct import pack
+ from base64 import b64decode
+ 
+-from Cryptodome.Hash import MD5, SHA1, HMAC
+-from Cryptodome.PublicKey.RSA import import_key as rsa_import_key, construct as rsa_construct
+-from Cryptodome.Cipher import PKCS1_OAEP, PKCS1_v1_5
+-from Cryptodome.Cipher import AES as AES
++from Crypto.Hash import MD5, SHA1, HMAC
++from Crypto.PublicKey.RSA import import_key as rsa_import_key, construct as rsa_construct
++from Crypto.Cipher import PKCS1_OAEP, PKCS1_v1_5
++from Crypto.Cipher import AES as AES
+ 
+ 
+ class UniverseKey(object):
