@@ -19,7 +19,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="
 	${DEPEND}
-	~dev-python/steam-1.2.0[${PYTHON_USEDEP},client]
+	~dev-python/steam-1.3.0[${PYTHON_USEDEP},client]
 	dev-python/appdirs[${PYTHON_USEDEP}]
 	dev-python/argcomplete[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
