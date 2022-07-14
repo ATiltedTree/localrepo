@@ -28,3 +28,8 @@ RDEPEND="
 	>=dev-python/vpk-1.3.2[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup4[${PYTHON_USEDEP}]
 "
+
+src_prepare() {
+	default
+	sed -i -e 's/pycryptodomex/pycryptodome/' steamctl/utils/versions_report.py || die
+}
