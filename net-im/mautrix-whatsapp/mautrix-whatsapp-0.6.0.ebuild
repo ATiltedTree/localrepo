@@ -26,7 +26,13 @@ RDEPEND="
 	${DEPEND}
 	acct-group/mautrix-whatsapp
 	acct-user/mautrix-whatsapp
+	net-im/synapse
 "
+
+src_prepare() {
+	default
+	sed -i "s#./logs#/var/log/${PN}" example-config.yaml
+}
 
 src_compile() {
 	./build.sh -o "${S}"/mautrix-whatsapp
@@ -35,9 +41,8 @@ src_compile() {
 src_install() {
 	dobin mautrix-whatsapp
 	insinto /etc/${PN}
-	newins example-config.yaml ${PN}.yaml
-	fperms -R 0640 /etc/${PN}/
-	fowners -R root:mautrix-whatsapp /etc/${PN}/
+	newins example-config.yaml config.yaml
+	fowners -R mautrix-whatsapp:mautrix-whatsapp /etc/${PN}/
 
 	if use systemd; then
 		systemd_dounit "${FILESDIR}/${PN}.service"
