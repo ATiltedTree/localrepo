@@ -31,7 +31,7 @@ RDEPEND="
 
 src_prepare() {
 	default
-	sed -i "s#./logs#/var/log/${PN}" example-config.yaml
+	sed -i "s#./logs#/var/log/${PN}#" example-config.yaml || die
 }
 
 src_compile() {
