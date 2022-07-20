@@ -4,14 +4,14 @@ After=syslog.target network.target
 Requires=synapse.service
 
 [Service]
-User=mautrix-whatsapp
-Group=mautrix-whatsapp
+User=mautrix-signal
+Group=mautrix-signal
 
 Type=simple
-StateDirectory=mautrix-whatsapp
-LogsDirectory=mautrix-whatsapp
-ConfigurationDirectory=mautrix-whatsapp
-ExecStart=/usr/bin/mautrix-whatsapp -c /etc/mautrix-whatsapp/config.yaml
+StateDirectory=mautrix-signal
+LogsDirectory=mautrix-signal
+ConfigurationDirectory=mautrix-signal
+ExecStart=/usr/bin/python -m mautrix_signal -c /etc/mautrix-signal/config.yaml
 TimeoutStopSec=20
 KillMode=process
 Restart=always
@@ -20,7 +20,6 @@ PrivateTmp=yes
 PrivateMounts=yes
 PrivateDevices=true
 ProtectHome=yes
-ProtectSystem=strict
 NoNewPrivileges=yes
 ProtectHostname=yes
 ProtectClock=yes
@@ -30,8 +29,6 @@ ProtectKernelLogs=yes
 ProtectControlGroups=yes
 RestrictRealtime=yes
 RestrictSUIDSGID=true
-RemoveIPC=true
-MemoryDenyWriteExecute=true
 PrivateDevices=yes
 LockPersonality=true
 SystemCallArchitectures=native
