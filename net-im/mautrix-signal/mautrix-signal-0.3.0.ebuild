@@ -43,6 +43,7 @@ src_prepare() {
 
 src_install() {
 	distutils-r1_src_install
+	rm "${D}"/usr/example-config.yaml
 	insinto /etc/${PN}
 	newins mautrix_signal/example-config.yaml config.yaml
 	fowners -R mautrix-signal:mautrix-signal /etc/${PN}/
