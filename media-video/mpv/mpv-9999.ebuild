@@ -29,7 +29,7 @@ SLOT="0"
 IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins nvenc doc +drm dvb
 	dvd +egl gamepad gbm +iconv jack javascript jpeg lcms libcaca libmpv +lua
 	openal +opengl pipewire pulseaudio raspberry-pi rubberband sdl sndio
-	selinux test tools +uchardet vaapi vdpau vulkan wayland +X +xv zlib zimg"
+	selinux test tools +uchardet vaapi vapoursynth vdpau vulkan wayland +X +xv zlib zimg"
 
 REQUIRED_USE="
 	|| ( cli libmpv )
@@ -86,6 +86,7 @@ COMMON_DEPEND="
 	sdl? ( media-libs/libsdl2[sound,threads,video] )
 	sndio? ( media-sound/sndio )
 	vaapi? ( x11-libs/libva:=[drm?,X?,wayland?] )
+	vapoursynth? ( media-libs/vapoursynth )
 	vdpau? ( x11-libs/libvdpau )
 	vulkan? (
 		>=media-libs/libplacebo-3.104.0:=[vulkan]
@@ -162,7 +163,7 @@ src_configure() {
 		$(meson_feature sdl sdl2)
 		$(meson_feature gamepad sdl2-gamepad)
 		$(meson_feature uchardet)
-		-Dvapoursynth=disabled # Only available in overlays.
+		$(meson_feature vapoursynth)
 		$(meson_feature zimg)
 		$(meson_feature zlib)
 
